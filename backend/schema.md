@@ -333,3 +333,7 @@ PATCH /entity/:id
 ---
 
 PATCH /user
+
+---
+
+GET /user

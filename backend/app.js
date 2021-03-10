@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const sequelize = require('./config/database');
+// require('./src/models/index');
+
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
@@ -23,8 +26,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// DB connection
+sequelize.authenticate().then(() => {
+    console.log('Database connected...');
+}).catch(err => {
+    console.log('Error: ' + err);
+})
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/entity', entityRouter);
 app.use('/transaction', transactionRouter);
 
@@ -44,4 +55,24 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+const PORT = process.env.PORT;
+
+sequelize.sync({force:true}).then(() => {
+  app.listen(PORT, console.log(`Server started on port ${PORT}`));
+
+  const newUser = {
+    id: "2e107775-2b0d-4e24-af6c-8766c042fb09",
+    name: "Joe Biden",
+    emailId: "Joe23biden12@potus.us",
+    companyName: "Mudikhana",
+    contact: "+21 233232324"
+  }
+
+  require('./src/proxy/user').create(newUser).then((value) => {
+    console.log(value);
+  }).catch(err => {
+    console.log(err);
+  })
+}).catch(err => console.log("Error: " + err));
+
+
