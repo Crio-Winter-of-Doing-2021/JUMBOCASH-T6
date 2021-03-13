@@ -1,0 +1,49 @@
+.payment-status-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  
+  .payment-status-badge.status-PAID {
+    background-color: #C8E6C9;
+    color: #224a23;
+  }
+  
+  .payment-status-badge.status-NOT_PAID {
+    background-color: #FFCDD2;
+    color: #73000c;
+  }
+  
+  @media screen and (max-width: 960px) {
+    .p-datatable.table-responsive .p-datatable-thead > tr > th,
+    .p-datatable.table-responsive .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+  
+    .p-datatable.table-responsive .p-datatable-tbody > tr {
+        border-bottom: 1px solid var(--layer-2);
+    }
+  
+    .p-datatable.table-responsive .p-datatable-tbody > tr > td {
+        text-align: left;
+        display: block;
+        border: 0 none !important;
+        width: 100% !important;
+        float: left;
+        clear: left;
+        border: 0 none;
+    }
+  
+    .p-datatable.table-responsive .p-datatable-tbody > tr > td .p-column-title {
+        padding: .4rem;
+        min-width: 30%;
+        display: inline-block;
+        margin: -.4rem 1rem -.4rem -.4rem;
+        font-weight: bold;
+    }
+  
+    .p-datatable.table-responsive .p-datatable-tbody > tr > td .p-progressbar {
+        margin-top: .5rem;
+    }
+  }
