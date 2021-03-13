@@ -63,6 +63,11 @@ const updateEntityById = async (req, res) => {
   entityProxy
     .updateEntity(entityBody, id)
     .then((value) => {
+
+      if(value[0] === 0) {
+        throw {code: 404, message: "Entity does not exist"}
+      }
+
       res.status(200).send({
         error: false,
         data: value,

@@ -1,29 +1,25 @@
 var express = require("express");
 var router = express.Router();
+const transactionController = require('../src/controllers/transaction');
 
 /* GET home page. */
 // router.get('/', require('../src/controllers/transaction').getTransactions);
 
 // router.post('/filter', require('../src/controllers/transaction').getTransactionsWithFilter)
 
-router.get("/", function (req, res, next) {
-  res.send("get all transaction");
-});
+// get all transaction
+router.get("/", transactionController.getAllTransactions);
 
-router.get("/:id", function (req, res, next) {
-  res.send("get transaction having id");
-});
+// get transaction having id
+router.get("/:id", transactionController.getTransactionById);
 
-router.patch("/:id", function (req, res, next) {
-    res.send("update transaction having id");
-  });
+// update transaction having id
+router.patch("/:id", transactionController.updateTransactionById);
 
-router.post("/filter", function (req, res, next) {
-  res.send("filter all transaction");
-});
+// filter all transaction
+router.post("/filter", transactionController.getAllTransactions);
 
-router.post("/", function (req, res, next) {
-  res.send("create transaction");
-});
+// create transaction
+router.post("/", transactionController.createTransaction);
 
 module.exports = router;

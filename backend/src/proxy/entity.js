@@ -1,4 +1,5 @@
 const Entity = require('../models/entity');
+const { isValidContact } = require('../services/validation');
 const validation = require('../services/validation');
 
 var EntityDao = {
@@ -58,16 +59,40 @@ async function create(entity) {
 
 async function updateEntity(entity, id) {
 
-    // name, userId cannot be updated
-    if(validation.isUUIDV4(id)) {
+    try {
+
+        // name, userId cannot be updated
+        if(! (validation.isUUIDV4(id) && 
+            validation.isValidContact(entity.contact)) && 
+            validation.isValidAddress(entity.address)) {
+
+            return false;
+        }
+        
         var updateEntity = {
             address: entity.address,
             contact: entity.contact
         }
-    }
+
+        return await Entity.update(updateEntity, { where: { id: id } });
+
+    } catch(err) {
+        errorHandler(err);
+    };
     
-    return await Entity.update(updateEntity, { where: { id: id } });
+    
 }
 
+function errorHandler(err) {
+
+    if(err instanceof Error) {
+        console.log(err);
+        throw {code: 500, message: err};
+    } else if(err.code) {
+        throw err;
+    } else {
+        throw {code: 500, message: err}
+    }
+  }
 
 module.exports = EntityDao;

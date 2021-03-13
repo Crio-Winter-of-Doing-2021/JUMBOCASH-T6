@@ -42,9 +42,9 @@ ENUMS
 2. paymentStatus: PAID, NOT_PAID (PAID PARTIALLY - in future)
 3. category: SALES, PURCHASE, EMPLOYEE, TAX, ASSET_LIQUIDATION
 
-Scope for adding new enums in future
+Scope for adding more enums in future
 
-Timestampz example: "2018-12-06T02:16:39 -06:-30"
+Timestampz example: "2018-12-06T02:16:39 -06:-30" - issue
 
 ---
 
@@ -318,12 +318,6 @@ Failed response:
 }
 ```
 
----
-
-GET /login
-
----
-
 POST /login
 
 ---
@@ -337,3 +331,5 @@ PATCH /user
 ---
 
 GET /user
+
+To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory

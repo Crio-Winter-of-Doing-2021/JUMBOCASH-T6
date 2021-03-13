@@ -1,0 +1,155 @@
+[
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8764c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "DEBIT CARD",
+            "paymentStatus": "NOT PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"userId not found"
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-b0df40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "DEBIT CARD",
+            "paymentStatus": "NOT PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"entityId not defined"
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "IMPS",
+            "paymentStatus": "NOT PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"payment mode not accepted"
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "",
+            "paymentStatus": "NOT PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"payment mode undefined"
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "DEBIT CARD",
+            "paymentStatus": "ALready Paid",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"payment Status not accepted"
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "DEBIT CARD",
+            "paymentStatus": "NOT PAID",
+            "amount": 2144.25,
+            "category": "PURCHadE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"category not accepted"
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "DEBIT_CARD",
+            "paymentStatus": "NOT_PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":201,
+            "body":{
+               "error":false,
+               "errorMessage":""
+            }
+         }
+    },
+    {
+        "request": {
+            "id": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "2019-01-03T06:17:43 -06:-30",
+            "paymentMode": "DEBIT_CARD",
+            "paymentStatus": "NOT_PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":409,
+            "body":{
+               "error":true,
+               "errorMessage":""
+            }
+         }
+    }
+]

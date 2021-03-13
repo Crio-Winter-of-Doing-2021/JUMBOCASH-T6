@@ -7,22 +7,22 @@ const Entity = require('./entity');
 const Transaction = db.define('transactions', {
     id: {
         type: Sequelize.UUID,
-        default: Sequelize.UUIDV4,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true
     },
-    // userId: {
-    //     type: Sequelize.UUID,
-    //     primaryKey: true,
-    // },
-    // entityId: {
-    //     type: Sequelize.UUID,
-    //     primaryKey: true,
-    // },
+    userId: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+    },
+    entityId: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+    },
     category: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    amountPayable: {
+    amount: {
         type: Sequelize.INTEGER,
         allowNull: true
     },

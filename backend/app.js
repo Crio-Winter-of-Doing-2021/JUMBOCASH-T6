@@ -57,22 +57,16 @@ app.use(function(err, req, res, next) {
 
 const PORT = process.env.PORT;
 
+// for setting the db with seed value, and starting the server
 sequelize.sync({force:true}).then(() => {
   app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
-  const newUser = {
-    id: "2e107775-2b0d-4e24-af6c-8766c042fb09",
-    name: "Joe Biden",
-    emailId: "Joe23biden12@potus.us",
-    companyName: "Mudikhana",
-    contact: "+21 233232324"
-  }
-
-  require('./src/proxy/user').create(newUser).then((value) => {
-    console.log(value);
-  }).catch(err => {
-    console.log(err);
-  })
+  require('./src/seed/seedDb');
 }).catch(err => console.log("Error: " + err));
+
+// for resetting the db, and starting the server
+// sequelize.sync().then(() => {
+//   app.listen(PORT, console.log(`Server started on port ${PORT}`));
+// }).catch(err => console.log("Error: " + err));
 
 
