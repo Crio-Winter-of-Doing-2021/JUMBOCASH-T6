@@ -155,6 +155,25 @@
         "request": {
             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
             "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+            "time": "Any other format",
+            "paymentMode": "DEBIT_CARD",
+            "paymentStatus": "NOT_PAID",
+            "amount": 2144.25,
+            "category": "PURCHASE"
+        },
+
+        "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":""
+            }
+         }
+    },
+    {
+        "request": {
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
             "time": "2019-01-03 06:17:43 -06:-30",
             "paymentMode": "DEBIT_CARD",
             "paymentStatus": "PAID",

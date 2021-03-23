@@ -84,19 +84,22 @@ async function updateTransaction(transaction, id) {
     }
 
     if (validateTransaction.isValidForUpdate(transaction)) {
-      var updateTransaction = {
-        paymentMode: paymentMode,
-        amount: amount,
-        paymentStatus: paymentStatus,
-      };
 
-      const isTransactionPresent = await Transaction.findByPk(id);
+      let transaction = await Transaction.findByPk(id);
 
-      if(isTransactionPresent === null ) {
+      if(transaction === null ) {
         throw {code: 404, message: "Not found"}
       }
 
-      return await Transaction.update(updateTransaction, { where: { id: id } });
+      if(paymentStatus){
+        transaction.paymentStatus = paymentStatus;
+      } if(paymentMode) {
+        transaction.paymentMode = paymentMode;
+      } if(amount) {
+        transaction.amount = amount;
+      }
+   
+      return await transaction.save();
 
     }
     

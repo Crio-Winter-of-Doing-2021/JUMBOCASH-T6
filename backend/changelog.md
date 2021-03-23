@@ -10,8 +10,9 @@
 3. Fixed: time is not accepted by server
 4. Improved: providing time is optional for client
 5. Changed: time format for request and response: [link](schema.md)
-6. Added config/data to declare custom enums, in a simpler way.
+6. Added config/data to declare custom enums, in a simpler way. [link](config/data.js)
 7. Changed: specify if you need seeded or undisturbed database
+8. Fixed: returns updated item after modification
 
 ## Action-4
 ### Major Issues:

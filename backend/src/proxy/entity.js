@@ -1,5 +1,4 @@
 const Entity = require('../models/entity');
-const { isValidContact } = require('../services/validation');
 const validation = require('../services/validation');
 
 var EntityDao = {
@@ -69,12 +68,19 @@ async function updateEntity(entity, id) {
             return false;
         }
         
-        var updateEntity = {
-            address: entity.address,
-            contact: entity.contact
+        let entityFound = await Entity.findByPk(id);
+
+        if(entityFound === null ) {
+            throw {code: 404, message: "Not found"}
         }
 
-        return await Entity.update(updateEntity, { where: { id: id } });
+        if(entity.address){
+            entityFound.address = entity.address;
+        } if(entity.contact) {
+            entityFound.contact = entity.contact;
+        }
+
+        return await entityFound.save();
 
     } catch(err) {
         errorHandler(err);

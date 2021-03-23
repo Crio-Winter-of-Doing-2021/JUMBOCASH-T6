@@ -5,7 +5,7 @@ const isValidTime = (time) => {
     // `2021-03-13 08:37:08 -06:-30`
     // from w3resources
 
-    if ( ! Object.prototype.toString.call(time) === "[object Date]" ) {
+    if (isNaN(Date.parse(time))) {
         throw {code: 422, message: "datetime does not conforms to guideline"}
     }
 

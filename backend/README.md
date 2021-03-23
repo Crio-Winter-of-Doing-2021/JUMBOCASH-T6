@@ -29,16 +29,16 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 3. Fixed: time is not accepted by server
 4. Improved: providing time is optional for client
 5. Changed: time format for request and response: [link](schema.md)
-6. Added config/data to declare custom enums, in a simpler way.
+6. Added config/data to declare custom enums, in a simpler way. [link](config/data.js)
 7. Changed: specify if you need seeded or undisturbed database
+8. Fixed: returns updated item after modification
 
 
 ## Upcoming actions
-1. Add validation and constraint for: date
-2. Add authentication
-3. Think about aggregates for dashboard functionality
-4. Implement page, filter, sort for database
-5. Deploy the app - version 1
+1. Add authentication
+2. Think about aggregates for dashboard functionality
+3. Implement page, filter, sort for database
+4. Deploy the app - version 1
 
 ## Todo
 ### Version 1
