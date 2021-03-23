@@ -3,16 +3,41 @@ const validation = require("../services/validation");
 const validateTransaction = require("../services/validateTransaction");
 const { isUUIDV4 } = require("../services/validation");
 
+
+const { sanitizeFilter } = require("../services/filter");
+const {sortResponse} = require("../services/sorting");
+
 var TransactionDao = {
   findAll: findAll,
   create: create,
   findById: findById,
   deleteById: deleteById,
   updateTransaction: updateTransaction,
+  findWithFilter: findWithFilter
 };
 
 async function findAll() {
   return await Transaction.findAll();
+}
+
+async function findWithFilter(filter, sort, page) {
+
+  try {
+    let response =  await Transaction.findAll({
+      where: {
+        ...sanitizeFilter(filter)
+      },
+      order: 
+        sortResponse(sort)
+      
+    });
+
+    return response;
+
+  } catch (err) {
+    errorHandler(err);
+  }
+  
 }
 
 async function findById(id) {

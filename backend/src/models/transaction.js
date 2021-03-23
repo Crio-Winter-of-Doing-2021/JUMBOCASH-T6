@@ -23,16 +23,21 @@ const Transaction = db.define('transactions', {
         allowNull: false
     },
     amount: {
-        type: Sequelize.INTEGER,
-        allowNull: true
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false
     },
     paymentMode: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     paymentStatus: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
+    },
+    time: {
+        type: Sequelize.DATE,
+        defaultValue: new Date().toISOString(),
+        allowNull: false
     }
 });
 

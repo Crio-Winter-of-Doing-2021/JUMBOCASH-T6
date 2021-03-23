@@ -17,7 +17,7 @@ router.get("/:id", transactionController.getTransactionById);
 router.patch("/:id", transactionController.updateTransactionById);
 
 // filter all transaction
-router.post("/filter", transactionController.getAllTransactions);
+router.post("/filter", transactionController.getTransactionsWithFilter);
 
 // create transaction
 router.post("/", transactionController.createTransaction);

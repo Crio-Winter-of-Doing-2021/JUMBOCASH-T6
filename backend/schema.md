@@ -44,7 +44,10 @@ ENUMS
 
 Scope for adding more enums in future
 
-Timestampz example: "2018-12-06T02:16:39 -06:-30" - issue
+TIMESTAMP:
+
+Request time format: "2018-12-06 02:16:39 -06:-30"<br>
+Response time format: "2018-12-07T08:16:39.000Z" ([ISO string format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString))
 
 ---
 
@@ -79,8 +82,8 @@ Timestampz example: "2018-12-06T02:16:39 -06:-30" - issue
         status: [],
         paymentMode: [],
         amount: {
-            from: "integer",
-            to: "integer"
+            from: "decimal",
+            to: "decimal"
         }
     }
 ```
@@ -173,7 +176,7 @@ Request:
 {
     "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
     "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
-    "time": "2018-12-06T02:16:39 -06:-30",
+    "time": "2018-12-06 02:16:39 -06:-30",
     "paymentMode": "CASH",
     "paymentStatus": "PAID",
     "amount": 2691.15,
@@ -188,7 +191,7 @@ Successful response:
         "id": "c5857cea-a5e5-4c85-b9b5-d99de8d7971e",
         "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
         "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
-        "time": "2018-12-06T02:16:39 -06:-30",
+        "time": "018-12-07T08:16:39.000Z",
         "paymentMode": "CASH",
         "paymentStatus": "PAID",
         "amount": 2691.15,
@@ -216,7 +219,7 @@ Successful response:
         "id": "c5857cea-a5e5-4c85-b9b5-d99de8d7971e",
         "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
         "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
-        "time": "2018-12-06T02:16:39 -06:-30",
+        "time": "2018-12-06 02:16:39 -06:-30",
         "paymentMode": "CASH",
         "paymentStatus": "PAID",
         "amount": 2691.15,
@@ -252,7 +255,7 @@ Successful response:
         "id": "c5857cea-a5e5-4c85-b9b5-d99de8d7971e",
         "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
         "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
-        "time": "2018-12-06T02:16:39 -06:-30",
+        "time": "2018-12-06 02:16:39 -06:-30",
         "paymentMode": "CASH",
         "paymentStatus": "PAID",
         "amount": 2691.15,
@@ -285,8 +288,8 @@ Request:
         status: [],
         paymentMode: [],
         amount: {
-            from: "integer",
-            to: "integer"
+            from: "decimal",
+            to: "decimal"
         }
     },
 

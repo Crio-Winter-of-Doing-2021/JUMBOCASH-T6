@@ -1,8 +1,14 @@
 const { isUUIDV4 } = require("./validation");
-
+const enums = require('../../config/data');
 
 const isValidTime = (time) => {
-    // `2021-03-13T08:37:08.201Z`
+    // `2021-03-13 08:37:08 -06:-30`
+    // from w3resources
+
+    if ( ! Object.prototype.toString.call(time) === "[object Date]" ) {
+        throw {code: 422, message: "datetime does not conforms to guideline"}
+    }
+
     return true;
 }
 
@@ -12,18 +18,18 @@ isValidAmount = (amount) => {
         throw {code: 422, message: "amount is empty"}
     } else if (isNaN(amount)) {
         throw {code: 422, message: "amount is not a number"}
+    } else if ((amount * 100) % 1 != 0) {
+        throw {code: 422, message: "amount takes number upto 2 decimal places"}
     }
 
     return true;
 }
 
 const isValidPaymentStatus = (paymentStatus) => {
-    
-    var paymentStatusList = ["PAID", "NOT_PAID"];
 
     if(!paymentStatus) {
         throw {code: 422, message: "payment status is empty"}
-    }else if (! paymentStatusList.includes(paymentStatus)) {
+    }else if (! enums.paymentStatusList.includes(paymentStatus)) {
         throw {code: 422, message: "payment status is not accepted"}
     }
 
@@ -32,11 +38,9 @@ const isValidPaymentStatus = (paymentStatus) => {
 
 const isValidPaymentMode = (paymentMode) => {
     
-    var paymentModeList = ["CASH", "DEBIT_CARD"," CREDIT_CARD", "UPI"];
-
     if(!paymentMode) {
         throw {code: 422, message: "payment mode is empty"}
-    }else if (! paymentModeList.includes(paymentMode)) {
+    }else if (! enums.paymentModeList.includes(paymentMode)) {
         throw {code: 422, message: "payment mode is not accepted"}
     }
 
@@ -45,11 +49,9 @@ const isValidPaymentMode = (paymentMode) => {
 
 const isValidCategory = (category) => {
     
-    var categoryList = ["SALES", "PURCHASE", "EMPLOYEE", "TAX", "ASSET_LIQUIDATION"];
-
     if(!category) {
         throw {code: 422, message: "category is empty"}
-    } else if (! categoryList.includes(category)) {
+    } else if (! enums.categoryList.includes(category)) {
         throw {code: 422, message: "category is not accepted"}
     }
     return true;
@@ -58,13 +60,13 @@ const isValidCategory = (category) => {
 
 const isValidTransaction = (transaction) => {
 
-    const {id, userId, entityId, createdAt, paymentMode, paymentStatus, amount, category} = transaction;
+    const {id, userId, entityId, paymentMode, paymentStatus, amount, category, time} = transaction;
 
     if(id && !isUUIDV4(id)) {
         return false;
     } else if(! (isUUIDV4(userId) && isUUIDV4(entityId))) {
         return false;
-    } else if (createdAt && !isValidTime(createdAt)) {
+    } else if (time && !isValidTime(time)) {
         return false;
     } else if(! (isValidPaymentMode(paymentMode) && isValidPaymentStatus(paymentStatus) && isValidCategory(category))) {
         return false

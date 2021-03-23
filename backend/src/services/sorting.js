@@ -1,4 +1,24 @@
-module.exports.sortResponse = (array, key, reverse = false) => {
+
+module.exports.sortResponse = (sort) => {
+
+    let {key, reverse} = sort;
+
+    if(!key) {
+        key = "amount"
+    }
+
+    if(reverse === undefined || !reverse) {
+        reverse = "ASC"
+    } else {
+        reverse = "DESC"
+    }
+
+    return [[key, reverse]];
+    
+}
+
+
+const sortResponse1 = (array, key, reverse = false) => {
 
     array.sort((a,b) => {
         var x = a[key]; var y = b[key];

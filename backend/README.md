@@ -6,38 +6,32 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 2. Untested features
 
 ## To Know More
-### README.md
-### schema.md
-### changelog.md
+### [README.md](#)
+### [schema.md](schema.md)
+### [changelog.md](changelog.md)
 
-## A Note..
+## How to Run
 1. To run the application
    > **npm start**
    > 
    > **npm run start-dev** (starts with nodemon)
+2. To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
 
-2. Seed database: 
-   1. In app.js, uncomment the following snippet
-   ```js
-   // for setting the db with seed value, and starting the server
-   sequelize.sync({force:true}).then(() => {
-   app.listen(PORT, console.log(`Server started on port ${PORT}`));
+## Action-4.1
+### Major Issues:
+1. Added environment variable
+2. Automated reset of database on starting of server, specified by env variable flag
+3. Added preliminary middleware for authentication handling
+4. Added filter-sort functionality
+### Minor fixes:
+1. Fixed: response body returns transaction with "entity" as its key
+2. throws error if gets amount of precision greater than 2.
+3. Fixed: time is not accepted by server
+4. Improved: providing time is optional for client
+5. Changed: time format for request and response: [link](schema.md)
+6. Added config/data to declare custom enums, in a simpler way.
+7. Changed: specify if you need seeded or undisturbed database
 
-   require('./src/seed/seedDb');
-   }).catch(err => console.log("Error: " + err));
-   ```
-3. Unseed database:
-   1. In app.js, uncomment the following snippet
-   ```js
-   // for starting the server with previously stored data
-   sequelize.sync().then(() => {
-   app.listen(PORT, console.log(`Server started on port ${PORT}`));
-   }).catch(err => console.log("Error: " + err));
-
-   // {force: true} - for dropping all tables
-   ```
-
-4. To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
 
 ## Upcoming actions
 1. Add validation and constraint for: date
@@ -83,3 +77,29 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    4. Histogram of Inflow and Outflow reduced to components eg Sales, Purchase, Tax etc. based on timeframe filter
    5. Transaction table - paginated, search by category, paymentStatus, paymentMode
 
+### Add authentication:
+1. Frontend:
+   1. get token from oauth server (pass credentials).
+   2. Send the token to the backend `/login` endpoint
+2. Backend:
+   1. sends the token to the oauth server, and get user data or error
+   2. if error: send error
+   3. if user logs in: 
+      1. first time: add user data [email, name] in `user` table, token id in `auth` table with userId
+      2. after first time: find user data, update `auth` table with token id, userId
+   4. Following successful authentication backend will send "initial data" to the frontend
+
+### Initial data
+1. Entities associated with the userid
+2. Latest 100 (or N) transactions
+3. Person details: userSchema
+4. Total Aggregates (to think about it)
+
+### Deploy the app for completing authentication
+1. Separate test and production database
+2. [x] Add env variables
+3. [x] Sequelize Logging is turned off
+4. deploy to heroku: [project-dashboard](https://dashboard.heroku.com/apps/jumbocash-dev/deploy/heroku-git)
+   1. Link postgres to node app: [heroku postgres](https://devcenter.heroku.com/articles/heroku-postgresql)
+   2. [x] Update env variables
+   3. Deploy the app

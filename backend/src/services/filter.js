@@ -1,3 +1,53 @@
+const {Op} = require('sequelize');
+
+// sanitize the filter directive for database proxy
+module.exports.sanitizeFilter = (filter) => {
+
+    // time: {
+    //     from: "datetime",
+    //     to: "datetime"
+    // },
+    // entity: [],
+    // category: [],
+    // status: [],
+    // paymentMode: [],
+    // amount: {
+    //     from: "integer",
+    //     to: "integer"
+    // }
+    let filterDirective = {};
+
+    const {time, amount, entity, category, status, paymentMode} = filter;
+
+    if(entity && entity.length) {
+        filterDirective.entityId = entity;
+    } 
+
+    if(category && category.length) {
+        filterDirective.category = category;
+    }
+
+    if(paymentMode && paymentMode.length) {
+        filterDirective.paymentMode = paymentMode;
+    }
+
+    if(status && status.length) {
+        filterDirective.paymentStatus = status;
+    }
+
+    if(amount) {
+        filterDirective.amount = {
+            [Op.gte] : amount.from,
+            [Op.lte]: amount.to
+        }
+    }
+
+    console.log(filterDirective)
+    return filterDirective;
+
+}
+
+
 module.exports.filterResponse = (array, filterDirective) => {
     
     // console.log(filterDirective.entity);
@@ -63,6 +113,7 @@ const filterByRange = (array, requestKey, itemKey) => {
     return result;
 
 }
+
 
 /*
 

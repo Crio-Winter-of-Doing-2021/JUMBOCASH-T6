@@ -1,3 +1,18 @@
+## Action-4.1
+### Major Issues:
+1. Added environment variable
+2. Automated reset of database on starting of server, specified by env variable flag
+3. Added preliminary middleware for authentication handling
+4. Added filter-sort functionality
+### Minor fixes:
+1. Fixed: response body returns transaction with "entity" as its key
+2. throws error if gets amount of precision greater than 2.
+3. Fixed: time is not accepted by server
+4. Improved: providing time is optional for client
+5. Changed: time format for request and response: [link](schema.md)
+6. Added config/data to declare custom enums, in a simpler way.
+7. Changed: specify if you need seeded or undisturbed database
+
 ## Action-4
 ### Major Issues:
 1. Added databse connection to all endpoints

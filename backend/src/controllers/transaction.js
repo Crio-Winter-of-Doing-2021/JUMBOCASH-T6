@@ -81,10 +81,10 @@ const getAllTransactions = async (req, res) => {
   
       const id = req.params.id;
   
-      const entityBody = req.body;
+      const transactionBody = req.body;
   
     transactionProxy
-      .updateTransaction(entityBody, id)
+      .updateTransaction(transactionBody, id)
       .then((value) => {
         res.status(200).send({
           error: false,
@@ -106,7 +106,7 @@ const getAllTransactions = async (req, res) => {
       .then((value) => {
         res.status(201).send({
           error: false,
-          entity: value,
+          transaction: value,
         });
       })
       .catch((err) => {
@@ -117,12 +117,35 @@ const getAllTransactions = async (req, res) => {
       });
   };
 
+  const getTransactionsWithFilter = (req, res) => {
+
+    const {sort, page, filter} = req.body;
+
+    console.log(sort, page, filter);
+
+    transactionProxy
+      .findWithFilter(filter, sort, page)
+      .then((value) => {
+        res.status(200).send({
+          error: false,
+          data: value,
+        });
+      })
+      .catch((err) => {
+        res.status(err.code).send({
+          error: true,
+          errorMessage: err.message,
+        });
+      });
+  }
+
   
   const transactionController = {
     getAllTransactions,
     getTransactionById,
     updateTransactionById,
     createTransaction,
+    getTransactionsWithFilter
   };
 
   module.exports = transactionController;

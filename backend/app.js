@@ -5,14 +5,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const sequelize = require('./config/database');
+const keys = require('./config/server');
 // require('./src/models/index');
 
-require('dotenv').config();
+// require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var entityRouter = require('./routes/entity');
 var transactionRouter = require('./routes/transaction');
+
+var authenticationRouter = require('./routes/authentication');
+
 
 var app = express();
 
@@ -35,6 +39,7 @@ sequelize.authenticate().then(() => {
 })
 
 app.use('/', indexRouter);
+app.use(authenticationRouter);
 app.use('/user', usersRouter);
 app.use('/entity', entityRouter);
 app.use('/transaction', transactionRouter);
@@ -55,18 +60,29 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const PORT = process.env.PORT;
+
 
 // for setting the db with seed value, and starting the server
-sequelize.sync({force:true}).then(() => {
-  app.listen(PORT, console.log(`Server started on port ${PORT}`));
+const startServer = (dbReset, port) => {
 
-  require('./src/seed/seedDb');
-}).catch(err => console.log("Error: " + err));
+  if(dbReset === "true") {
+    sequelize.sync({force:true}).then(() => {
+      app.listen(port, console.log(`Server started on port ${port}`));
+    
+      require('./src/seed/seedDb');
+    }).catch(err => console.log("Error: " + err));
+  }
+  
+  else {
+    // for resetting the db, and starting the server
+    sequelize.sync().then(() => {
+      app.listen(port, console.log(`Server started on port ${port}`));
+    }).catch(err => console.log("Error: " + err));
+  }
+  
+}
 
-// for resetting the db, and starting the server
-// sequelize.sync().then(() => {
-//   app.listen(PORT, console.log(`Server started on port ${PORT}`));
-// }).catch(err => console.log("Error: " + err));
+startServer(keys.resetDB, keys.port);
+
 
 
