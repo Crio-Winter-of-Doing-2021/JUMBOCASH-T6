@@ -33,12 +33,12 @@ const Transaction = db.define('transactions', {
     paymentStatus: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    time: {
+        type: Sequelize.DATE,
+        defaultValue: new Date().toISOString(),
+        allowNull: false
     }
-    // time: {
-    //     type: Sequelize.DATE,
-    //     defaultValue: new Date().toISOString(),
-    //     allowNull: false
-    // }
 });
 
 // foreign key
