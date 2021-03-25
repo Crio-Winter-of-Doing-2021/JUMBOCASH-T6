@@ -1,5 +1,6 @@
 const Entity = require('../models/entity');
 const validation = require('../services/validation');
+const errorHandler = require('../services/handleErrors');
 
 var EntityDao = {
     findAll: findAll,
@@ -10,7 +11,11 @@ var EntityDao = {
 }
 
 async function findAll() {
-    return await Entity.findAll();
+    try {
+        return await Entity.findAll();
+    } catch (err) {
+        errorHandler(err);
+    }
 }
 
 async function findById(id) {
@@ -88,17 +93,5 @@ async function updateEntity(entity, id) {
     
     
 }
-
-function errorHandler(err) {
-
-    if(err instanceof Error) {
-        console.log(err);
-        throw {code: 500, message: err};
-    } else if(err.code) {
-        throw err;
-    } else {
-        throw {code: 500, message: err}
-    }
-  }
 
 module.exports = EntityDao;

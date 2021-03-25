@@ -52,10 +52,10 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    7.  GET /login
    8. [x] PATCH /entity/:id
 2. [x] Add hardcoded data for request and response schema
-3. Authentication
-   1. Make authentication feature using passport js using google strategy
+3. [ ] Authentication
+   1. [ ] Make authentication feature using passport js using google strategy
    2. [x] Add hardcoded data for a test user, many entity and many transactions
-   3. Make an access token for accessing a test user
+   3. [ ] Make an access token for accessing a test user
 4. [x] Pagination for hardcoded data
 5. [x] Filter for hardcoded data
 6. [x] Sort for hardcoded data
@@ -64,6 +64,12 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 9.  [x] Make request object schema
 10. [x] make reposnse object schema
 11. [x] Add test folder based on mocha and chai library
+12. [ ] Add `/user` endpoint to get and edit user data
+13. [ ] Make aggregation of transactions
+14. [ ] Add option to make and send csv file
+15. [ ] Add optional analytics
+16. [ ] Add multiple transactions
+17. [ ] Update Multiple transactions
 
 ### Version 2
 1. Add aggregates functionality to get sum, count, min, max data
@@ -103,3 +109,35 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    1. Link postgres to node app: [heroku postgres](https://devcenter.heroku.com/articles/heroku-postgresql)
    2. [x] Update env variables
    3. Deploy the app
+   
+### Aggregations
+1. Window: Monthly, quaterly, yearly
+2. Each window
+   1. Total Inflow, Outflow - Paid
+   2. Total Debt, Credit - Not paid
+   3. Top 10 Vendors and 10 Customers
+   4. List of Transactions with filter, sort, page options
+
+### Cashflow:
+1. component: Purchase, sales, taxes, employee, asset liquidation, asset acquiring, interest-paid
+2. Total inflow, total outflow in cash and cashless
+3. time interval, customer id
+
+### Optional Analytics
+1. customers: 
+   1. added, 
+   2. top customer by transaction frequency, 
+   3. top customer by total amount, 
+   4. cashless, cash transaction
+   5. unpaid customer dues(total),
+   6. unpaid customer's name with dues
+2. vendors: 
+   1. added, 
+   2. top customer by transaction frequency, 
+   3. top customer by total amount, 
+   4. cashless and cash transaction
+   5. unpaid vendors dues(total)
+   6. unpaid vendor's name with dues
+3. Components: 
+   1. comparison with last 5 time intervals (mth, qtr, yr)
+   2. % breakdown in inflow and outflow

@@ -1,7 +1,7 @@
 const Transaction = require("../models/transaction");
 const validation = require("../services/validation");
 const validateTransaction = require("../services/validateTransaction");
-const { isUUIDV4 } = require("../services/validation");
+const errorHandler = require('../services/handleErrors')
 
 
 const { sanitizeFilter } = require("../services/filter");
@@ -17,7 +17,11 @@ var TransactionDao = {
 };
 
 async function findAll() {
-  return await Transaction.findAll();
+  try {
+    return await Transaction.findAll();
+  } catch (err) {
+    errorHandler(err);
+  }
 }
 
 async function findWithFilter(filter, sort, page) {
@@ -79,7 +83,7 @@ async function updateTransaction(transaction, id) {
 
   try {
 
-    if(! isUUIDV4(id)) {
+    if(! validation.isUUIDV4(id)) {
       return false;
     }
 
@@ -110,15 +114,16 @@ async function updateTransaction(transaction, id) {
   }
 }
 
-function errorHandler(err) {
-  if (err instanceof Error) {
-    console.log(err);
-    throw { code: 500, message: err };
-  } else if (err.code) {
-    throw err;
-  } else {
-    throw { code: 500, message: err };
-  }
-}
+// function errorHandler(err) {
+//   if (err instanceof Error) {
+//     console.log(err);
+//     throw { code: 500, message: err };
+//   } else if (err.code) {
+//     throw err;
+//   } else {
+//     // if someone's dog got lost or any other esoteric errors
+//     throw { code: 500, message: err };
+//   }
+// }
 
 module.exports = TransactionDao;

@@ -42,6 +42,13 @@ module.exports.sanitizeFilter = (filter) => {
         }
     }
 
+    if(time) {
+        filterDirective.time = {
+            [Op.gte] : time.from,
+            [Op.lte]: time.to
+        }
+    }
+
     console.log(filterDirective)
     return filterDirective;
 
