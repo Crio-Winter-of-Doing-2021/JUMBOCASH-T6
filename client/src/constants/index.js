@@ -1,5 +1,6 @@
 export const FACEBOOK_AUTH_LINK = 'https://localhost:5000/auth/facebook';
 export const GOOGLE_AUTH_LINK = 'https://localhost:5000/auth/google';
+export const BASE_URL = 'http://ec2-52-66-210-39.ap-south-1.compute.amazonaws.com:8081';
 
 export const PaymentModes = [
   { label: 'Cash', value: 'CASH' },
@@ -8,10 +9,22 @@ export const PaymentModes = [
   { label: 'UPI', value: 'UPI' },
 ];
 
+export const PaymentModeLabelMap = {
+  'CASH':'Cash',
+  'DEBIT_CARD':'Debit Card',
+  'CREDIT_CARD':'Credit Card',
+  'UPI':'UPI'
+}
+
 export const PaymentStatuses = [
   { label: 'Paid', value: 'PAID' },
   { label: 'Not Paid', value: 'NOT_PAID' },
 ];
+
+export const PaymentStatusLabelMap = {
+  'PAID': 'Paid',
+  'NOT_PAID': 'Not Paid',
+};
 
 export const Categories = [
   { label: 'Sales', value: 'SALES' },
@@ -21,8 +34,20 @@ export const Categories = [
   { label: 'Asset Liquidation', value: 'ASSET_LIQUIDATION' },
 ];
 
-export const Entities = [
-  // will be populated from backend
-  { id: '12345', userId: '34567', name: 'Entity1', address: 'West Bengal, India', contact: '9876543210' },
-  { id: '67890', userId: '89215', name: 'Entity2', address: 'Assam, India', contact: '8876542310' },
-];
+export const DefaultTransaction = {
+  userId: '2e107775-2b0d-4e24-af6c-8766c042fb09',
+  amount: 0,
+  time: Date.now(),
+  paymentStatus: '',
+  paymentMode: '',
+  category: '',
+  entityId: '',
+  remarks: '',
+};
+
+export const DefaultEntity = {
+  userId:'2e107775-2b0d-4e24-af6c-8766c042fb09',
+  name: '',
+  address: '',
+  contact: '',
+}

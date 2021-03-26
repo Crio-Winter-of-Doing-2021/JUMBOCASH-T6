@@ -28,7 +28,7 @@ const Login = ({auth,logInUserWithOauth}) => {
               width="100"
             />
             <h1>
-              Hello <span>👋</span> Welcome to <span className="text-primary">Flowex</span>.
+              Hello <span role="img" aria-label="Hello">👋</span> Welcome to <span className="text-primary">Flowex</span>.
             </h1>
             <h2>Please, login to continue</h2>
             <Button

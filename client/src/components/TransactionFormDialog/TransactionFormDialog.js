@@ -10,7 +10,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
-import { PaymentStatuses, PaymentModes, Categories} from '../../constants';
+import { PaymentStatuses, PaymentModes, Categories } from '../../constants';
 import SaveButton from '../SaveButton/SaveButton';
 import { useFormik } from 'formik';
 import { transactionFormSchema } from './validation';
@@ -20,29 +20,23 @@ const TransactionFormDialog = ({
   getEntities,
   addTransaction,
   editTransaction,
-  transaction: { isLoading },
+  transaction: { isUpdating },
   visible,
   onHide,
   initialValues,
-  isEdit
+  isEdit,
 }) => {
-
-   useEffect(()=>{
+  useEffect(() => {
     getEntities();
-   },[])
+  }, []);
 
+  initialValues.time = new Date(initialValues.time);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: transactionFormSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
-      if(isEdit){
-        await editTransaction(initialValues.id,values);
-        
-      }
-      else {
-        await addTransaction(values);
-      } 
+      await (isEdit ? editTransaction(initialValues.id, values) : addTransaction(values));
+
       resetForm();
       onHide(false);
     },
@@ -63,10 +57,10 @@ const TransactionFormDialog = ({
   return (
     <form onSubmit={formik.handleSubmit}>
       <Dialog
-        header={`${isEdit?'Edit Transaction':'Add New Transaction'}`}
+        header={`${isEdit ? 'Edit Transaction' : 'Add New Transaction'}`}
         visible={visible}
         style={{ width: '50vw' }}
-        footer={<SaveButton isSubmitting={isLoading} />}
+        footer={<SaveButton isSubmitting={isUpdating} />}
         onHide={() => {
           onHide(false);
         }}
@@ -166,6 +160,8 @@ const TransactionFormDialog = ({
               itemTemplate={entityTemplate}
               filterBy="name,address"
               placeholder="Select an entity"
+              baseZIndex={1}
+              appendTo={document.body}
               {...formik.getFieldProps('entityId')}
             />
             {formik.touched.entityId && formik.errors.entityId ? (
@@ -195,4 +191,6 @@ const mapStateToProps = (state) => ({
   transaction: state.transaction,
 });
 
-export default connect(mapStateToProps, { addTransaction, editTransaction,getEntities })(TransactionFormDialog);
+export default connect(mapStateToProps, { addTransaction, editTransaction, getEntities })(
+  TransactionFormDialog,
+);

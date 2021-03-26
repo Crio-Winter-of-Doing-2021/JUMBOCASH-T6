@@ -31,6 +31,22 @@ a {
   height: 100%;
 }
 
+.va-mid {
+  vertical-align: middle;
+}
+
+.bg-green-gradient {
+  background-color: #1d976c; /* fallback for old browsers */
+  background-image:-webkit-linear-gradient(to right, #4CAF50, #28df99); /* Chrome 10-25, Safari 5.1-6 */
+  background-image:linear-gradient(to right, #4CAF50, #28df99); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/**************************************************************/
+/********************** Vendor CSS Overrides*******************/
+/**************************************************************/
+
+/*****************************Toastify*************************/
+
 .Toastify__toast--success {
   background-color: #C8E6C9;
   color: #224a23;
@@ -51,14 +67,13 @@ a {
   color: #73000c;
 }
 
-.va-mid {
-  vertical-align: middle;
-}
-
-.bg-green-gradient {
-  background-color: #1d976c; /* fallback for old browsers */
-  background-image:-webkit-linear-gradient(to right, #4CAF50, #28df99); /* Chrome 10-25, Safari 5.1-6 */
-  background-image:linear-gradient(to right, #4CAF50, #28df99); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
+/**************************Prime React****************************/
    
+.p-tabview .p-tabview-panels {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.p-inputtext {
+  width:100%
+}

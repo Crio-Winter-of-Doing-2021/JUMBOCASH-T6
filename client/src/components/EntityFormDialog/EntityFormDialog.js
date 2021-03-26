@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addEntity } from '../../store/actions/entityActions';
+import { addEntity, editEntity } from '../../store/actions/entityActions';
 
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
@@ -11,32 +11,34 @@ import { useFormik } from 'formik';
 import { entityFormSchema } from './validation';
 import SaveButton from '../SaveButton/SaveButton';
 
-
-const EntityFormDialog = ({ addEntity, entity:{isLoading,error}, visible, onHide }) => {
-  
+const EntityFormDialog = ({
+  addEntity,
+  editEntity,
+  entity: { isUpdating, error },
+  visible,
+  onHide,
+  initialValues,
+  isEdit,
+}) => {
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      address: '',
-      contact: '',
-    },
+    initialValues,
     validationSchema: entityFormSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
-      await addEntity(values);
+      await (isEdit ? editEntity(initialValues.id, values) : addEntity(values));
+
       resetForm();
       onHide(false);
     },
+    enableReinitialize: true,
   });
-
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <Dialog
-        header="Add New Enitity"
+        header={`${isEdit ? 'Edit Entity' : 'Add New Entity'}`}
         visible={visible}
         style={{ width: '50vw' }}
-        footer={<SaveButton isSubmitting={isLoading} />}
+        footer={<SaveButton isSubmitting={isUpdating} />}
         onHide={() => onHide(false)}
         dismissableMask={true}
       >
@@ -95,4 +97,4 @@ const mapStateToProps = (state) => ({
   entity: state.entity,
 });
 
-export default connect(mapStateToProps, { addEntity })(EntityFormDialog);
+export default connect(mapStateToProps, { addEntity, editEntity })(EntityFormDialog);

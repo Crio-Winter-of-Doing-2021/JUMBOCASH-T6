@@ -15,7 +15,6 @@ export default (ChildComponent) => {
 
     shouldNavigateAway() {
       if (!this.props.auth.isAuthenticated) {
-        console.log('history push');
         this.props.history.push('/login');
       }
     }

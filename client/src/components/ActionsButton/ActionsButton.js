@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import { Button } from 'primereact/button';
 
-const ActionsButton = ({ className, styles, setShowEntityFormDialog, addTransactionDialog }) => {
+const ActionsButton = ({ className, styles, addEntityDialog, addTransactionDialog }) => {
 
   return (
     <nav className={`fab-container p-d-flex  p-flex-column-reverse ${className}`} style={styles}>
@@ -13,7 +13,7 @@ const ActionsButton = ({ className, styles, setShowEntityFormDialog, addTransact
       />
       <Button className="fab-item p-mt-2 bg-green-gradient text-white" label="Add Transaction" onClick={()=>addTransactionDialog()}/>
       {/* <Button className="fab-item p-mt-2" label="Add Multiple Transactions" /> */}
-      <Button className="fab-item p-mt-2 bg-green-gradient text-white" label="Add Entity" onClick={()=>setShowEntityFormDialog(true)}/>
+      <Button className="fab-item p-mt-2 bg-green-gradient text-white" label="Add Entity" onClick={()=>addEntityDialog()}/>
     </nav>
   );
 };

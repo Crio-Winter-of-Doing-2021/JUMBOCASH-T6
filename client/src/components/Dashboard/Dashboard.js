@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 import CashflowSummaryCard from '../CashflowSummaryCard/CashflowSummaryCard';
 import TopEntitiesCard from '../TopEntitiesCard/TopEntitiesCard';
 import MonthlyTransactionsCard from '../MonthlyTransactionsCard/MonthlyTransactionsCard';
@@ -9,28 +8,28 @@ import TransactionsTable from '../TransactionsTable.js/TransactionsTable';
 import ActionsButton from '../ActionsButton/ActionsButton';
 import TransactionFormDialog from '../TransactionFormDialog/TransactionFormDialog';
 import EntityFormDialog from '../EntityFormDialog/EntityFormDialog';
+import { DefaultEntity, DefaultTransaction } from '../../constants';
+import ItemsTabView from '../ItemsTabView/ItemsTabView';
+import EntitiesTable from '../EntitiesTable.js/EntitiesTable';
 
 const Dashboard = () => {
   const [showTransactionFormDialog, setShowTransactionFormDialog] = useState(false);
   const [showEntityFormDialog, setShowEntityFormDialog] = useState(false);
   const [currTransaction, setCurrTransaction] = useState({});
   const [isTransactionEdit, setIsTransactionEdit] = useState(false);
-  
+  const [currEntity, setCurrEntity] = useState({});
+  const [isEntityEdit, setIsEntityEdit] = useState(false);
 
   const addOrEditTransactionDialog = (data) => {
     data ? setIsTransactionEdit(true) : setIsTransactionEdit(false);
-    setCurrTransaction(
-      data || {
-        amount: 0,
-        time: '',
-        paymentStatus: '',
-        paymentMode: '',
-        category: '',
-        entityId: '',
-        remarks: '',
-      },
-    );
+    setCurrTransaction(data || DefaultTransaction);
     setShowTransactionFormDialog(true);
+  };
+
+  const addOrEditEntityDialog = (data) => {
+    data ? setIsEntityEdit(true) : setIsEntityEdit(false);
+    setCurrEntity(data || DefaultEntity);
+    setShowEntityFormDialog(true);
   };
 
   return (
@@ -46,10 +45,21 @@ const Dashboard = () => {
           <MonthlyTransactionsCard />
         </div>
       </div>
-      <TransactionsTable editTransactionDialog={addOrEditTransactionDialog} />
+      <ItemsTabView
+        items={[
+          {
+            header: 'Transactions',
+            content: <TransactionsTable editTransactionDialog={addOrEditTransactionDialog} />,
+          },
+          {
+            header: 'Entities',
+            content: <EntitiesTable editEntityDialog={addOrEditEntityDialog} />,
+          },
+        ]}
+      />
       <ActionsButton
         addTransactionDialog={addOrEditTransactionDialog}
-        setShowEntityFormDialog={setShowEntityFormDialog}
+        addEntityDialog={addOrEditEntityDialog}
       />
       <TransactionFormDialog
         visible={showTransactionFormDialog}
@@ -57,10 +67,14 @@ const Dashboard = () => {
         initialValues={currTransaction}
         isEdit={isTransactionEdit}
       />
-      <EntityFormDialog visible={showEntityFormDialog} onHide={setShowEntityFormDialog} />
+      <EntityFormDialog
+        visible={showEntityFormDialog}
+        onHide={setShowEntityFormDialog}
+        initialValues={currEntity}
+        isEdit={isEntityEdit}
+      />
     </>
   );
 };
-
 
 export default Dashboard;
