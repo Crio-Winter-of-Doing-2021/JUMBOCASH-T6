@@ -4,8 +4,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
       "time": "2018-11-10 12:00:48 -06:-30",
-      "paymentMode": "DEBIT CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "DEBIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 2192.33,
       "category": "PURCHASE"
     },
@@ -14,8 +14,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
       "time": "2019-01-03 06:17:43 -06:-30",
-      "paymentMode": "DEBIT CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "DEBIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 2144.25,
       "category": "PURCHASE"
     },
@@ -24,7 +24,7 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
       "time": "2015-02-01 10:38:57 -06:-30",
-      "paymentMode": "DEBIT CARD",
+      "paymentMode": "DEBIT_CARD",
       "paymentStatus": "PAID",
       "amount": 2677.4,
       "category": "SALES"
@@ -45,7 +45,7 @@ module.exports = [
       "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
       "time": "2014-02-28 03:45:22 -06:-30",
       "paymentMode": "CASH",
-      "paymentStatus": "NOT PAID",
+      "paymentStatus": "NOT_PAID",
       "amount": 3157.64,
       "category": "SALES"
     },
@@ -54,8 +54,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
       "time": "2016-01-18 04:46:49 -06:-30",
-      "paymentMode": "CREDIT-CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "CREDIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 1259.89,
       "category": "SALES"
     },
@@ -74,8 +74,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
       "time": "2014-03-18 01:18:32 -06:-30",
-      "paymentMode": "CREDIT-CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "CREDIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 2997.06,
       "category": "PURCHASE"
     },
@@ -84,8 +84,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
       "time": "2020-10-15 08:23:37 -06:-30",
-      "paymentMode": "DEBIT CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "DEBIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 2082.93,
       "category": "PURCHASE"
     },
@@ -94,8 +94,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
       "time": "2014-11-20 09:32:05 -06:-30",
-      "paymentMode": "DEBIT CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "DEBIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 1749.72,
       "category": "PURCHASE"
     },
@@ -104,8 +104,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
       "time": "2016-05-19 11:06:49 -06:-30",
-      "paymentMode": "CREDIT-CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "CREDIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 1905.96,
       "category": "SALES"
     },
@@ -114,8 +114,8 @@ module.exports = [
       "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
       "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
       "time": "2017-09-09 02:46:12 -06:-30",
-      "paymentMode": "CREDIT-CARD",
-      "paymentStatus": "NOT PAID",
+      "paymentMode": "CREDIT_CARD",
+      "paymentStatus": "NOT_PAID",
       "amount": 3005.4,
       "category": "SALES"
     }
