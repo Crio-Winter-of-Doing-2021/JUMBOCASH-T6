@@ -1,0 +1,63 @@
+[
+    {
+       "request":{
+          "uuid":100
+       },
+       "response":{
+          "code":422,
+          "body":{
+             "error":true,
+             "errorMessage":""
+          }
+       }
+    },
+    {
+       "request":{
+          "uuid":"100"
+       },
+       "response":{
+          "code":422,
+          "body":{
+             "error":true,
+             "errorMessage":""
+          }
+       }
+    },
+    {
+        "request":{
+           "uuid":"4e9f3917-c2d5-4f85-ba51-97a3058f726d"
+        },
+        "response":{
+           "code":404,
+           "body":{
+              "error":true,
+              "errorMessage":"Not found"
+           }
+        }
+     },
+     {
+        "request":{
+           "uuid":"2e107775-2b0d-4e24-af6c-8766c042fb09"
+        },
+        "response":{
+           "code":404,
+           "body":{
+              "error":true,
+              "errorMessage":"Not found"
+           }
+        }
+     },
+     {
+        "request":{
+           "uuid":"4e9f3907-c2d5-4f85-ba51-97a3058f726d"
+        },
+        "response":{
+           "code":200,
+           "body":{
+              "error":false,
+              "errorMessage":"Not found"
+           }
+        }
+     }
+     
+ ]

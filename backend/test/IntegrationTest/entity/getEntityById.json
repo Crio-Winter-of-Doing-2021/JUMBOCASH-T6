@@ -1,0 +1,26 @@
+[
+    {
+       "request":{
+          "uuid":100
+       },
+       "response":{
+          "code":422,
+          "body":{
+             "error":true,
+             "errorMessage":""
+          }
+       }
+    },
+    {
+       "request":{
+          "uuid":"100"
+       },
+       "response":{
+          "code":422,
+          "body":{
+             "error":true,
+             "errorMessage":""
+          }
+       }
+    }
+ ]

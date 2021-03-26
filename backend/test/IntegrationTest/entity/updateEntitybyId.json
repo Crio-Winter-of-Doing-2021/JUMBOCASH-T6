@@ -1,0 +1,116 @@
+[
+    {
+        "request":{
+             "uuid": "9813",
+             "body": {
+                "userId": "",
+                "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                "name": "Stone Quinn",
+                "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+                "contact": "+91 (969) 552-3445"
+             }
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"not a valid uuid"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+             "body": {
+                "userId": "",
+                "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                "name": "Stone Quinn",
+                "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+                "contact": "+91 (969) 552-3445"
+             }
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"not a valid contact"
+           }
+        }
+     },
+     {
+         "request":{
+            "uuid": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+            "body": {
+               "userId": "",
+               "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+               "name": "Stone Quinn",
+               "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+               "contact": ""
+            }
+         },
+         "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"contact cannot be left empty"
+            }
+         }
+      },
+      {
+         "request":{
+              "uuid": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+              "body": {
+                 "userId": "",
+                 "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                 "name": "Stone Quinn",
+                 "address": "",
+                 "contact": "+91 (969) 552-3445"
+              }
+          },
+         "response":{
+            "code":422,
+            "body":{
+               "error":true,
+               "errorMessage":"address cannot be left empty"
+            }
+         }
+      },
+      {
+         "request":{
+              "uuid": "946e3d9a-1f85-404a-a98c-00fef8cd2211",
+              "body": {
+                 "userId": "",
+                 "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                 "name": "Stone Quinn",
+                 "address": "232hig kjrb kgnr",
+                 "contact": "+915523445"
+              }
+          },
+         "response":{
+            "code":404,
+            "body":{
+               "error":true,
+               "errorMessage":"Entity not found"
+            }
+         }
+      },
+      {
+         "request":{
+              "uuid": "4a454efb-4818-4154-9729-bbdf40791fe7",
+              "body": {
+                 "userId": "",
+                 "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                 "name": "Stone Quinn",
+                 "address": "232hig kjrb kgnr",
+                 "contact": "+919695523445"
+              }
+          },
+         "response":{
+            "code":200,
+            "body":{
+               "error":false
+               
+            }
+         }
+      }
+]
