@@ -1,0 +1,17 @@
+.login-btn-fb.p-button {
+  background-color: #3b5998;
+  border:none
+}
+
+.login-btn-fb.p-button:hover{
+  background-color: #6077aa!important;
+}
+
+.login-btn-google.p-button {
+  background-color: #dd4b39;
+  border: none;
+}
+
+.login-btn-google.p-button:hover {
+  background-color: #da6e60!important;
+}
