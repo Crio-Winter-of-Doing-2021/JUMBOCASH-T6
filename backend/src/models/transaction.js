@@ -3,7 +3,7 @@ const db = require('../../config/database');
 
 const User = require('./user');
 const Entity = require('./entity');
-
+// schema of transaction
 const Transaction = db.define('transactions', {
     id: {
         type: Sequelize.UUID,

@@ -51,6 +51,7 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    6. [x] GET /transaction/:id
    7.  GET /login
    8. [x] PATCH /entity/:id
+   9. [x] GET /entity/:id
 2. [x] Add hardcoded data for request and response schema
 3. [ ] Authentication
    1. [ ] Make authentication feature using passport js using google strategy
@@ -64,12 +65,12 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 9.  [x] Make request object schema
 10. [x] make reposnse object schema
 11. [x] Add test folder based on mocha and chai library
-12. [ ] Add `/user` endpoint to get and edit user data
-13. [ ] Make aggregation of transactions
-14. [ ] Add option to make and send csv file
-15. [ ] Add optional analytics
-16. [ ] Add multiple transactions
-17. [ ] Update Multiple transactions
+12.  Add `/user` endpoint to get and edit user data
+13.  Make aggregation of transactions
+14.  Add option to make and send csv file
+15.  Add optional analytics
+16.  Add multiple transactions
+17.  Update Multiple transactions
 
 ### Version 2
 1. Add aggregates functionality to get sum, count, min, max data

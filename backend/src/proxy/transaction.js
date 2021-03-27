@@ -1,11 +1,13 @@
 const Transaction = require("../models/transaction");
 const validation = require("../services/validation");
 const validateTransaction = require("../services/validateTransaction");
-const errorHandler = require('../services/handleErrors')
-
+const errorHandler = require("../services/handleErrors");
 
 const { sanitizeFilter } = require("../services/filter");
-const {sortResponse} = require("../services/sorting");
+const { sortResponse } = require("../services/sorting");
+
+// 1. Gets data from postgres
+// 2. Sends data to postgres
 
 var TransactionDao = {
   findAll: findAll,
@@ -13,7 +15,7 @@ var TransactionDao = {
   findById: findById,
   deleteById: deleteById,
   updateTransaction: updateTransaction,
-  findWithFilter: findWithFilter
+  findWithFilter: findWithFilter,
 };
 
 async function findAll() {
@@ -25,23 +27,18 @@ async function findAll() {
 }
 
 async function findWithFilter(filter, sort, page) {
-
   try {
-    let response =  await Transaction.findAll({
+    let response = await Transaction.findAll({
       where: {
-        ...sanitizeFilter(filter)
+        ...sanitizeFilter(filter),
       },
-      order: 
-        sortResponse(sort)
-      
+      order: sortResponse(sort),
     });
 
     return response;
-
   } catch (err) {
     errorHandler(err);
   }
-  
 }
 
 async function findById(id) {
@@ -82,33 +79,31 @@ async function updateTransaction(transaction, id) {
   const { paymentMode, paymentStatus, amount } = transaction;
 
   try {
-
-    if(! validation.isUUIDV4(id)) {
+    if (!validation.isUUIDV4(id)) {
       return false;
     }
 
     if (validateTransaction.isValidForUpdate(transaction)) {
-
       let transaction = await Transaction.findByPk(id);
 
-      if(transaction === null ) {
-        throw {code: 404, message: "Not found"}
+      if (transaction === null) {
+        throw { code: 404, message: "Not found" };
       }
 
-      if(paymentStatus){
+      if (paymentStatus) {
         transaction.paymentStatus = paymentStatus;
-      } if(paymentMode) {
+      }
+      if (paymentMode) {
         transaction.paymentMode = paymentMode;
-      } if(amount) {
+      }
+      if (amount) {
         transaction.amount = amount;
       }
-   
+
       return await transaction.save();
-
     }
-    
-    return false;
 
+    return false;
   } catch (err) {
     errorHandler(err);
   }
