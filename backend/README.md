@@ -17,28 +17,26 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    > **npm run start-dev** (starts with nodemon)
 2. To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
 
-## Action-4.1
-### Major Issues:
-1. Added environment variable
-2. Automated reset of database on starting of server, specified by env variable flag
-3. Added preliminary middleware for authentication handling
-4. Added filter-sort functionality
-### Minor fixes:
-1. Fixed: response body returns transaction with "entity" as its key
-2. throws error if gets amount of precision greater than 2.
-3. Fixed: time is not accepted by server
-4. Improved: providing time is optional for client
-5. Changed: time format for request and response: [link](schema.md)
-6. Added config/data to declare custom enums, in a simpler way. [link](config/data.js)
-7. Changed: specify if you need seeded or undisturbed database
-8. Fixed: returns updated item after modification
+## Major Enhancements:
+1. Added env variable to select database from "remote" or "local"
+2. Configured ssl for remote database
+3. Seed value in database are now consistent with specified enums.
+4. Configured passport to authenticate using google strategy
+5. Generated credentials for google oauth2.0
+6. Added OAuth2.0 using google strategy with opaque OAuth2.0 tokens.
+7. Added token in userSchema
+## To Do
+1. Test all protected endpoints with test access token
+2. Add where id: userId in entity, transaction column
+3. Add aggregates based on last week, last month, last quarter, last year
+4. Deploy the code, Push the code, Inform partner about changes
+5. Add initial data in `user/dashboard`
+6. Add pagination
+7. Think about caching, indexing, optimizing of query
+8. run 2 instances of app in aws: latest-unstable, stable
+## Minor fixes:
+1. Changed action to version in changelog
 
-
-## Upcoming actions
-1. Add authentication
-2. Think about aggregates for dashboard functionality
-3. Implement page, filter, sort for database
-4. Deploy the app - version 1
 
 ## Todo
 ### Version 1
@@ -54,9 +52,9 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    9. [x] GET /entity/:id
 2. [x] Add hardcoded data for request and response schema
 3. [ ] Authentication
-   1. [ ] Make authentication feature using passport js using google strategy
+   1. [x] Make authentication feature using passport js using google strategy
    2. [x] Add hardcoded data for a test user, many entity and many transactions
-   3. [ ] Make an access token for accessing a test user
+   3. [x] Make an access token for accessing a test user
 4. [x] Pagination for hardcoded data
 5. [x] Filter for hardcoded data
 6. [x] Sort for hardcoded data
@@ -71,6 +69,7 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 15.  Add optional analytics
 16.  Add multiple transactions
 17.  Update Multiple transactions
+18.  Add cache for userId, now proxy is called 3 times, for deserialize, for id, for getting initial data wrt to query
 
 ### Version 2
 1. Add aggregates functionality to get sum, count, min, max data
@@ -78,23 +77,12 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    1. Timeframe filter - 
       1. last day, last week, last month, last quarter, last year
       2. current day, current week, current month, current quarter, current year
-   1. Total Credit Inflow and Outflow based on timeframe filter
-   2. Vendor Chart - max by transaction, max by sum of amount based on timeframe filter
-   3. Customer Chart - max by transaction, max by sum of amount based on timeframe filter
-   4. Histogram of Inflow and Outflow reduced to components eg Sales, Purchase, Tax etc. based on timeframe filter
-   5. Transaction table - paginated, search by category, paymentStatus, paymentMode
+   2. Total Credit Inflow and Outflow based on timeframe filter
+   3. Vendor Chart - max by transaction, max by sum of amount based on timeframe filter
+   4. Customer Chart - max by transaction, max by sum of amount based on timeframe filter
+   5. Histogram of Inflow and Outflow reduced to components eg Sales, Purchase, Tax etc. based on timeframe filter
+   6. Transaction table - paginated, search by category, paymentStatus, paymentMode
 
-### Add authentication:
-1. Frontend:
-   1. get token from oauth server (pass credentials).
-   2. Send the token to the backend `/login` endpoint
-2. Backend:
-   1. sends the token to the oauth server, and get user data or error
-   2. if error: send error
-   3. if user logs in: 
-      1. first time: add user data [email, name] in `user` table, token id in `auth` table with userId
-      2. after first time: find user data, update `auth` table with token id, userId
-   4. Following successful authentication backend will send "initial data" to the frontend
 
 ### Initial data
 1. Entities associated with the userid
@@ -102,15 +90,6 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 3. Person details: userSchema
 4. Total Aggregates (to think about it)
 
-### Deploy the app for completing authentication
-1. Separate test and production database
-2. [x] Add env variables
-3. [x] Sequelize Logging is turned off
-4. deploy to heroku: [project-dashboard](https://dashboard.heroku.com/apps/jumbocash-dev/deploy/heroku-git)
-   1. Link postgres to node app: [heroku postgres](https://devcenter.heroku.com/articles/heroku-postgresql)
-   2. [x] Update env variables
-   3. Deploy the app
-   
 ### Aggregations
 1. Window: Monthly, quaterly, yearly
 2. Each window

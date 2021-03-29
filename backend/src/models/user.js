@@ -22,6 +22,10 @@ const User = db.define('users', {
     contact: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    token: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
 });
 

@@ -14,7 +14,7 @@ const newUser = {
 const seed = async () => {
 
     await require('../proxy/user').create(newUser).then((value) => {
-        console.log(value);
+        console.log("seeded user");
     }).catch(err => {
         console.log(err);
     })

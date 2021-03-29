@@ -8,7 +8,8 @@
         name: 'text',
         emailId: 'text',
         companyName: 'text',
-        contact: 'text'
+        contact: 'text',
+        token: 'text'
     }
 ```
 

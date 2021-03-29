@@ -1,10 +1,15 @@
 const User = require('../models/user');
+const errorHandler = require('../services/handleErrors');
+
 var UserDao = {
     findAll: findAll,
     create: create,
     findById: findById,
     deleteById: deleteById,
-    updateUser: updateUser
+    updateUser: updateUser,
+    findOrCreateUser: findOrCreateUser,
+    findUserByToken: findUserByToken,
+    validateToken: validateToken
 }
 
 async function findAll() {
@@ -12,7 +17,12 @@ async function findAll() {
 }
 
 async function findById(id) {
-    return await User.findByPk(id);
+    try {
+        return await User.findByPk(id);
+    } catch (err) {
+        errorHandler(err);
+    }
+    
 }
 
 async function deleteById(id) {
@@ -24,13 +34,27 @@ async function create(user) {
     try {
         var newUser = new User(user);
         // test
-        console.log(newUser);
+        // console.log(newUser);
         return await newUser.save();
 
     } catch(err) {
         throw {code: 500, message: err}
     };
 
+}
+
+async function findOrCreateUser(userDetails) {
+
+    try {
+        const [user, created] = await User.findOrCreate({
+            where: { emailId: userDetails.emailId, name: userDetails.name, token: userDetails.token }
+        });
+
+        return [user, created];
+
+    } catch(err) {
+        throw {code: 500, message: err}
+    };
 }
 
 async function updateUser(user, id) {
@@ -41,6 +65,24 @@ async function updateUser(user, id) {
         email: user.email
     };
     return await User.update(updateUser, { where: { id: id } });
+}
+
+async function findUserByToken(token) {
+    try {
+        const user = await User.findOne({ where: {token}})
+        return user;
+    } catch(err) {
+        errorHandler(err);
+    }
+}
+
+async function validateToken(token) {
+    try {
+        const user = await User.findOne({attributes: ['id'], where: {token}})
+        return user;
+    } catch(err) {
+        errorHandler(err);
+    }
 }
 
 module.exports = UserDao;
