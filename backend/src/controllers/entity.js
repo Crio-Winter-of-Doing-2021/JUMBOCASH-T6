@@ -13,8 +13,11 @@ module.exports.getEntities = (req, res) => {
 
 const getAllEntities = async (req, res) => {
 
+  console.log(`get all entity with user Id ${req.userId}`);
+  const userId = req.userId;
+
   entityProxy
-    .findAll()
+    .findAll(userId)
     .then((value) => {
       res.status(200).send({
         error: false,
@@ -32,9 +35,10 @@ const getAllEntities = async (req, res) => {
 const getEntityById = async (req, res) => {
 
   const id = req.params.id;
+  console.log(`get particular entity of Id: ${id} with user Id ${req.userId}`);
 
   entityProxy
-    .findById(id)
+    .findById(id, req.userId)
     .then((value) => {
 
       if(value === null) {
@@ -57,11 +61,11 @@ const getEntityById = async (req, res) => {
 const updateEntityById = async (req, res) => {
 
     const id = req.params.id;
-
     const entityBody = req.body;
+    console.log(`update particular entity of Id: ${id} with user Id ${req.userId}`);
 
   entityProxy
-    .updateEntity(entityBody, id)
+    .updateEntity(entityBody, id, req.userId)
     .then((value) => {
 
       if(value[0] === 0) {
@@ -83,8 +87,14 @@ const updateEntityById = async (req, res) => {
 
 const createEntity = async (req, res) => {
 
+  console.log(`create entity ${req.body} with user Id ${req.userId}`);
+
+  let entity = req.body;
+  // inject userId in entity
+  entity.userId = req.userId;
+
   entityProxy
-    .create(req.body)
+    .create(entity)
     .then((value) => {
       res.status(201).send({
         error: false,

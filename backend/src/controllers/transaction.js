@@ -38,8 +38,12 @@ module.exports.getTransactionsWithFilter = (req, res) => {
 // 3. Decide which proxy or dao to use
 
 const getAllTransactions = async (req, res) => {
+
+  console.log(`get all transactions with user Id ${req.userId}`);
+  const userId = req.userId;
+
   transactionProxy
-    .findAll()
+    .findAll(userId)
     .then((value) => {
       res.status(200).send({
         error: false,
@@ -56,9 +60,11 @@ const getAllTransactions = async (req, res) => {
 
 const getTransactionById = async (req, res) => {
   const id = req.params.id;
+  console.log(`get transactions of id ${id} with user Id ${req.userId}`);
+  const userId = req.userId;
 
   transactionProxy
-    .findById(id)
+    .findById(id, userId)
     .then((value) => {
       if (value === null) {
         throw { code: 404, message: "Transaction does not exist" };
@@ -79,11 +85,13 @@ const getTransactionById = async (req, res) => {
 
 const updateTransactionById = async (req, res) => {
   const id = req.params.id;
+  console.log(`update transactions of id: ${id} where user Id ${req.userId}`);
+  const userId = req.userId;
 
   const transactionBody = req.body;
 
   transactionProxy
-    .updateTransaction(transactionBody, id)
+    .updateTransaction(transactionBody, id, userId)
     .then((value) => {
       res.status(200).send({
         error: false,
@@ -99,8 +107,16 @@ const updateTransactionById = async (req, res) => {
 };
 
 const createTransaction = async (req, res) => {
+
+  console.log(`create transactions having user Id ${req.userId}`);
+  const userId = req.userId;
+
+  let transaction = req.body;
+  // inject userId in transaction
+  transaction.userId = userId;
+
   transactionProxy
-    .create(req.body)
+    .create(transaction)
     .then((value) => {
       res.status(201).send({
         error: false,
@@ -118,10 +134,10 @@ const createTransaction = async (req, res) => {
 const getTransactionsWithFilter = (req, res) => {
   const { sort, page, filter } = req.body;
 
-  console.log(sort, page, filter);
+  console.log(sort, page, filter, req.userId);
 
   transactionProxy
-    .findWithFilter(filter, sort, page)
+    .findWithFilter(filter, sort, page, req.userId)
     .then((value) => {
       res.status(200).send({
         error: false,

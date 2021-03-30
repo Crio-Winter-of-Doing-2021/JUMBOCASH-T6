@@ -8,7 +8,7 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 ## To Know More
 ### [README.md](#)
 ### [schema.md](schema.md)
-### [changelog.md](changelog.md)
+### [changelog.md](changelog.md) - for viewing new features in Version-5.1
 
 ## How to Run
 1. To run the application
@@ -16,6 +16,15 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    > 
    > **npm run start-dev** (starts with nodemon)
 2. To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
+
+## Note from backend developer (30th March):
+1. Fixed the enum in seeding file, check `backend/config/data.js` for acceptable enums
+2. Added cookie based authentication using OAuth2.0 with google Strategy
+   1. `GET auth/google` - endpoint for logging in
+   2. `GET auth/logout` - endpoint for logging out
+   3. `GET user/me` - get user data conforms to userSchema ([schema.md](schema.md)); to be redirected on this endpoint after successful authentication
+   4. `PATCH user/me` - editing user data, not implemented it yet.
+3. To be deployed by tomorrow.
 
 ## Major Enhancements:
 1. Added env variable to select database from "remote" or "local"
@@ -51,7 +60,7 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    8. [x] PATCH /entity/:id
    9. [x] GET /entity/:id
 2. [x] Add hardcoded data for request and response schema
-3. [ ] Authentication
+3. [x] Authentication
    1. [x] Make authentication feature using passport js using google strategy
    2. [x] Add hardcoded data for a test user, many entity and many transactions
    3. [x] Make an access token for accessing a test user

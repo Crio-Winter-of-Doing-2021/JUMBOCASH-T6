@@ -18,19 +18,20 @@ var TransactionDao = {
   findWithFilter: findWithFilter,
 };
 
-async function findAll() {
+async function findAll(userId) {
   try {
-    return await Transaction.findAll();
+    return await Transaction.findAll({where: {userId}});
   } catch (err) {
     errorHandler(err);
   }
 }
 
-async function findWithFilter(filter, sort, page) {
+async function findWithFilter(filter, sort, page, userId) {
   try {
     let response = await Transaction.findAll({
       where: {
         ...sanitizeFilter(filter),
+        userId
       },
       order: sortResponse(sort),
     });
@@ -41,10 +42,10 @@ async function findWithFilter(filter, sort, page) {
   }
 }
 
-async function findById(id) {
+async function findById(id, userId) {
   // test for uuid
   if (validation.isUUIDV4(id)) {
-    return await Transaction.findByPk(id);
+    return await Transaction.findOne({where: {id, userId}});
   }
 }
 
@@ -54,26 +55,37 @@ async function deleteById(id) {
 
 async function create(transaction) {
   try {
+
     if (validateTransaction.isValidTransaction(transaction)) {
       var newTransaction = new Transaction(transaction);
     }
 
+    // check for duplicate transaction, where we can check for duplicate transaction
+    const duplicateTransaction = await Transaction.findOne({ where: { 
+      time: newTransaction.time,
+      entityId: newTransaction.entityId,
+      userId: newTransaction.userId
+    } });
+
+    if (duplicateTransaction !== null) {
+        throw {code: 409, message: "Transaction already exist"}
+    }
+    
     return await newTransaction.save();
+
   } catch (err) {
     if (err.name === "SequelizeForeignKeyConstraintError") {
       throw {
         code: 422,
         message: "Either of the owner or the customer does not exist",
       };
-    } else if (err.name === "SequelizeUniqueConstraintError") {
-      throw { code: 409, message: "Transaction already exist" };
     } else {
       errorHandler(err);
     }
   }
 }
 
-async function updateTransaction(transaction, id) {
+async function updateTransaction(transaction, id, userId) {
   // name, userId cannot be updated
 
   const { paymentMode, paymentStatus, amount } = transaction;
@@ -84,7 +96,7 @@ async function updateTransaction(transaction, id) {
     }
 
     if (validateTransaction.isValidForUpdate(transaction)) {
-      let transaction = await Transaction.findByPk(id);
+      let transaction = await Transaction.findOne({where: {id, userId}});
 
       if (transaction === null) {
         throw { code: 404, message: "Not found" };
@@ -109,16 +121,5 @@ async function updateTransaction(transaction, id) {
   }
 }
 
-// function errorHandler(err) {
-//   if (err instanceof Error) {
-//     console.log(err);
-//     throw { code: 500, message: err };
-//   } else if (err.code) {
-//     throw err;
-//   } else {
-//     // if someone's dog got lost or any other esoteric errors
-//     throw { code: 500, message: err };
-//   }
-// }
 
 module.exports = TransactionDao;

@@ -1,6 +1,7 @@
 const Entity = require('../models/entity');
 const validation = require('../services/validation');
 const errorHandler = require('../services/handleErrors');
+const User = require('../models/user');
 
 var EntityDao = {
     findAll: findAll,
@@ -10,19 +11,24 @@ var EntityDao = {
     updateEntity: updateEntity
 }
 
-async function findAll() {
+async function findAll(userId) {
     try {
-        return await Entity.findAll();
+        return await Entity.findAll({where: {userId}});
     } catch (err) {
         errorHandler(err);
     }
 }
 
-async function findById(id) {
+async function findById(id, userId) {
 
-    // test for uuid
-    if(validation.isUUIDV4(id)) {
-        return await Entity.findByPk(id);
+    try {
+        // test for uuid
+        // user will only be able to see entity added by him
+        if(validation.isUUIDV4(id) && validation.isUUIDV4(userId)) {
+            return await Entity.findOne({where: {id, userId}});
+        }
+    } catch (err) {
+        errorHandler(err);
     }
 }
 
@@ -41,7 +47,8 @@ async function create(entity) {
         const similarEntity = await Entity.findOne({ where: { 
             name: newEntity.name,
             address: newEntity.address,
-            contact: newEntity.contact
+            contact: newEntity.contact,
+            userId: newEntity.userId
         } });
 
         if (similarEntity !== null) {
@@ -61,19 +68,20 @@ async function create(entity) {
     
 }
 
-async function updateEntity(entity, id) {
+async function updateEntity(entity, id, userId) {
 
     try {
 
         // name, userId cannot be updated
         if(! (validation.isUUIDV4(id) && 
-            validation.isValidContact(entity.contact)) && 
-            validation.isValidAddress(entity.address)) {
+            validation.isUUIDV4(userId) &&
+            validation.isValidContact(entity.contact) && 
+            validation.isValidAddress(entity.address)) ) {
 
             return false;
         }
         
-        let entityFound = await Entity.findByPk(id);
+        let entityFound = await Entity.findOne({where: {id, userId}});
 
         if(entityFound === null ) {
             throw {code: 404, message: "Not found"}

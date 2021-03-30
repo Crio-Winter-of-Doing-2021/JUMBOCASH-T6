@@ -11,7 +11,7 @@ passport.serializeUser((token, done) => {
 
 passport.deserializeUser(async ({token}, done) => {
   
-  console.log('DEserialize ... called', token)
+  // console.log('DEserialize ... called', token)
 
   await validateToken(token)
     .then(userId => {

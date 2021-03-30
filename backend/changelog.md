@@ -1,5 +1,19 @@
-## Version-5.0:
+## Version-5.1:
 ## Major Enhancements:
+1. Protected all routes with authentication.
+2. Test all protected endpoints with test access token.
+3. Made a test access token for testing authentication in postman.
+4. Added pm2 for app management in production
+### To Do:
+1. To add functionality for editing user details
+### Minor improvements:
+1. Fixed: uuid of request not matching with entityId in updateEntityById.json
+2. User can create transaction with entity they have not defined
+3. Validate transaction for duplication
+4. Fixed: test cases in postman
+
+## Version-5.0:
+### Major Enhancements:
 1. Added env variable to select database from "remote" or "local"
 2. Configured ssl for remote database
 3. Seed value in database are now consistent with specified enums.
@@ -7,7 +21,7 @@
 5. Generated credentials for google oauth2.0
 6. Added OAuth2.0 using google strategy with opaque OAuth2.0 tokens.
 7. Added token in userSchema
-## To Do
+### To Do
 1. Test all protected endpoints with test access token
 2. Add where id: userId in entity, transaction column
 3. Add aggregates based on last week, last month, last quarter, last year
@@ -16,7 +30,7 @@
 6. Add pagination
 7. Think about caching, indexing, optimizing of query
 8. run 2 instances of app in aws: latest-unstable, stable
-## Minor fixes:
+### Minor fixes:
 1. Changed action to version in changelog
 
 ## Version-4.1
