@@ -65,9 +65,8 @@ Response time format: "2018-12-07T08:16:39.000Z" ([ISO string format](https://de
 ### Pagination 
 ```js
     page = {
-        cursor: {id: "id"},
-        flow: "start" | "end",
-        limit: "any integer"
+        limitPerPage: "Natural number",
+        currentPage: "Natural Number"
     }
 ```
 
@@ -295,9 +294,8 @@ Request:
     },
 
     page: {
-        cursor: {id: "id"},
-        flow: "start" | "end",
-        limit: "any integer"
+        limitPerPage: "Natural number",
+        currentPage: "Natural Number"
     },
 
     sort: {

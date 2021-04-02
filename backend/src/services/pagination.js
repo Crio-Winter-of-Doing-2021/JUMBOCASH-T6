@@ -1,4 +1,4 @@
-module.exports.paginate = (array, pageDirective) => {
+const paginateV1 = (array, pageDirective) => {
 
     let {cursor, flow, limit} = pageDirective;
     // console.log(cursor, flow, limit);
@@ -33,3 +33,17 @@ module.exports.paginate = (array, pageDirective) => {
     return array.slice(startIndex, endIndex+1);
 
 }
+
+function paginate (pageDirective) {
+    let { limitPerPage, currentPage } = pageDirective;
+
+    const limit = Number(limitPerPage) * 1;
+    const offset = (Number(currentPage) - 1) * limit;
+
+    return {
+        "limit": limit,
+        "offset": offset
+    }
+}
+
+module.exports = paginate;

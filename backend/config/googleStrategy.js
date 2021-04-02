@@ -1,30 +1,31 @@
-const GoogleStrategy = require('passport-google-oauth20');
-const findOrCreate = require('../src/proxy/user').findOrCreateUser;
-const GoogleKeys = require('./server').auth.google;
+const GoogleStrategy = require("passport-google-oauth20");
+const findOrCreate = require("../src/proxy/user").findOrCreateUser;
+const GoogleKeys = require("./server").auth.google;
 
 const strategy = new GoogleStrategy(
   {
     clientID: GoogleKeys.clientID,
     clientSecret: GoogleKeys.clientSecret,
-    callbackURL: GoogleKeys.callbackURL
+    callbackURL: GoogleKeys.callbackURL,
   },
-  async function(token, tokenSecret, profile, done) {
+  async function (token, tokenSecret, profile, done) {
     // testing
     // console.log('===== GOOGLE PROFILE =======')
     // console.log(profile)
     // console.log('======== END ===========')
-    
+
     const name = profile.displayName;
     const emailId = profile.emails[0].value;
 
-    const extractedData = {name, emailId, token};
+    const extractedData = { name, emailId, token };
 
-    console.log('===== Extracted info =======')
+    console.log("===== Extracted info =======");
     console.log(extractedData);
-    console.log('======== END ===========')
+    console.log("======== END ===========");
 
     // code
 
+    // find by userId and emailId, and update token if found or create token if not found
     findOrCreate(extractedData)
       .then((userDetails) => {
         if(userDetails === null) {
@@ -34,10 +35,11 @@ const strategy = new GoogleStrategy(
           return done(null, extractedData.token);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+        return done(err);
+      });
   }
-)
+);
 
-module.exports = strategy
+module.exports = strategy;

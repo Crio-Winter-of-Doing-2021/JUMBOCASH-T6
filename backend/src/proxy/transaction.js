@@ -5,6 +5,7 @@ const errorHandler = require("../services/handleErrors");
 
 const { sanitizeFilter } = require("../services/filter");
 const { sortResponse } = require("../services/sorting");
+const paginate = require("../services/pagination");
 
 // 1. Gets data from postgres
 // 2. Sends data to postgres
@@ -34,6 +35,7 @@ async function findWithFilter(filter, sort, page, userId) {
         userId
       },
       order: sortResponse(sort),
+      ...paginate(page)
     });
 
     return response;

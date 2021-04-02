@@ -1,9 +1,9 @@
-const entities = require("../seed/entity");
+// const entities = require("../seed/entity");
 const entityProxy = require("../proxy/entity");
 
 // ======================== Version 1
-
-module.exports.getEntities = (req, res) => {
+// DEPRECATED
+const getEntities = (req, res) => {
   console.log("entity");
 
   res.send(entities);

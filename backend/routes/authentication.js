@@ -1,47 +1,46 @@
-const router = require('express').Router();
-const passport = require('../config/passport');
-const { validateToken } = require('../src/proxy/user');
+const router = require("express").Router();
+const passport = require("../config/passport");
+const clientUrl = require("../config/server").clientUrl;
+const authController = require("../src/controllers/authentication");
 
-
+// AUTHENTICATION MIDDLEWARE
 const authenticate = async (req, res, next) => {
-
-    // if login pass
-    // passports method
-    if(req.isAuthenticated()) {
-      await validateToken(req.session.passport.user.token)
-        .then((data) => {
-          req.userId = data.dataValues.id;
-          next();
-        })
-        .catch(err => console.log(err));
-    } else {
-      res.redirect('/auth/google');
-      res.end();
-    }
-    
-}
+  // if login pass
+  // passports method
+  if (req.isAuthenticated()) {
+    console.log(`userId ${req.user}`);
+    req.userId = req.user;
+    next();
+  } else {
+    res.redirect("/auth/google");
+    res.end();
+  }
+};
 
 // =========================================================================
 
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
-
-router.get('/google/callback', 
-  passport.authenticate('google', 
-  {successRedirect: '/user/me', failureRedirect: '/auth/google'}
-  )
-)
-
-router.get('/logout', (req, res) => {
-  console.log(req.user);
-  if (req.user) {
-    req.logout();
-    // res.clearCookie('connect.sid') // clean up!
-    return res.json({ msg: 'logging you out' })
-  } else {
-    return res.json({ msg: 'no user to log out!' })
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    // successReturnToOrRedirect: clientUrl, 
+    failureRedirect: "/auth/google"
+  })
+  // During integration with frontend
+  ,
+  (req, res) => {
+    var token = req.user;
+    console.log(`callback ${token}`);
+    // res.redirect("http://localhost:3000?token=" + token);
+    res.redirect(clientUrl);
   }
-})
+);
+
+router.get("/logout", authController.logoutUser);
 
 // router.post(
 //   '/login',
@@ -63,7 +62,6 @@ router.get('/logout', (req, res) => {
 //   }
 // )
 
-
 // router.post('/signup', (req, res) => {
 //   const { username, password } = req.body
 //   // ADD VALIDATION
@@ -76,4 +74,4 @@ router.get('/logout', (req, res) => {
 //   })
 // })
 
-module.exports = {router, authenticate }
+module.exports = { router, authenticate };
