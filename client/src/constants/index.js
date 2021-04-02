@@ -1,6 +1,5 @@
-export const FACEBOOK_AUTH_LINK = 'https://localhost:5000/auth/facebook';
-export const GOOGLE_AUTH_LINK = 'https://localhost:5000/auth/google';
 export const BASE_URL = 'http://ec2-52-66-210-39.ap-south-1.compute.amazonaws.com:8081';
+export const GOOGLE_AUTH_LINK = BASE_URL+'/auth/google';
 
 export const PaymentModes = [
   { label: 'Cash', value: 'CASH' },

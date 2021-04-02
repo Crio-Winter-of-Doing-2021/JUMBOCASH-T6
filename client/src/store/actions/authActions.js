@@ -4,27 +4,28 @@ import {
   LOGIN_WITH_OAUTH_LOADING,
   LOGIN_WITH_OAUTH_SUCCESS,
   LOGIN_WITH_OAUTH_FAIL,
-  LOGOUT_SUCCESS,
   USER_LOADING,
   USER_SUCCESS,
-  USER_FAIL
+  USER_FAIL,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL
 } from '../types';
+import { BASE_URL } from '../../constants';
 
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   try {
     const options = attachTokenToHeaders(getState);
-    const response = await axios.get('/api/users/me', options);
-
+    const response = await axios.get(BASE_URL+'/user/me', options);
     dispatch({
       type: USER_SUCCESS,
-      payload: { user: response.data.user },
+      payload: { user: response.data.data },
     });
   } catch (err) {
     dispatch({
       type: USER_FAIL,
-      payload: { error: err.response.data.message },
+      payload: { error: err?.response?.data?.message },
     });
   }
 };
@@ -38,11 +39,11 @@ export const logInUserWithOauth = (token) => async (dispatch, getState) => {
       'x-auth-token': token,
     };
 
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${token}`, { headers });
-
+    const response = await axios.get(BASE_URL+'/user/me', { headers });
+    
     dispatch({
       type: LOGIN_WITH_OAUTH_SUCCESS,
-      payload: { user: response.data.user, token },
+      payload: { user: response.data.data, token },
     });
   } catch (err) {
     dispatch({
@@ -57,13 +58,17 @@ export const logOutUser = (history) => async (dispatch) => {
   console.log("logging out")
   try {
     deleteAllCookies();
-    await axios.get('https://jsonplaceholder.typicode.com/posts');
+    await axios.get(BASE_URL+'/auth/logout');
 
     dispatch({
       type: LOGOUT_SUCCESS,
     });
     if (history) history.push('/login');
-  } catch (err) {}
+  } catch (err) {
+    dispatch({
+      type: LOGOUT_FAIL,
+    });
+  }
 };
 
 

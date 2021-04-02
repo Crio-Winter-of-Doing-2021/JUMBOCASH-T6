@@ -21,8 +21,8 @@ const App = ({ logInUserWithOauth, auth, loadUser }) => {
   }, [loadUser]);
 
   useEffect(() => {
+    
     if (window.location.hash === '#_=_') window.location.hash = '';
-
     const cookieJwt = Cookies.get('x-auth-cookie');
     if (cookieJwt) {
       Cookies.remove('x-auth-cookie');
