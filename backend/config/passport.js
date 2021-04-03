@@ -6,11 +6,11 @@ passport.serializeUser((token, done) => {
   console.log("=== serialize ... called ===");
   console.log(`token: ${token}`); // token
   console.log("---------");
-  done(null, { token: token });
+  done(null, token);
 });
 
 
-passport.deserializeUser(async ({ token }, done) => {
+passport.deserializeUser(async (token, done) => {
   console.log("DEserialize ... called", token);
 
   await validateToken(token)

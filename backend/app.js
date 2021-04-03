@@ -4,7 +4,7 @@ var path = require("path");
 // var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-const cookieSession = require('cookie-session')
+// const cookieSession = require('cookie-session')
 const passport = require('passport');
 const {router, authenticate} = require("./routes/authentication");
 
@@ -22,22 +22,24 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(cors({
-  "origin": keys.clientUrl,
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "credentials": true,
   "exposedHeaders": ["date", "etag", "access-control-allow-origin", "access-control-allow-credentials"]
 }));
 
 // For an actual app you should configure this with an experation time, better keys, proxy and secure
-app.use(
-  cookieSession({
-    name: "tuto-session",
-    keys: ["key1", "key2"],
-    // sameSite: "none", 
-    // secure: true // uncomment on deployment
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "tuto-session",
+//     keys: ["key1", "key2"],
+//     // sameSite: "none", 
+//     // secure: true // uncomment on deployment
+//   })
+// );
 
 app.use(logger("dev"));
 
@@ -62,17 +64,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
 
 /* Express app ROUTING */
-app.use('/auth', router)
+app.use('/api/auth', router)
 
 // app.use(authenticate)
 // protected routes
-app.use("/user", authenticate, usersRouter);
-app.use("/entity", authenticate, entityRouter);
-app.use("/transaction", authenticate, transactionRouter);
-app.use("/analytics", authenticate, analyticsRouter)
+app.use("/api/user", authenticate, usersRouter);
+app.use("/api/entity", authenticate, entityRouter);
+app.use("/api/transaction", authenticate, transactionRouter);
+app.use("/api/analytics", authenticate, analyticsRouter)
 
 
 // catch 404 and forward to error handler
