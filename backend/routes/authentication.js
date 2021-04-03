@@ -7,6 +7,7 @@ const authController = require("../src/controllers/authentication");
 const authenticate = async (req, res, next) => {
   // if login pass
   // passports method
+  console.log(`is authenticated ${req.user}`);
   if (req.user) {
     console.log(`userId ${req.user}`);
     req.userId = req.user;
@@ -36,13 +37,10 @@ router.get(
     var token = req.user;
     console.log(`access token ${token}`);
     // res.redirect("http://localhost:3000?token=" + token);
-    res.set('Access-Control-Allow-Origin', clientUrl); //req.headers.origin
+    res.set('Access-Control-Allow-Origin', '*'); //req.headers.origin
     res.set('Access-Control-Allow-Credentials', 'true');
     res.cookie('x-auth-cookie', token);
 
-    // req.session.save(() => {
-    //   res.redirect(clientUrl);
-    // })
     res.redirect(clientUrl);
     // res.send({error: false, message: "is Logged in"});
   }

@@ -1,10 +1,10 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-// var cookieParser = require("cookie-parser");
+var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-// const cookieSession = require('cookie-session')
+const cookieSession = require('cookie-session')
 const passport = require('passport');
 const {router, authenticate} = require("./routes/authentication");
 
@@ -32,21 +32,21 @@ app.use(cors({
 }));
 
 // For an actual app you should configure this with an experation time, better keys, proxy and secure
-// app.use(
-//   cookieSession({
-//     name: "tuto-session",
-//     keys: ["key1", "key2"],
-//     // sameSite: "none", 
-//     // secure: true // uncomment on deployment
-//   })
-// );
+app.use(
+  cookieSession({
+    name: "tuto-session",
+    keys: ["key1", "key2"]
+    // sameSite: "none", 
+    // secure: true // uncomment on deployment
+  })
+);
 
 app.use(logger("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // DB connection
