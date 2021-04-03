@@ -9,6 +9,7 @@ passport.serializeUser((token, done) => {
   done(null, { token: token });
 });
 
+
 passport.deserializeUser(async ({ token }, done) => {
   console.log("DEserialize ... called", token);
 

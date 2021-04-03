@@ -1,7 +1,7 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-var cookieParser = require("cookie-parser");
+// var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 const cookieSession = require('cookie-session')
@@ -24,7 +24,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(cors({
-  "origin": true,
+  "origin": keys.clientUrl,
   "credentials": true,
   "exposedHeaders": ["date", "etag", "access-control-allow-origin", "access-control-allow-credentials"]
 }));
@@ -34,8 +34,8 @@ app.use(
   cookieSession({
     name: "tuto-session",
     keys: ["key1", "key2"],
-    sameSite: "none",
-    secure: true // set true by default in https
+    // sameSite: "none", 
+    // secure: true // uncomment on deployment
   })
 );
 
@@ -60,6 +60,7 @@ sequelize
 // Initializes passport and passport sessions
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.use("/", indexRouter);
 

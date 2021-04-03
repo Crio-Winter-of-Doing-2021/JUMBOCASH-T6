@@ -33,11 +33,13 @@ router.get(
   // During integration with frontend
   ,
   (req, res) => {
-    var token = req.cookies;
+    var token = req.user;
     console.log(`callback ${token}`);
     // res.redirect("http://localhost:3000?token=" + token);
-    // res.redirect(clientUrl);
-    res.send({error: false, message: "is Logged in"});
+    res.set('Access-Control-Allow-Origin', clientUrl); //req.headers.origin
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.redirect(clientUrl);
+    // res.send({error: false, message: "is Logged in"});
   }
 );
 

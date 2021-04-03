@@ -22,6 +22,7 @@ const strategy = new GoogleStrategy(
     console.log("===== Extracted info =======");
     console.log(extractedData);
     console.log("======== END ===========");
+  
 
     // code
 
