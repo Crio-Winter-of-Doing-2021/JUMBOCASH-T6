@@ -23,13 +23,28 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(cors());
+app.use(cors({
+  "origin": true,
+  "credentials": true,
+  "exposedHeaders": ["date", "etag", "access-control-allow-origin", "access-control-allow-credentials"]
+}));
+
+// For an actual app you should configure this with an experation time, better keys, proxy and secure
+app.use(
+  cookieSession({
+    name: "tuto-session",
+    keys: ["key1", "key2"],
+    sameSite: "none",
+    secure: true // set true by default in https
+  })
+);
+
 app.use(logger("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // DB connection
@@ -41,14 +56,6 @@ sequelize
   .catch((err) => {
     console.log("Error: " + err);
   });
-
-// For an actual app you should configure this with an experation time, better keys, proxy and secure
-app.use(
-  cookieSession({
-    name: "tuto-session",
-    keys: ["key1", "key2"],
-  })
-);
 
 // Initializes passport and passport sessions
 app.use(passport.initialize());
