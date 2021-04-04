@@ -13,8 +13,8 @@ const newUserList = [{
   {
     
     "id": "2e107775-2b0d-4e24-af6c-8766c042fb09",
-    "name":"Piyush Arya",
-    "emailId":"piyusharya223@gmail.com",
+    "name":"Kanishka Chowdhury",
+    "emailId":"ckanishka24@gmail.com",
     "companyName":null,
     "contact":null,
     "token": null
