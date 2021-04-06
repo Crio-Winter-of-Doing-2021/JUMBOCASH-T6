@@ -13,7 +13,7 @@ passport.serializeUser((token, done) => {
 passport.deserializeUser(async (token, done) => {
   console.log("DEserialize ... called", token);
 
-  await validateToken(token)
+  validateToken(token)
     .then((userId) => {
       if (userId === null) {
         console.log("Token Id not registered against any user");

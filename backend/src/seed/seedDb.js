@@ -21,6 +21,9 @@ const newUserList = [{
   }
 ]
 
+// "name":"Kanishka Chowdhury",
+// "emailId":"ckanishka24@gmail.com",
+
 const seed = async () => {
 
     await User.bulkCreate(newUserList).then((value) => {

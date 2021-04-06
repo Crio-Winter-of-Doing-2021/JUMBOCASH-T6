@@ -2,11 +2,10 @@
 Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 
 --- 
-### Current Version Developed: 5.2
+### Current Version Developed: 6.0
 
-### Current Version Deployed: 5.0
+### Current Version Deployed: 6.0
 ---
-
 
 ## Branch: backend-feature
 1. All experimental features
@@ -15,43 +14,49 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 ## To Know More
 ### [README.md](#)
 ### [schema.md](schema.md)
-### [changelog.md](changelog.md) - for viewing new features in Version-5.1
+### [changelog.md](changelog.md) - for viewing new features in Version-6.0
 
 ## How to Run
-1. To run the application
-   > **npm start**
-   > 
-   > **npm run start-dev** (starts with nodemon)
-2. To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
+To run the application
+> **npm start**
+> 
+> **npm run start-dev** (starts with nodemon)
 
-## Note from backend developer (30th March):
-1. Fixed the enum in seeding file, check `backend/config/data.js` for acceptable enums
-2. Added cookie based authentication using OAuth2.0 with google Strategy
-   1. `GET auth/google` - endpoint for logging in
-   2. `GET auth/logout` - endpoint for logging out
-   3. `GET user/me` - get user data conforms to userSchema ([schema.md](schema.md)); to be redirected on this endpoint after successful authentication
-   4. `PATCH user/me` - editing user data, not implemented it yet.
-3. To be deployed by tomorrow.
+<br>
+
+      To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
+
+## Note from backend developer (6th April):
+
+      For Cashflow Calculations:
+      Pending amount is not calculated in cashflow report. Only the transactions whose status is "done" is taken into consideration.
+      Current amount signifies the total cashflow, which will get written in cashflow report, while pending is an additional insight generated for user to manage his/her debt.
+      Inflow is basically what comes in cash/cashless, Outflow is what goes out in cash/cashless.
+
+## Version-6.0
 
 ## Major Enhancements:
-1. Added env variable to select database from "remote" or "local"
-2. Configured ssl for remote database
-3. Seed value in database are now consistent with specified enums.
-4. Configured passport to authenticate using google strategy
-5. Generated credentials for google oauth2.0
-6. Added OAuth2.0 using google strategy with opaque OAuth2.0 tokens.
-7. Added token in userSchema
-## To Do
-1. Test all protected endpoints with test access token
-2. Add where id: userId in entity, transaction column
-3. Add aggregates based on last week, last month, last quarter, last year
-4. Deploy the code, Push the code, Inform partner about changes
-5. Add initial data in `user/dashboard`
-6. Add pagination
-7. Think about caching, indexing, optimizing of query
-8. run 2 instances of app in aws: latest-unstable, stable
-## Minor fixes:
-1. Changed action to version in changelog
+
+1. **Implemented authentication with redirection**, tested with frontend app
+2. Changed Architecture of web app, now frontend is mounted on server
+3. Changed Schema of Page Object in filter-sort-page
+4. **Added analytics**
+5. Added Request and response schema in [schema file](schema.md)
+6. Added inflow, outflow, interval enums in `config/data`
+
+### To Do:
+
+1. Multiple transactions
+2. Edit users
+3. Add more seeds
+
+### Minor improvements:
+
+1. Refactored authentication handling stack: routes, controllers, and proxy
+2. Seeded the test data for auth protected api testing.
+3. Tested filter
+4. Tested analytics endpoint
+5. Fixed: "CREDIT_CARD" is not accepted
 
 
 ## Todo
@@ -80,12 +85,12 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 10. [x] make reposnse object schema
 11. [x] Add test folder based on mocha and chai library
 12.  Add `/user` endpoint to get and edit user data
-13.  Make aggregation of transactions
+13. [x] Make aggregation of transactions
 14.  Add option to make and send csv file
-15.  Add optional analytics
+15. [x] Add optional analytics
 16.  Add multiple transactions
 17.  Update Multiple transactions
-18.  Add cache for userId, now proxy is called 3 times, for deserialize, for id, for getting initial data wrt to query
+18.  Add cache for userId, now proxy is called 2 times, for deserialize, for id, for getting initial data wrt to query
 
 ### Version 2
 1. Add aggregates functionality to get sum, count, min, max data
@@ -104,10 +109,10 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 1. Entities associated with the userid
 2. Latest 100 (or N) transactions
 3. Person details: userSchema
-4. Total Aggregates (to think about it)
+4. Total Aggregates
 
 ### Aggregations
-1. Window: Monthly, quaterly, yearly
+1. Window: weekly, monthly, quaterly, yearly
 2. Each window
    1. Total Inflow, Outflow - Paid
    2. Total Debt, Credit - Not paid
@@ -135,5 +140,5 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
    5. unpaid vendors dues(total)
    6. unpaid vendor's name with dues
 3. Components: 
-   1. comparison with last 5 time intervals (mth, qtr, yr)
+   1. comparison with last 5 time intervals (week, mth, qtr, yr)
    2. % breakdown in inflow and outflow

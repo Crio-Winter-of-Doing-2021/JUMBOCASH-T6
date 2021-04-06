@@ -1,3 +1,28 @@
+## Version-6.0
+
+## Major Enhancements:
+
+1. **Implemented authentication with redirection**, tested with frontend app
+2. Changed Architecture of web app, now frontend is mounted on server
+3. Changed Schema of Page Object in filter-sort-page
+4. **Added analytics**
+5. Added Request and response schema in [schema file](schema.md)
+6. Added inflow, outflow, interval enums in `config/data`
+
+### To Do:
+
+1. Multiple transactions
+2. Edit users
+3. Add more seeds
+
+### Minor improvements:
+
+1. Refactored authentication handling stack: routes, controllers, and proxy
+2. Seeded the test data for auth protected api testing.
+3. Tested filter
+4. Tested analytics endpoint
+5. Fixed: "CREDIT_CARD" is not accepted
+
 ## Version-5.2
 
 ## Major Enhancements:

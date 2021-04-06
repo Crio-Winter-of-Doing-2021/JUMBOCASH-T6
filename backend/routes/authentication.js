@@ -7,9 +7,9 @@ const authController = require("../src/controllers/authentication");
 const authenticate = async (req, res, next) => {
   // if login pass
   // passports method
-  console.log(`is authenticated ${req.user}`);
+  // console.log(`is authenticated ${req.user}`);
   if (req.user) {
-    console.log(`userId ${req.user}`);
+    console.log(`user with Id ${req.user} is authenticated`);
     req.userId = req.user;
     next();
   } else {

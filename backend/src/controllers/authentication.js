@@ -1,4 +1,3 @@
-const errorHandler = require("../services/handleErrors");
 const deleteToken = require("../proxy/authentication").deleteToken;
 
 const logoutUser = async (req, res) => {
@@ -15,7 +14,10 @@ const logoutUser = async (req, res) => {
         return res.json({ msg: "no user to log out!" });
       }
     } catch(err) {
-      errorHandler(err);
+      res.status(err.code).send({
+        error: true,
+        errorMessage: err.message,
+      });
     }
     
   }

@@ -334,4 +334,208 @@ PATCH /user
 
 GET /user
 
-To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory
+---
+
+POST analytics/trend - get trends last 6 weeks/months/quarters/years
+
+Request body:
+```js
+{
+    "interval": "week" | "month" | "quarter" | "year" 
+}
+```
+
+Failed response:
+```js
+{
+    error: true,
+    message: "Interval not allowed"
+}
+```
+
+Successful response:
+```js
+{
+    "error": false,
+    "analytics": {
+        "pending": {
+            "inflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            },
+            "outflow": {
+                "countTransaction": 1,
+                "totalAmount": 2082.93,
+                "components": [
+                    {
+                        "totalAmount": "2082.93",
+                        "countTransactions": "1",
+                        "startTime": "2020-10-01T00:00:00.000Z",
+                        "paymentStatus": "NOT_PAID",
+                        "category": "PURCHASE"
+                    }
+                ]
+            }
+        },
+        "current": {
+            "inflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            },
+            "outflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            }
+        },
+        "message": "Trend since last 6 months"
+    }
+}
+```
+---
+
+POST analytics/entity
+
+Request Body
+```js
+{
+    "time": {
+       "from": "2018-01-03T06:17:43Z",
+        "to": "2021-01-01T01:00:00Z"
+    }
+}
+```
+Date in ISO string format
+
+Successful Response
+
+```js
+{
+    "error": false,
+    "analytics": {
+        "pending": {
+            "inflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            },
+            "outflow": {
+                "countTransaction": 3,
+                "totalAmount": 6419.51,
+                "components": [
+                    {
+                        "totalAmount": "2192.33",
+                        "countTransactions": "1",
+                        "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                        "paymentStatus": "NOT_PAID",
+                        "category": "PURCHASE"
+                    },
+                    {
+                        "totalAmount": "2144.25",
+                        "countTransactions": "1",
+                        "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+                        "paymentStatus": "NOT_PAID",
+                        "category": "PURCHASE"
+                    },
+                    {
+                        "totalAmount": "2082.93",
+                        "countTransactions": "1",
+                        "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
+                        "paymentStatus": "NOT_PAID",
+                        "category": "PURCHASE"
+                    }
+                ]
+            }
+        },
+        "current": {
+            "inflow": {
+                "countTransaction": 1,
+                "totalAmount": 2691.15,
+                "components": [
+                    {
+                        "totalAmount": "2691.15",
+                        "countTransactions": "1",
+                        "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
+                        "paymentStatus": "PAID",
+                        "category": "SALES"
+                    }
+                ]
+            },
+            "outflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            }
+        }
+    }
+}
+```
+---
+
+POST analytics/cashflow
+
+Request Body
+```js
+{
+    "time": {
+       "from": "2018-01-03T06:17:43Z",
+        "to": "2021-01-01T01:00:00Z"
+    }
+}
+```
+
+Successful Response:
+```js
+{
+    "error": false,
+    "analytics": {
+        "pending": {
+            "inflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            },
+            "outflow": {
+                "countTransaction": 3,
+                "totalAmount": 6419.51,
+                "components": [
+                    {
+                        "totalAmount": "6419.51",
+                        "countTransactions": "3",
+                        "category": "PURCHASE",
+                        "paymentStatus": "NOT_PAID"
+                    }
+                ]
+            }
+        },
+        "current": {
+            "inflow": {
+                "countTransaction": 1,
+                "totalAmount": 2691.15,
+                "components": [
+                    {
+                        "totalAmount": "2691.15",
+                        "countTransactions": "1",
+                        "category": "SALES",
+                        "paymentStatus": "PAID"
+                    }
+                ]
+            },
+            "outflow": {
+                "countTransaction": 0,
+                "totalAmount": 0,
+                "components": []
+            }
+        }
+    }
+}
+```
+    For Cashflow Calculations:
+    Pending amount is not calculated in cashflow report. Only the transactions whose status is "done" is taken into consideration.
+    Current amount signifies the total cashflow, which will get written in cashflow report, while pending is an additional insight generated for user to manage his/her debt
+
+<br>
+
+    To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory

@@ -15,8 +15,8 @@ const postgresOption = {
   },
   dialectOptions: {
     useUTC: false, // for reading from database
-  },
-  timezone: database.timezone, // for writing to database
+  }
+  // timezone: database.timezone, // for writing to database
 }
 
 if(dbProxy === "remote") { 
