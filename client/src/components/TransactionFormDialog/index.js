@@ -11,7 +11,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { PaymentStatuses, PaymentModes, Categories } from '../../constants';
-import SaveButton from '../SaveButton/SaveButton';
+import SaveButton from '../SaveButton';
 import { useFormik } from 'formik';
 import { transactionFormSchema } from './validation';
 

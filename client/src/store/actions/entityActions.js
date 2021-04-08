@@ -22,10 +22,10 @@ export const addEntity = (formData) => async (dispatch, getState) => {
   dispatch({
     type: ADD_ENTITY_LOADING,
   });
-  let response;
+  
   try {
     const options = attachTokenToHeaders(getState);
-    response = await axios.post(
+    const response = await axios.post(
       BASE_URL+'/entity',
       formData,
       options,
@@ -70,6 +70,7 @@ export const editEntity = (id, formData) => async (dispatch, getState) => {
     type: EDIT_ENTITY_LOADING,
     payload: { id },
   });
+  
   try {
     const options = attachTokenToHeaders(getState);
     const response = await axios.patch(BASE_URL+'/entity/'+id, formData, options);

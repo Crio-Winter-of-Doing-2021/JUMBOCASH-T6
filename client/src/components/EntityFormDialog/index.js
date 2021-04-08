@@ -9,7 +9,7 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { useFormik } from 'formik';
 import { entityFormSchema } from './validation';
-import SaveButton from '../SaveButton/SaveButton';
+import SaveButton from '../SaveButton';
 
 const EntityFormDialog = ({
   addEntity,

@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://ec2-52-66-210-39.ap-south-1.compute.amazonaws.com:8081';
+export const BASE_URL = 'https://jumbocash-dev.herokuapp.com/api';
 export const GOOGLE_AUTH_LINK = BASE_URL+'/auth/google';
 
 export const PaymentModes = [
@@ -34,7 +34,6 @@ export const Categories = [
 ];
 
 export const DefaultTransaction = {
-  userId: '2e107775-2b0d-4e24-af6c-8766c042fb09',
   amount: 0,
   time: Date.now(),
   paymentStatus: '',
@@ -45,7 +44,6 @@ export const DefaultTransaction = {
 };
 
 export const DefaultEntity = {
-  userId:'2e107775-2b0d-4e24-af6c-8766c042fb09',
   name: '',
   address: '',
   contact: '',

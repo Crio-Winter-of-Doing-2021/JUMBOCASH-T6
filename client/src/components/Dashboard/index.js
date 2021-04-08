@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 
-import CashflowSummaryCard from '../CashflowSummaryCard/CashflowSummaryCard';
-import TopEntitiesCard from '../TopEntitiesCard/TopEntitiesCard';
-import MonthlyTransactionsCard from '../MonthlyTransactionsCard/MonthlyTransactionsCard';
+import CashflowSummaryCard from '../CashflowSummaryCard';
+import TopEntitiesCard from '../TopEntitiesCard';
+import MonthlyTransactionsCard from '../MonthlyTransactionsCard';
 
-import TransactionsTable from '../TransactionsTable.js/TransactionsTable';
-import ActionsButton from '../ActionsButton/ActionsButton';
-import TransactionFormDialog from '../TransactionFormDialog/TransactionFormDialog';
-import EntityFormDialog from '../EntityFormDialog/EntityFormDialog';
+import TransactionsTable from '../TransactionsTable.js';
+import ActionsButton from '../ActionsButton';
+import TransactionFormDialog from '../TransactionFormDialog';
+import EntityFormDialog from '../EntityFormDialog';
 import { DefaultEntity, DefaultTransaction } from '../../constants';
-import ItemsTabView from '../ItemsTabView/ItemsTabView';
-import EntitiesTable from '../EntitiesTable.js/EntitiesTable';
+import ItemsTabView from '../ItemsTabView';
+import EntitiesTable from '../EntitiesTable.js';
+import AddMultipleItemsDialog from '../AddMultipleItemsDialog';
 
 const Dashboard = () => {
   const [showTransactionFormDialog, setShowTransactionFormDialog] = useState(false);
   const [showEntityFormDialog, setShowEntityFormDialog] = useState(false);
+  const [showAddMultipleItemsDialog, setAddMultipleItemsDialog] = useState(false);
   const [currTransaction, setCurrTransaction] = useState({});
   const [isTransactionEdit, setIsTransactionEdit] = useState(false);
   const [currEntity, setCurrEntity] = useState({});
   const [isEntityEdit, setIsEntityEdit] = useState(false);
+  const [isMultipleEntity, setIsMultipleEntity] = useState(false);
 
   const addOrEditTransactionDialog = (data) => {
     data ? setIsTransactionEdit(true) : setIsTransactionEdit(false);
@@ -30,6 +33,11 @@ const Dashboard = () => {
     data ? setIsEntityEdit(true) : setIsEntityEdit(false);
     setCurrEntity(data || DefaultEntity);
     setShowEntityFormDialog(true);
+  };
+
+  const addMultipleItemsDialog = (isMultipleEntity) => {
+    isMultipleEntity ? setIsMultipleEntity(true) : setIsMultipleEntity(false);
+    setAddMultipleItemsDialog(true);
   };
 
   return (
@@ -60,6 +68,7 @@ const Dashboard = () => {
       <ActionsButton
         addTransactionDialog={addOrEditTransactionDialog}
         addEntityDialog={addOrEditEntityDialog}
+        addMultipleItemsDialog={addMultipleItemsDialog}
       />
       <TransactionFormDialog
         visible={showTransactionFormDialog}
@@ -72,6 +81,11 @@ const Dashboard = () => {
         onHide={setShowEntityFormDialog}
         initialValues={currEntity}
         isEdit={isEntityEdit}
+      />
+      <AddMultipleItemsDialog
+        visible={showAddMultipleItemsDialog}
+        onHide={setAddMultipleItemsDialog}
+        isEntity={isMultipleEntity}
       />
     </>
   );

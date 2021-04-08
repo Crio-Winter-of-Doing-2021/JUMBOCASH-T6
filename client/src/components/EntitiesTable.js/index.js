@@ -8,7 +8,7 @@ import { Column } from 'primereact/column';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
-import Loader from '../Loader/Loader';
+import Loader from '../Loader';
 
 
 const EntitiesTable = ({

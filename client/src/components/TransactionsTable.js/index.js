@@ -17,7 +17,7 @@ import {
   PaymentModes,
   PaymentStatuses,
 } from '../../constants';
-import Loader from '../Loader/Loader';
+import Loader from '../Loader';
 
 import placeholder from '../../static/assets/images/placeholder.png';
 import upi from '../../static/assets/images/upi.png';

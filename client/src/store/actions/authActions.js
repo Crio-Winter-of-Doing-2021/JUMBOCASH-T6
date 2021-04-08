@@ -14,7 +14,7 @@ import { BASE_URL } from '../../constants';
 
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
-
+  
   try {
     const options = attachTokenToHeaders(getState);
     const response = await axios.get(BASE_URL+'/user/me', options);
@@ -32,7 +32,7 @@ export const loadUser = () => async (dispatch, getState) => {
 
 export const logInUserWithOauth = (token) => async (dispatch, getState) => {
   dispatch({ type: LOGIN_WITH_OAUTH_LOADING });
-
+ 
   try {
     const headers = {
       'Content-Type': 'application/json',
@@ -40,15 +40,15 @@ export const logInUserWithOauth = (token) => async (dispatch, getState) => {
     };
 
     const response = await axios.get(BASE_URL+'/user/me', { headers });
-    
+  
     dispatch({
       type: LOGIN_WITH_OAUTH_SUCCESS,
-      payload: { user: response.data.data, token },
+      payload: { user: response?.data?.data, token },
     });
   } catch (err) {
     dispatch({
       type: LOGIN_WITH_OAUTH_FAIL,
-      payload: { error: err.response.data.message },
+      payload: { error: err?.response?.data?.message },
     });
   }
 };

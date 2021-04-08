@@ -22,6 +22,7 @@ export const addTransaction = (formData) => async (dispatch, getState) => {
   dispatch({
     type: ADD_TRANSACTION_LOADING,
   });
+  
   try {
     const options = attachTokenToHeaders(getState);
     const response = await axios.post(
@@ -70,6 +71,7 @@ export const editTransaction = (id, formData) => async (dispatch, getState) => {
     type: EDIT_TRANSACTION_LOADING,
     payload: { id },
   });
+  
   try {
     const options = attachTokenToHeaders(getState);
     const response = await axios.patch(

@@ -6,11 +6,11 @@ import Cookies from 'js-cookie';
 
 import { ToastContainer } from 'react-toastify';
 
-import Login from './pages/Login/Login';
-import Home from './pages/Home/Home';
-import NotFound from './pages/NotFound/NotFound';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
-import Loader from './components/Loader/Loader';
+import Loader from './components/Loader';
 
 import { logInUserWithOauth, loadUser } from './store/actions/authActions';
 
@@ -21,7 +21,7 @@ const App = ({ logInUserWithOauth, auth, loadUser }) => {
   }, [loadUser]);
 
   useEffect(() => {
-    
+  
     if (window.location.hash === '#_=_') window.location.hash = '';
     const cookieJwt = Cookies.get('x-auth-cookie');
     if (cookieJwt) {

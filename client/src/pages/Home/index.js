@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import requireAuth from '../../hoc/requireAuth';
 
 import Layout from '../../layout/Layout';
-import NotauthenticatedAlert from '../../components/NotauthenticatedAlert/NotauthenticatedAlert';
+import NotauthenticatedAlert from '../../components/NotauthenticatedAlert';
 
-import Dashboard from '../../components/Dashboard/Dashboard';
+import Dashboard from '../../components/Dashboard';
 
 
 const Home = ({ auth }) => {
