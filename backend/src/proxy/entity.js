@@ -11,9 +11,14 @@ var EntityDao = {
     updateEntity: updateEntity
 }
 
+const visibleAttribute = ["id", "name", "address", "contact"];
+
 async function findAll(userId) {
     try {
-        return await Entity.findAll({where: {userId}});
+        return await Entity.findAll({
+            attributes: visibleAttribute,
+            where: {userId}
+        });
     } catch (err) {
         errorHandler(err);
     }
@@ -25,7 +30,10 @@ async function findById(id, userId) {
         // test for uuid
         // user will only be able to see entity added by him
         if(validation.isUUIDV4(id) && validation.isUUIDV4(userId)) {
-            return await Entity.findOne({where: {id, userId}});
+            return await Entity.findOne({
+                attributes: visibleAttribute,
+                where: {id, userId}
+            });
         }
     } catch (err) {
         errorHandler(err);

@@ -1,5 +1,6 @@
 const { isUUIDV4 } = require("./validation");
 const enums = require("../../config/data");
+const errorHandler = require("./handleErrors");
 
 const isValidTime = (time) => {
   // `2021-03-13 08:37:08 -06:-30`
@@ -103,4 +104,23 @@ const isValidForUpdate = (updateTransaction) => {
   return true;
 };
 
-module.exports = { isValidTransaction, isValidForUpdate };
+const validateMultipleTransactions = (transactionList) => {
+
+  // console.log(transactionList);
+
+  let i = 0;
+  try {
+    for(let transaction of transactionList) {
+      i += 1;
+      if(!isValidTransaction(transaction)){
+        return false
+      }
+    }
+    return true;
+  } catch (err) {
+    err.message += ` in item ${i}`;
+    errorHandler(err)
+  }
+}
+
+module.exports = { isValidTransaction, isValidForUpdate, validateMultipleTransactions };

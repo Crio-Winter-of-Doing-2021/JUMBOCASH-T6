@@ -9,6 +9,7 @@ const paginate = require("../services/pagination");
 
 // 1. Gets data from postgres
 // 2. Sends data to postgres
+const visibleAttribute = ["id", "entityId", "category", "amount", "paymentStatus", "paymentMode", "time"];
 
 var TransactionDao = {
   findAll: findAll,
@@ -17,11 +18,15 @@ var TransactionDao = {
   deleteById: deleteById,
   updateTransaction: updateTransaction,
   findWithFilter: findWithFilter,
+  addMultipleTransactions: addMultipleTransactions
 };
 
 async function findAll(userId) {
   try {
-    return await Transaction.findAll({where: {userId}});
+    return await Transaction.findAll({
+      attributes: visibleAttribute,
+      where: {userId}
+    });
   } catch (err) {
     errorHandler(err);
   }
@@ -30,6 +35,7 @@ async function findAll(userId) {
 async function findWithFilter(filter, sort, page, userId) {
   try {
     let response = await Transaction.findAll({
+      attributes: visibleAttribute,
       where: {
         ...sanitizeFilter(filter),
         userId
@@ -47,7 +53,10 @@ async function findWithFilter(filter, sort, page, userId) {
 async function findById(id, userId) {
   // test for uuid
   if (validation.isUUIDV4(id)) {
-    return await Transaction.findOne({where: {id, userId}});
+    return await Transaction.findOne({
+      attributes: visibleAttribute,
+      where: {id, userId}
+    });
   }
 }
 
@@ -121,6 +130,22 @@ async function updateTransaction(transaction, id, userId) {
   } catch (err) {
     errorHandler(err);
   }
+}
+
+async function addMultipleTransactions(transactionList) {
+
+  try {
+
+    if(! validateTransaction.validateMultipleTransactions(transactionList)){
+      return false;
+    }
+    let validatedTransactionList = transactionList;
+
+    return await Transaction.bulkCreate(validatedTransactionList, {returning: true, updateOnDuplicate: ["updatedAt"]});
+  }
+    catch(err) {
+      errorHandler(err);
+    }
 }
 
 

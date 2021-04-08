@@ -47,6 +47,7 @@ async function getEntityAnalytics(userId, startTime, endTime) {
           [Op.gte]: startTime,
           [Op.lte]: endTime,
         },
+        category: ["SALES", "PURCHASE"]
       },
       group: ["entityId", "category", "paymentStatus"],
       order: [sequelize.literal('"totalAmount" DESC')]

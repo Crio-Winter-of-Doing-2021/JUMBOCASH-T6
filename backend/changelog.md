@@ -1,3 +1,20 @@
+## Version-6.1 (8th April)
+
+## Major Enhancements:
+
+1. Added seeder function dependent on `fakerator`
+2. Added `transaction/multi` endpoint for adding multiple transactions
+
+### To Do:
+
+1. Add csv report
+
+### Minor improvements:
+
+1. Fixed: entity analytics should only group based on "SALES" and "PURCHASE".
+2. Reduced response body size from database by `removing` userId, createdAt, updatedAt key from transaction, entity
+3. Refactored: User must only see message of database related errors
+
 ## Version-6.0
 
 ## Major Enhancements:

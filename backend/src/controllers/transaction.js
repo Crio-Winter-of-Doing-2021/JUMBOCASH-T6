@@ -152,12 +152,42 @@ const getTransactionsWithFilter = (req, res) => {
     });
 };
 
+const createMultipleTransactions = async (req, res) => {
+
+  console.log(`create transactions having user Id ${req.userId}`);
+  const userId = req.userId;
+
+  let transactionList = req.body;
+  // inject userId in transaction
+  // transaction.userId = userId;
+  transactionList = transactionList.map(transaction => {
+    transaction["userId"] = userId;
+    return transaction
+  });
+
+  transactionProxy
+    .addMultipleTransactions(transactionList)
+    .then((value) => {
+      res.status(201).send({
+        error: false,
+        transaction: value,
+      });
+    })
+    .catch((err) => {
+      res.status(err.code).send({
+        error: true,
+        errorMessage: err.message,
+      });
+    });
+};
+
 const transactionController = {
   getAllTransactions,
   getTransactionById,
   updateTransactionById,
   createTransaction,
   getTransactionsWithFilter,
+  createMultipleTransactions
 };
 
 module.exports = transactionController;

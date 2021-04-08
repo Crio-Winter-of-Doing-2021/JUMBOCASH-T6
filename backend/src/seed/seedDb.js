@@ -1,6 +1,11 @@
 const {User, Entity, Transaction } = require('../models/index');
-const EntityList = require('./entity');
-const TransactionList = require('./transaction');
+// ====== DEPRECATED
+// let EntityList = require('./entity');
+// let TransactionList = require('./transaction');
+
+// ==== New version
+const generateSeed = require("./newTransaction");
+let {EntityList, TransactionList} = generateSeed("2e107775-2b0d-4e24-af6c-8766c042fb09", 50, 60, 100, 120)
 
 // ==== Seed user table with single user
 const newUserList = [{

@@ -8,6 +8,9 @@ const transactionController = require('../src/controllers/transaction');
 // router.post('/filter', require('../src/controllers/transaction').getTransactionsWithFilter)
 
 // get all transaction
+/**
+ * DEPRECATED
+ */
 router.get("/", transactionController.getAllTransactions);
 
 // get transaction having id
@@ -21,5 +24,8 @@ router.post("/filter", transactionController.getTransactionsWithFilter);
 
 // create transaction
 router.post("/", transactionController.createTransaction);
+
+// add multiple transactions
+router.post("/multi", transactionController.createMultipleTransactions)
 
 module.exports = router;
