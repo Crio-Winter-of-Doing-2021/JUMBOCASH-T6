@@ -33,6 +33,12 @@ export const Categories = [
   { label: 'Asset Liquidation', value: 'ASSET_LIQUIDATION' },
 ];
 
+export const Intervals = [
+  { label: 'Weeks', value: 'week' },
+  { label: 'Months', value: 'month' },
+  { label: 'Quarters', value: 'quarter' },
+  { label: 'Years', value: 'year' },
+]
 export const DefaultTransaction = {
   amount: 0,
   time: Date.now(),

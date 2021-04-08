@@ -3,9 +3,15 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import entityReducer from './entityReducer';
 import transactionReducer from './transactionReducer';
+import analyticsReducer from './analyticsReducer';
+import entityAnalyticsReducer from './entityAnalyticsReducer';
+import cashflowAnalyticsReducer from './cashflowAnalyticsReducer';
 
 export default combineReducers({
   auth: authReducer,
   entity: entityReducer,
-  transaction: transactionReducer
+  transaction: transactionReducer,
+  analytics: analyticsReducer,
+  entityAnalytics: entityAnalyticsReducer,
+  cashflowAnalytics: cashflowAnalyticsReducer
 });
