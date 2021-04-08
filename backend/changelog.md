@@ -1,3 +1,37 @@
+## Version-7.0 (8th April, 11PM)
+
+## Major Enhancements:
+
+1. Added csv report functionality, curently user can view
+   1. current inflow - total incoming transactions 
+   2. curent outflow - total outgoing transactions
+   3. pending inflow - total incoming amount, which has not been paid by client to the user
+   4. pending outflow - total outgoing amount, which has not been paid by the user to the vendor
+   5. entity-current inflow - list of client who has paid most to the user
+   6. entity-current outflow - list of vendor who has sold most items to the user
+   7. entity-pending inflow - list of client who are biggest credit holders
+   8. entity-pending outflow - list of vendors to whom user owes the most
+2. Added service to remove file
+3. Added job scheduler, which currently
+   1. Cleans `report` directory to optimize space
+4. Added `analytics/csv` endpoint for user to download zip of folder containig list of csv files
+
+### To Do:
+
+1. Prettify trends report
+2. Add trends to the report
+3. cache userId
+4. Prettify entity object in entity analytics
+5. Add pagination of 100 transactions limit
+6. Add swagger jsdoc
+7. Refactor services, auth middleware, seed, config(for passport), app.js
+8. Think about adding 'inflow', 'outflow' in transaction schema
+
+### Minor improvements:
+
+1. Fixed: entity analytics should return name and contact of the user, in generating report
+
+
 ## Version-6.1 (8th April)
 
 ## Major Enhancements:

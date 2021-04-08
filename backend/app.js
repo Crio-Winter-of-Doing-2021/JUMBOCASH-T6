@@ -7,6 +7,7 @@ var cors = require("cors");
 const cookieSession = require('cookie-session')
 const passport = require('passport');
 const {router, authenticate} = require("./routes/authentication");
+const fs = require('fs');
 
 const sequelize = require("./config/database");
 const keys = require("./config/server");
@@ -17,7 +18,18 @@ var entityRouter = require("./routes/entity");
 var transactionRouter = require("./routes/transaction");
 var analyticsRouter = require("./routes/analytics");
 
+const removeDir = require('./src/services/removeDirectory');
+
 var app = express();
+
+// JOB scheduler to run every hour
+setInterval(function() {
+  removeDir(path.join(__dirname, "report"));
+  if (!fs.existsSync(`report`)){
+    fs.mkdirSync(`report`);
+  }
+  console.log("cleaned Directory report")
+}, 3000 * 1000);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -9,4 +9,6 @@ router.post('/entity', analyticsController.getEntityAnalytics)
 
 router.post('/trend', analyticsController.getTrend)
 
+router.post('/csv', analyticsController.generateCsvReport);
+
 module.exports = router;

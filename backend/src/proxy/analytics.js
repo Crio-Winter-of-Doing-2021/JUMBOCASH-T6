@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Transaction } = require("../models/index");
+const { Transaction, Entity } = require("../models/index");
 const errorHandler = require("../services/handleErrors");
 const sequelize = require("../../config/database");
 const analyse = require("../services/analytics");
@@ -30,7 +30,7 @@ async function getTotalCashFlow(userId, startTime, endTime) {
   }
 }
 
-async function getEntityAnalytics(userId, startTime, endTime) {
+async function getEntityAnalytics(userId, startTime, endTime, limit = 10) {
 
   try {
     const entityData = await Transaction.findAll({
@@ -49,11 +49,15 @@ async function getEntityAnalytics(userId, startTime, endTime) {
         },
         category: ["SALES", "PURCHASE"]
       },
-      group: ["entityId", "category", "paymentStatus"],
+      include: {
+        model: Entity,
+        attributes:['name', 'contact']
+          },
+      group: ["entityId", "category", "paymentStatus", "entity.name", "entity.id"],
       order: [sequelize.literal('"totalAmount" DESC')]
     });
 
-    return analyse.analyseTotalOutflowInflow(entityData);
+    return analyse.analyseTotalOutflowInflow(entityData, limit);
     
 
   } catch (err) {
@@ -97,8 +101,27 @@ async function getTrend(userId, interval) {
   }
 }
 
+async function getReport (userId, interval, from, to) { 
+
+  try {
+
+    const [cashflow, entityAnalytics, trend] = await Promise.all([
+        getTotalCashFlow(userId, from, to),
+        getEntityAnalytics(userId, from, to, 20),
+        getTrend(userId, interval)
+      ]);
+
+    return analyse.getReport(userId, cashflow, entityAnalytics, trend);
+
+  } catch (err) {
+      errorHandler(err);
+    }
+ 
+}
+
 module.exports = {
   getTotalCashFlow: getTotalCashFlow,
   getEntityAnalytics: getEntityAnalytics,
-  getTrend: getTrend
+  getTrend: getTrend,
+  getReport: getReport
 };

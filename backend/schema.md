@@ -429,6 +429,10 @@ Successful Response
                         "totalAmount": "2192.33",
                         "countTransactions": "1",
                         "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+                        "entity": {
+                            "name": "Headly Sawayn",
+                            "contact": "9256057908"
+                        }
                         "paymentStatus": "NOT_PAID",
                         "category": "PURCHASE"
                     },
@@ -436,6 +440,10 @@ Successful Response
                         "totalAmount": "2144.25",
                         "countTransactions": "1",
                         "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+                        "entity": {
+                            "name": "Richard Dawkins",
+                            "contact": "6883729018"
+                        }
                         "paymentStatus": "NOT_PAID",
                         "category": "PURCHASE"
                     },
@@ -443,6 +451,10 @@ Successful Response
                         "totalAmount": "2082.93",
                         "countTransactions": "1",
                         "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
+                        "entity": {
+                            "name": "Simon Sawayn IV",
+                            "contact": "6859057908"
+                        }
                         "paymentStatus": "NOT_PAID",
                         "category": "PURCHASE"
                     }
@@ -458,6 +470,10 @@ Successful Response
                         "totalAmount": "2691.15",
                         "countTransactions": "1",
                         "entityId": "65327d08-9184-4d57-9f83-f7a646e92a58",
+                        "entity": {
+                            "name": "Simon Sawayn IV",
+                            "contact": "6859057908"
+                        }
                         "paymentStatus": "PAID",
                         "category": "SALES"
                     }
@@ -532,6 +548,28 @@ Successful Response:
     }
 }
 ```
+POST analytics/csv
+
+Request Body
+```js
+{
+    "time": {
+       "from": "2020-01-03T06:17:43Z",
+        "to": "2021-05-01T01:00:00Z"
+    },
+    "interval": "year"
+}
+```
+Successful Response:
+
+> Returns a folder with .zip extension containig all reports
+
+Failure Response:
+
+> Returns a .json file
+
+---
+
     For Cashflow Calculations:
     Pending amount is not calculated in cashflow report. Only the transactions whose status is "done" is taken into consideration.
     Current amount signifies the total cashflow, which will get written in cashflow report, while pending is an additional insight generated for user to manage his/her debt
