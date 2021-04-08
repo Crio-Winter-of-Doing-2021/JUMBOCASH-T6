@@ -2,9 +2,9 @@
 Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 
 --- 
-### Current Version Developed: 6.0
+### Current Version Developed: 6.2
 
-### Current Version Deployed: 6.0
+### Current Version Deployed: 6.2
 ---
 
 ## Branch: backend-feature
@@ -14,7 +14,7 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 ## To Know More
 ### [README.md](#)
 ### [schema.md](schema.md)
-### [changelog.md](changelog.md) - for viewing new features in Version-6.0
+### [changelog.md](changelog.md) - for viewing new features in Version-6.2
 
 ## How to Run
 To run the application
@@ -88,7 +88,7 @@ To run the application
 13. [x] Make aggregation of transactions
 14.  Add option to make and send csv file
 15. [x] Add optional analytics
-16.  Add multiple transactions
+16. [x] Add multiple transactions
 17.  Update Multiple transactions
 18.  Add cache for userId, now proxy is called 2 times, for deserialize, for id, for getting initial data wrt to query
 
