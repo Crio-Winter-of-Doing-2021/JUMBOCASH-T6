@@ -5,21 +5,22 @@ const {User, Entity, Transaction } = require('../models/index');
 
 // ==== New version
 const generateSeed = require("./newTransaction");
-let {EntityList, TransactionList} = generateSeed("2e107775-2b0d-4e24-af6c-8766c042fb09", 50, 60, 100, 120)
+let {EntityList, TransactionList} = generateSeed("2e107775-2b0d-4e24-af6c-8766c042fb09", 10, 10, 30, 30)
 
 // ==== Seed user table with single user
 const newUserList = [{
-    id:"9ab3b39b-9aee-438a-88bf-bae9833d0926",
-    name: "Joe Biden",
-    emailId: "Joe23biden12@potus.us",
-    companyName: "Mudikhana",
-    contact: "21233232324"
+    "id":"9ab3b39b-9aee-438a-88bf-bae9833d0926",
+    "name": "Kanishka Chowdhury",
+    "emailId": "ckanishka24@gmail.com",
+    "companyName": "Mudikhana",
+    "contact": "21233232324",
+    "token": null
   },
   {
     
     "id": "2e107775-2b0d-4e24-af6c-8766c042fb09",
-    "name":"Kanishka Chowdhury",
-    "emailId":"ckanishka24@gmail.com",
+    "name":"Piyush Arya",
+    "emailId":"piyusharya223@gmail.com",
     "companyName":null,
     "contact":null,
     "token": null

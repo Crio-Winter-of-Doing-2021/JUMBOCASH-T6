@@ -4,7 +4,7 @@ const clientUrl = require("../config/server").clientUrl;
 const authController = require("../src/controllers/authentication");
 
 // AUTHENTICATION MIDDLEWARE
-const authenticate = async (req, res, next) => {
+const authenticate = (req, res, next) => {
   // if login pass
   // passports method
   // console.log(`is authenticated ${req.user}`);
@@ -16,6 +16,16 @@ const authenticate = async (req, res, next) => {
     res.redirect("/api/auth/google");
     res.end();
   }
+};
+
+// FAIL-SAFE for unauthorized access
+const authenticateTest = (req, res, next) => {
+
+  // To be not used in production
+  // All request will be passed to Kanishka's saved data
+  req.userId = "2e107775-2b0d-4e24-af6c-8766c042fb09";
+  next();
+
 };
 
 // =========================================================================
@@ -80,4 +90,6 @@ router.get("/logout", authController.logoutUser);
 //   })
 // })
 
-module.exports = { router, authenticate };
+module.exports = { 
+  router: router, 
+  authenticate: authenticateTest };
