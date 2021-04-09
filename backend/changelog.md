@@ -1,3 +1,23 @@
+## Version-7.1 (9th April, 6PM)
+
+## Major Enhancements:
+
+1. Integrated frontend charts with backend api
+
+### To Do:
+
+1. Prettify trends report
+2. Add trends to the report
+3. cache userId
+4. Prettify entity object in entity analytics
+5. Add pagination of 100 transactions limit
+6. Add swagger jsdoc
+7. Refactor services, auth middleware, seed, config(for passport), app.js
+8. Think about adding 'inflow', 'outflow' in transaction schema
+
+### Minor improvements:
+
+
 ## Version-7.0 (8th April, 11PM)
 
 ## Major Enhancements:

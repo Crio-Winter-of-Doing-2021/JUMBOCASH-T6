@@ -61,6 +61,7 @@ To run the application
 6. Add swagger jsdoc
 7. Refactor services, auth middleware, seed, config(for passport), app.js
 8. Think about adding 'inflow', 'outflow' in transaction schema
+9. Add validation check on all analytics routes
 
 ### Minor improvements:
 
