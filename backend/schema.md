@@ -328,11 +328,63 @@ PATCH /entity/:id
 
 ---
 
-PATCH /user
+PATCH /user/me
 
+Request body:
+```js
+{
+    "name": "Piyush Arya",
+    "emailId": "piyusharya223@gmail.com",
+    "companyName": "alpacino",
+    "contact": "21129133"
+}
+```
+
+Successful Response:
+```js
+{
+    "error": false,
+    "data": {
+        "id": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+        "name": "Piyush Arya",
+        "emailId": "piyusharya223@gmail.com",
+        "companyName": "alpacino",
+        "contact": "21129133",
+        "token": null,
+        "createdAt": "2021-04-09T14:02:17.412Z",
+        "updatedAt": "2021-04-09T14:53:55.431Z"
+    }
+}
+```
+
+Failure response:
+```js
+{
+    "error": false,
+    "message": "company name cannot be left empty" | "contact cannot be left empty"
+}
+```
 ---
 
-GET /user
+GET /user/me
+
+Successful Response:
+```js
+{
+    "error": false,
+    "data": {
+        "id": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+        "name": "Piyush Arya",
+        "emailId": "piyusharya223@gmail.com",
+        "companyName": "alpacino",
+        "contact": "21129133",
+        "token": null,
+        "createdAt": "2021-04-09T14:02:17.412Z",
+        "updatedAt": "2021-04-09T14:53:55.431Z"
+    }
+}
+```
+
 
 ---
 

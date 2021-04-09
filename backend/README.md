@@ -2,9 +2,9 @@
 Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 
 --- 
-### Current Version Developed: 7.0
+### Current Version Developed: 7.1
 
-### Current Version Deployed: 6.2
+### Current Version Deployed: 7.1
 ---
 
 ## Branch: backend-feature
@@ -14,7 +14,7 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 ## To Know More
 ### [README.md](#)
 ### [schema.md](schema.md)
-### [changelog.md](changelog.md) - for viewing new features in Version-7.0
+### [changelog.md](changelog.md) - for viewing new features in Version-7.1
 
 ## How to Run
 To run the application

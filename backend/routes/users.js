@@ -10,9 +10,7 @@ router.get('/', function(req, res, next) {
   res.send(req.session.passport);
 });
 
-router.patch('/me', function(req, res, next) {
-  res.send('update user');
-});
+router.patch('/me', userController.updateUser);
 
 
 

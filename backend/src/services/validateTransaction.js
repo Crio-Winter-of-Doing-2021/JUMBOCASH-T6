@@ -116,7 +116,13 @@ const validateMultipleTransactions = (transactionList) => {
         return false
       }
     }
-    return true;
+
+    let newTransactionList = [...new Set(
+      transactionList.map(el => JSON.stringify(el))
+    )].map(e => JSON.parse(e));
+
+    return newTransactionList;
+
   } catch (err) {
     err.message += ` in item ${i}`;
     errorHandler(err)

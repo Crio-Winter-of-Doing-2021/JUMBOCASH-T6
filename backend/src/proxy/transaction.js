@@ -136,12 +136,10 @@ async function addMultipleTransactions(transactionList) {
 
   try {
 
-    if(! validateTransaction.validateMultipleTransactions(transactionList)){
-      return false;
-    }
-    let validatedTransactionList = transactionList;
+    let validatedTransactionList = validateTransaction.validateMultipleTransactions(transactionList);
 
-    return await Transaction.bulkCreate(validatedTransactionList, {returning: true, updateOnDuplicate: ["updatedAt"]});
+    return await Transaction.bulkCreate(validatedTransactionList, {returning: true, ignoreDuplicates: true });
+    // ignoreDuplicates works in postgres > 9.5
   }
     catch(err) {
       errorHandler(err);

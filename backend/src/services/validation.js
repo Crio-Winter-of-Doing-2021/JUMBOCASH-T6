@@ -51,7 +51,8 @@ const validation = {
   isUUIDV4,
   isValidEntity,
   isValidContact,
-  isValidAddress
+  isValidAddress,
+  isValidName
 };
 
 module.exports = validation;

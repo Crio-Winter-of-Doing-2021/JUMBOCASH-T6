@@ -1,6 +1,5 @@
 const moment = require('moment');
 const enums = require("../../config/data");
-// const errorHandler = require('./handleErrors');
 
 function getInterval(interval) {
 
@@ -14,8 +13,6 @@ function getInterval(interval) {
     const startTime = moment(endTime).subtract(6, interval);
 
     return {startTime, endTime};
-
-
 }
 
 module.exports = {

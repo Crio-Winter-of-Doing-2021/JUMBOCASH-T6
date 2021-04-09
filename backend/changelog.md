@@ -1,22 +1,24 @@
-## Version-7.1 (9th April, 6PM)
+## Version-7.1 (9th April, 10PM)
 
 ## Major Enhancements:
 
-1. Integrated frontend charts with backend api
+1. Integrated frontend charts with backend api.
+2. Added endpoint to edit user.
 
 ### To Do:
 
 1. Prettify trends report
 2. Add trends to the report
-3. cache userId
-4. Prettify entity object in entity analytics
-5. Add pagination of 100 transactions limit
-6. Add swagger jsdoc
+3. cache userId (Need time to implement)
+4. Prettify entity object in entity analytics (prettified in report generation)
+5. Add pagination of 100 transactions limit (already implemented in `transaction/filter`)
+6. Add swagger jsdoc (check [schema](schema.md))
 7. Refactor services, auth middleware, seed, config(for passport), app.js
 8. Think about adding 'inflow', 'outflow' in transaction schema
 
 ### Minor improvements:
 
+1. Fixed: `transaction/multi` adding duplicate transactions in bulkCreate, but it won't update if transaction is already present in the db.
 
 ## Version-7.0 (8th April, 11PM)
 

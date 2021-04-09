@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const errorHandler = require("../services/handleErrors");
+const userValidation = require('../services/validateUser');
 
 var UserDao = {
   findAll: findAll,
@@ -72,13 +73,23 @@ async function findOrCreateUser(userDetails) {
 }
 
 async function updateUser(user, id) {
-  var updateUser = {
-    name: user.name,
-    emaiId: user.emaiId,
-    companyName: user.companyName,
-    email: user.email,
-  };
-  return await User.update(updateUser, { where: { id: id } });
+
+  try {
+
+    if(! userValidation.isValidUserForUpdate(user)) {
+      return false;
+    }
+
+    let userFound = await User.findOne({where: {id}});
+
+    userFound.companyName = user.companyName;
+    userFound.contact = user.contact;
+
+    return await userFound.save();
+
+  } catch (err) {
+    errorHandler(err);
+  }
 }
 
 async function findUserByToken(token) {
