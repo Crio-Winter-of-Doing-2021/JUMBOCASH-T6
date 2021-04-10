@@ -320,6 +320,79 @@ Failed response:
 }
 ```
 
+POST transaction/multi
+Request:
+```js
+[
+    {
+        "entityId": "c6b8fe63-3807-4012-80dc-10af6bf89105",
+        "time": "2018-11-12 12:00:48 -06:-30",
+        "paymentMode": "DEBIT_CARD",
+        "paymentStatus": "NOT_PAID",
+        "amount": 800.56,
+        "category": "PURCHASE"
+      },
+      {
+        "entityId": "c6b8fe63-3807-4012-80dc-10af6bf89105",
+        "time": "2018-11-12 12:00:48 -06:-30",
+        "paymentMode": "DEBIT_CARD",
+        "paymentStatus": "NOT_PAID",
+        "amount": 800.56,
+        "category": "PURCHASE"
+      },
+      {
+        "entityId": "c6b8fe63-3807-4012-80dc-10af6bf89105",
+        "time": "2019-01-02 06:17:43 -06:-30",
+        "paymentMode": "CASH",
+        "paymentStatus": "NOT_PAID",
+        "amount": 1600,
+        "category": "SALES"
+      }
+]
+```
+
+Successful response:
+```js
+{
+    "error": false,
+    "transaction": [
+        {
+            "id": "db9435b4-4601-4ca1-be49-875aa082e2b8",
+            "entityId": "c6b8fe63-3807-4012-80dc-10af6bf89105",
+            "time": "2018-11-13T18:00:48.000Z",
+            "paymentMode": "DEBIT_CARD",
+            "paymentStatus": "NOT_PAID",
+            "amount": "800.56",
+            "category": "PURCHASE",
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "createdAt": "2021-04-10T06:28:18.742Z",
+            "updatedAt": "2021-04-10T06:28:18.742Z"
+        },
+        {
+            "id": "e227fd7c-7ca1-4e72-adaf-d2407de6d139",
+            "entityId": "c6b8fe63-3807-4012-80dc-10af6bf89105",
+            "time": "2019-01-03T12:17:43.000Z",
+            "paymentMode": "CASH",
+            "paymentStatus": "NOT_PAID",
+            "amount": "1600.00",
+            "category": "SALES",
+            "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+            "createdAt": "2021-04-10T06:28:18.742Z",
+            "updatedAt": "2021-04-10T06:28:18.742Z"
+        }
+    ]
+}
+```
+
+Failure Response:
+```js
+{
+    "error": true,
+    "message": "..."
+}
+```
+
+
 POST /login
 
 ---
