@@ -11,12 +11,15 @@ import {
   GET_TRANSACTIONS_LOADING,
   GET_TRANSACTIONS_SUCCESS,
   GET_TRANSACTIONS_FAIL,
+  ADD_MULTIPLE_TRANSACTIONS_LOADING,
+  ADD_MULTIPLE_TRANSACTIONS_SUCCESS,
+  ADD_MULTIPLE_TRANSACTIONS_FAIL,
 } from '../types';
 
 const initialState = {
   transactions: [],
   isLoading: false,
-  isUpdating:false,
+  isUpdating: false,
   error: null,
 };
 
@@ -30,6 +33,7 @@ export default function (state = initialState, { type, payload }) {
     case EDIT_TRANSACTION_LOADING:
     case DELETE_TRANSACTION_LOADING:
     case ADD_TRANSACTION_LOADING:
+    case ADD_MULTIPLE_TRANSACTIONS_LOADING:
       return {
         ...state,
         isUpdating: true,
@@ -45,6 +49,12 @@ export default function (state = initialState, { type, payload }) {
         ...state,
         isUpdating: false,
         transactions: [payload.transaction, ...state.transactions],
+      };
+    case ADD_MULTIPLE_TRANSACTIONS_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        transactions: [...payload.transactions, ...state.transactions],
       };
     case DELETE_TRANSACTION_SUCCESS:
       return {
@@ -64,6 +74,7 @@ export default function (state = initialState, { type, payload }) {
     case DELETE_TRANSACTION_FAIL:
     case EDIT_TRANSACTION_FAIL:
     case ADD_TRANSACTION_FAIL:
+    case ADD_MULTIPLE_TRANSACTIONS_FAIL:  
       return {
         ...state,
         isUpdating: false,

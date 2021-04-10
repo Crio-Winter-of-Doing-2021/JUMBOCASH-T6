@@ -33,12 +33,30 @@ export const Categories = [
   { label: 'Asset Liquidation', value: 'ASSET_LIQUIDATION' },
 ];
 
+export const CategoryLabelMap = {
+  'SALES':'Sales',
+  'PURCHASE': 'Purchase',
+  'EMPLOYEE': 'Employee',
+  'TAX': 'Tax',
+  'ASSET_LIQUIDATION':'Asset Liquidation'
+}
+
 export const Intervals = [
   { label: 'Weeks', value: 'week' },
   { label: 'Months', value: 'month' },
   { label: 'Quarters', value: 'quarter' },
   { label: 'Years', value: 'year' },
 ]
+
+export const TransactionTableHeaderLabelMap = {
+  'Amount' : 'amount',
+  'Category' : 'category',
+  'Entity' : 'entityId',
+  'Payment Mode': 'paymentMode',
+  'Payment Status': 'paymentStatus',
+  'Time of Transaction': 'time'
+}
+
 export const DefaultTransaction = {
   amount: 0,
   time: Date.now(),

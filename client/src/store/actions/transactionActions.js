@@ -15,6 +15,9 @@ import {
   GET_TRANSACTIONS_LOADING,
   GET_TRANSACTIONS_SUCCESS,
   GET_TRANSACTIONS_FAIL,
+  ADD_MULTIPLE_TRANSACTIONS_LOADING,
+  ADD_MULTIPLE_TRANSACTIONS_SUCCESS,
+  ADD_MULTIPLE_TRANSACTIONS_FAIL,
 } from '../types';
 import { BASE_URL } from '../../constants';
 
@@ -36,7 +39,7 @@ export const addTransaction = (formData) => async (dispatch, getState) => {
       payload: { transaction: response.data.transaction },
     });
   } catch (err) {
-    const errMessage = err?.response?.data?.errorMessage;
+    const errMessage = err?.response?.data?.errorMessage || '';
     toast.error('❌ Failed to add transaction. ' + errMessage);
     dispatch({
       type: ADD_TRANSACTION_FAIL,
@@ -88,7 +91,7 @@ export const editTransaction = (id, formData) => async (dispatch, getState) => {
     });
     
   } catch (err) {
-    const errMessage = err?.response?.data?.errorMessage;
+    const errMessage = err?.response?.data?.errorMessage || '';
     toast.error('❌ Failed to edit transaction. ' + errMessage);
     dispatch({
       type: EDIT_TRANSACTION_FAIL,
@@ -96,6 +99,34 @@ export const editTransaction = (id, formData) => async (dispatch, getState) => {
     });
   }
 };
+
+export const addMultipleTransactions = (transactionArr) => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_MULTIPLE_TRANSACTIONS_LOADING
+  });
+  toast.info('Parsing Completed. 🚀 Adding the transactions.');
+  try {
+    const options = attachTokenToHeaders(getState);
+    const response = await axios.post(
+      BASE_URL+'/transaction/multi',
+      transactionArr,
+      options,
+    );
+    toast.success('✅ Transactions Added Successfully');
+    dispatch({
+      type: ADD_MULTIPLE_TRANSACTIONS_SUCCESS,
+      payload: { transactions: response.data.transaction },
+    });
+  } catch (err) {
+    const errMessage = err?.response?.data?.errorMessage || '';
+    toast.error('❌ Failed to add transactions. ' + errMessage);
+    dispatch({
+      type: ADD_MULTIPLE_TRANSACTIONS_FAIL,
+      payload: { error: errMessage },
+    });
+  }
+};
+
 
 export const deleteTransaction = (id) => async (dispatch, getState) => {
   dispatch({

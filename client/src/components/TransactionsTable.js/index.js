@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import * as Papa from 'papaparse';
 
 import { getEntities } from '../../store/actions/entityActions';
-import { getTransactions } from '../../store/actions/transactionActions';
+import { addMultipleTransactions, getTransactions } from '../../store/actions/transactionActions';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -10,12 +12,15 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { MultiSelect } from 'primereact/multiselect';
 import { Message } from 'primereact/message';
+import { FileUpload } from 'primereact/fileupload';
 import {
   Categories,
   PaymentModeLabelMap,
   PaymentStatusLabelMap,
   PaymentModes,
   PaymentStatuses,
+  CategoryLabelMap,
+  TransactionTableHeaderLabelMap,
 } from '../../constants';
 import Loader from '../Loader';
 
@@ -26,6 +31,7 @@ import debit_card from '../../static/assets/images/debit_card.png';
 import credit_card from '../../static/assets/images/credit_card.png';
 
 import './styles.css';
+import { transactionFormSchema } from '../TransactionFormDialog/validation';
 
 const paymentModeImgMap = {
   UPI: upi,
@@ -64,12 +70,14 @@ const TransactionsTable = ({
   entity,
   getTransactions,
   getEntities,
+  addMultipleTransactions,
   editTransactionDialog,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(null);
   const [selectedPaymentMode, setSelectedPaymentMode] = useState(null);
   const dt = useRef(null);
+  let fileUploader = useRef(null);
 
   useEffect(() => {
     if (!transaction.transactions.length && !transaction.isLoading) {
@@ -80,16 +88,74 @@ const TransactionsTable = ({
     }
   }, []);
 
+  const exportCSV = () => {
+    dt.current.exportCSV();
+  };
+
+  const fileUploadHandler = (event, form) => {
+    toast.warning('📃 File parsing is in progress.');
+    Papa.parse(event.files[0], {
+      header: true,
+      skipEmptyLines: true,
+      transformHeader: (header) => {
+        return TransactionTableHeaderLabelMap[header];
+      },
+      complete: async (results) => {
+        fileUploader.clear();
+        if (!results.errors.length && results.data.length) {
+          for (let i = 0; i < results.data.length; i++) {
+            const item = results.data[i];
+            const isValidRow = await transactionFormSchema.isValid(item);
+            if (!isValidRow) {
+              toast.error(
+                `❌ Failed to parse file. Some fields at row ${i + 2} violate the schema.`,
+              );
+              return;
+            }
+          }
+        } else if (results.data.length <= 1) {
+          // empty or with only header
+          toast.error(`File is empty with no rows.`);
+          return;
+        } else {
+          const errMessage = results.errors[0].message;
+          const rowNum =
+            results.errors[0].row !== undefined ? `Error at row:${results.errors[0].row + 2}.` : '';
+          toast.error(`❌ Failed to parse file. ${rowNum} ${errMessage}`);
+          return;
+        }
+        addMultipleTransactions(results.data);
+      },
+      error: (err) => {
+        fileUploader.clear();
+        toast.error('❌ Failed to parse file.');
+      },
+    });
+  };
+
   const cardTitle = (
-    <div className="p-card-title p-d-flex">
-      List of Transactions
-      <Button
-        type="Button"
-        icon="pi pi-refresh"
-        className="p-ml-auto"
-        tooltip="Refresh"
-        onClick={getTransactions}
-      />
+    <div className="p-card-title p-d-flex p-jc-between">
+      <div>List of Transactions</div>
+      <div className="p-d-flex p-flex-wrap">
+        <FileUpload
+          ref={(el) => (fileUploader = el)}
+          className="p-mr-2"
+          auto
+          accept=".csv"
+          chooseLabel="Import CSV"
+          mode="basic"
+          customUpload
+          uploadHandler={fileUploadHandler}
+        />
+        <Button
+          type="Button"
+          icon="pi pi-download"
+          className="p-button-info p-mr-4"
+          label="Export CSV"
+          onClick={exportCSV}
+        />
+        <Button type="Button" icon="pi pi-refresh" tooltip="Refresh" onClick={getTransactions} />
+      </div>
     </div>
   );
 
@@ -132,6 +198,23 @@ const TransactionsTable = ({
     return item.name.toLowerCase().includes(filter.toLowerCase());
   };
 
+  const categoryBodyTemplate = ({ category }) => {
+    return (
+      <>
+        <div>{CategoryLabelMap[category]}</div>
+      </>
+    );
+  };
+
+  const timeBodyTemplate = ({ time }) => {
+    const formattedTime = new Date(time).toString();
+    return (
+      <>
+        <div>{formattedTime}</div>
+      </>
+    );
+  };
+
   const actionBodyTemplate = (rowData) => {
     return (
       <>
@@ -166,6 +249,7 @@ const TransactionsTable = ({
           sortMode="multiple"
           removableSort
           emptyMessage="No transactions found."
+          exportFilename="Transactions"
         >
           <Column
             field="entityId"
@@ -206,11 +290,13 @@ const TransactionsTable = ({
           <Column
             field="category"
             header="Category"
+            body={categoryBodyTemplate}
             sortable
             filter
             filterMatchMode="contains"
             filterElement={<SelectFilter field="category" options={Categories} />}
           />
+          <Column field="time" header="Time of Transaction" body={timeBodyTemplate} sortable />
           <Column body={actionBodyTemplate}></Column>
         </DataTable>
       )}
@@ -223,4 +309,6 @@ const mapStateToProps = (state) => ({
   entity: state.entity,
 });
 
-export default connect(mapStateToProps, { getTransactions, getEntities })(TransactionsTable);
+export default connect(mapStateToProps, { getTransactions, getEntities, addMultipleTransactions })(
+  TransactionsTable,
+);

@@ -36,7 +36,7 @@ export const addEntity = (formData) => async (dispatch, getState) => {
       payload: { entity: response.data.entity },
     });
   } catch (err) {
-    const errMessage = err?.response?.data?.errorMessage;
+    const errMessage = err?.response?.data?.errorMessage || '';
     toast.error('❌ Failed to add entity. ' + errMessage)
     dispatch({
       type: ADD_ENTITY_FAIL,
@@ -80,7 +80,7 @@ export const editEntity = (id, formData) => async (dispatch, getState) => {
       payload: { entity: response.data.data },
     });
   } catch (err) {
-    const errMessage = err?.response?.data?.errorMessage;
+    const errMessage = err?.response?.data?.errorMessage || '';
     toast.error('❌ Failed to edit entity. ' + errMessage)
     dispatch({
       type: EDIT_ENTITY_FAIL,

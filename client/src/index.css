@@ -77,3 +77,18 @@ a {
 .p-inputtext {
   width:100%
 }
+
+.p-fileupload .p-button {
+  background-color: #FBC02D;
+  border: 1px solid #FBC02D;
+}
+
+.p-fileupload-choose:not(.p-disabled):hover {
+  background: #ebaf18;
+  color: #ffffff;
+  border-color: #ebaf18;
+}
+
+.p-fileupload .p-button .p-button-icon::before {
+  content: '\e934';
+}
