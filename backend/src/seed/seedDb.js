@@ -16,7 +16,7 @@ const newUserList = [{
     "id":"9ab3b39b-9aee-438a-88bf-bae9833d0926",
     "name": "Kanishka Chowdhury",
     "emailId": "ckanishka24@gmail.com",
-    "companyName": "Mudikhana",
+    "companyName": "Kanishka's Store",
     "contact": "21233232324",
     "token": null
   },

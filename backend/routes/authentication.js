@@ -92,4 +92,4 @@ router.get("/logout", authController.logoutUser);
 
 module.exports = { 
   router: router, 
-  authenticate: authenticateTest };
+  authenticate: authenticate };
