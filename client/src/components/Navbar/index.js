@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
 import { logOutUser } from '../../store/actions/authActions';
 import { Button } from 'primereact/button';
-import  logo from '../../static/assets/images/logo.png';
+import { OverlayPanel } from 'primereact/overlaypanel';
+
+
+import logo from '../../static/assets/images/logo.png';
+import { getAvatarLabel } from '../../utils/getAvatarLabel';
+import UserDropdownMenu from './UserDropdownMenu';
 
 const Navbar = ({ auth, logOutUser, history }) => {
+  const op = useRef(null);
+
   const onLogOut = (event) => {
     event.preventDefault();
     logOutUser(history);
   };
+ 
+  const redirectToUserPage = () => {
+    history.push('/user')
+  }
 
   const items = [
     {
@@ -50,13 +61,23 @@ const Navbar = ({ auth, logOutUser, history }) => {
     ></img>
   );
 
-  const end = <Button label="Logout" icon="pi pi-power-off" onClick={onLogOut} />;
-
+  const end = (
+    <Button
+      label={getAvatarLabel(auth?.user?.name)}
+      className="p-button-secondary p-button-raised p-p-2"
+      onClick={(e) => op.current.toggle(e)}
+      aria-haspopup
+      aria-controls="overlay_panel"
+    />
+  );
   return (
     <div>
       <div className="card">
         <Menubar model={items} start={start} end={end} />
       </div>
+      <OverlayPanel ref={op} dismissable>
+        <UserDropdownMenu onLogOut={onLogOut} redirectToUserPage={redirectToUserPage}/>
+      </OverlayPanel>
     </div>
   );
 };

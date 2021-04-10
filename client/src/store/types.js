@@ -48,6 +48,10 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 export const USER_LOADING = 'USER_LOADING';
 export const USER_SUCCESS = 'USER_SUCCESS';
 export const USER_FAIL = 'USER_FAIL';
+export const USER_UPDATE_LOADING = 'USER_UPDATE_LOADING';
+export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
+export const USER_UPDATE_FAIL = 'USER_UPDATE_FAIL';
+
 
 /****************************Analytics****************************/
 

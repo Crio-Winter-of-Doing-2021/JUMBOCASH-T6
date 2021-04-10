@@ -6,12 +6,16 @@ import {
   USER_LOADING,
   USER_SUCCESS,
   USER_FAIL,
+  USER_UPDATE_LOADING,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from '../types';
 
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false, 
   isLoading: false,
+  isUpdating:false,
   user: null,
   error: null,
   appLoaded: false,
@@ -26,6 +30,11 @@ export default function (state = initialState, { type, payload }) {
         appLoaded: false,
         error: null,
       };
+      case USER_UPDATE_LOADING:
+        return {
+          ...state,
+          isUpdating: true,
+        };  
     case LOGIN_WITH_OAUTH_LOADING:
       return {
         ...state,
@@ -51,6 +60,12 @@ export default function (state = initialState, { type, payload }) {
         error: null,
         appLoaded: true,
       };
+    case USER_UPDATE_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        user: payload.user,
+      };    
     case USER_FAIL:
       localStorage.removeItem('token');
       return {
@@ -61,6 +76,11 @@ export default function (state = initialState, { type, payload }) {
         error: null,
         appLoaded: true,
       };
+      case USER_UPDATE_FAIL:
+        return {
+          ...state,
+          isUpdating: false,
+        };     
     case LOGOUT_SUCCESS:
       localStorage.removeItem('token');
       return {

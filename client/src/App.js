@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound';
 import Loader from './components/Loader';
 
 import { logInUserWithOauth, loadUser } from './store/actions/authActions';
+import User from './pages/User';
 
 const App = ({ logInUserWithOauth, auth, loadUser }) => {
 
@@ -42,7 +43,7 @@ const App = ({ logInUserWithOauth, auth, loadUser }) => {
         <>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/report" component={Home} />
+          <Route path="/user" component={User} />
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>

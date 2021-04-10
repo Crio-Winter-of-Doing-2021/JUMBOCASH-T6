@@ -8,9 +8,13 @@ import {
   USER_SUCCESS,
   USER_FAIL,
   LOGOUT_SUCCESS,
-  LOGOUT_FAIL
+  LOGOUT_FAIL,
+  USER_UPDATE_LOADING,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from '../types';
 import { BASE_URL } from '../../constants';
+import { toast } from 'react-toastify';
 
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
@@ -20,11 +24,32 @@ export const loadUser = () => async (dispatch, getState) => {
     const response = await axios.get(BASE_URL+'/user/me', options);
     dispatch({
       type: USER_SUCCESS,
-      payload: { user: response.data.data },
+      payload: { user: response?.data?.data },
     });
   } catch (err) {
     dispatch({
       type: USER_FAIL,
+      payload: { error: err?.response?.data?.message },
+    });
+  }
+};
+
+export const updateUserInfo = (formData) => async (dispatch, getState) => {
+  dispatch({ type: USER_UPDATE_LOADING });
+  
+  try {
+    const options = attachTokenToHeaders(getState);
+    const response = await axios.patch(BASE_URL+'/user/me',formData, options);
+    toast.success('✅ User info updated successfully.')
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+      payload: { user: response?.data?.data },
+    });
+  } catch (err) {
+    const errMessage = err?.response?.data?.message || '';
+    toast.error('❌ Failed to update user info. ' + errMessage)
+    dispatch({
+      type: USER_UPDATE_FAIL,
       payload: { error: err?.response?.data?.message },
     });
   }
