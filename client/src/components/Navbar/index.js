@@ -9,7 +9,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
 
 import logo from '../../static/assets/images/logo.png';
-import { getAvatarLabel } from '../../utils/getAvatarLabel';
+import { getAvatarLabel } from '../../utils';
 import UserDropdownMenu from './UserDropdownMenu';
 
 const Navbar = ({ auth, logOutUser, history }) => {

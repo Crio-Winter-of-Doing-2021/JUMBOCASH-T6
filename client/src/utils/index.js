@@ -7,3 +7,11 @@ export const getAvatarLabel = (name) => {
         return 'U'
     }
 }
+
+export const replaceNullWithEmptyString = (obj) => {
+    Object.entries(obj).forEach(([k,v])=>{
+        if(!v){
+            obj[k] = '';
+        }
+    })
+}

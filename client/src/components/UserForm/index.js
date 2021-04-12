@@ -6,10 +6,11 @@ import { InputText } from 'primereact/inputtext';
 import { useFormik } from 'formik';
 import { userFormSchema } from './validation';
 import SaveButton from '../SaveButton';
-import { getAvatarLabel } from '../../utils/getAvatarLabel';
+import { getAvatarLabel, replaceNullWithEmptyString } from '../../utils';
 import { updateUserInfo } from '../../store/actions/authActions';
 
-const UserForm = ({ auth: { isUpdating, error }, initialValues }) => {
+const UserForm = ({ updateUserInfo, auth: { isUpdating, error }, initialValues }) => {
+  replaceNullWithEmptyString(initialValues);
   const formik = useFormik({
     initialValues,
     validationSchema: userFormSchema,
