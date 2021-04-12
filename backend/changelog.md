@@ -1,3 +1,8 @@
+## Version-7.2 (12th April, 10PM)
+
+### Minor fixes:
+1. Changed response schema of transaction to include entity name. (Check [schema](schema.md))
+
 ## Version-7.1 (9th April, 10PM)
 
 ## Major Enhancements:

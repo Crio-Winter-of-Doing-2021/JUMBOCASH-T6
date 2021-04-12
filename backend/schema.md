@@ -158,11 +158,24 @@ GET /transactions
 
 Returns an array of transactions conforming to transactionSchema or an empty array
 
-Response:  
+Response: Array of transactions
 ```js
 {
     error: false,
-    data: [...transactionArray]
+    data: [
+        {
+            "id": "18afecca-7095-4b41-a917-476421d40651",
+            "entityId": "0c2cd7ea-6c6b-432c-9303-4cef275456aa",
+            "category": "SALES",
+            "amount": "9810.00",
+            "paymentStatus": "PAID",
+            "paymentMode": "DEBIT_CARD",
+            "time": "2021-04-12T09:07:50.874Z",
+            "entity": {
+                "name": "Guadalupe Nitzsche"
+            }
+        },
+    ]
 }
 ```
 
@@ -305,11 +318,24 @@ Request:
     
 }
 ```
-Successful response:  
+Successful response:  Array of transactions
 ```js
 {
     error: false,
-    data: [...transactionArray]
+    data: [
+        {
+            "id": "18afecca-7095-4b41-a917-476421d40651",
+            "entityId": "0c2cd7ea-6c6b-432c-9303-4cef275456aa",
+            "category": "SALES",
+            "amount": "9810.00",
+            "paymentStatus": "PAID",
+            "paymentMode": "DEBIT_CARD",
+            "time": "2021-04-12T09:07:50.874Z",
+            "entity": {
+                "name": "Guadalupe Nitzsche"
+            }
+        },
+    ]
 }
 ```
 Failed response:  

@@ -1,4 +1,4 @@
-const Transaction = require("../models/transaction");
+const {Transaction, Entity} = require("../models/index");
 const validation = require("../services/validation");
 const validateTransaction = require("../services/validateTransaction");
 const errorHandler = require("../services/handleErrors");
@@ -25,6 +25,10 @@ async function findAll(userId) {
   try {
     return await Transaction.findAll({
       attributes: visibleAttribute,
+      include: {
+        model: Entity,
+        attributes:['name']
+        },
       where: {userId}
     });
   } catch (err) {
@@ -36,6 +40,10 @@ async function findWithFilter(filter, sort, page, userId) {
   try {
     let response = await Transaction.findAll({
       attributes: visibleAttribute,
+      include: {
+        model: Entity,
+        attributes:['name']
+        },
       where: {
         ...sanitizeFilter(filter),
         userId
