@@ -14,6 +14,7 @@ import Loader from './components/Loader';
 
 import { logInUserWithOauth, loadUser } from './store/actions/authActions';
 import User from './pages/User';
+import Report from './pages/Report';
 
 const App = ({ logInUserWithOauth, auth, loadUser }) => {
 
@@ -44,6 +45,7 @@ const App = ({ logInUserWithOauth, auth, loadUser }) => {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/user" component={User} />
+          <Route path="/report" component={Report} />
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>

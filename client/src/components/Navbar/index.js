@@ -36,17 +36,17 @@ const Navbar = ({ auth, logOutUser, history }) => {
         );
       },
     },
-    // {
-    //   label: 'Report',
-    //   template: (item, options) => {
-    //     return (
-    //       <NavLink className="p-menuitem-link" activeClassName="active-link" to="/report">
-    //         <span className="p-menuitem-icon pi pi-fw pi-file-o"></span>
-    //         <span className="p-menuitem-text">Report</span>
-    //       </NavLink>
-    //     );
-    //   },
-    // },
+    {
+      label: 'Report',
+      template: (item, options) => {
+        return (
+          <NavLink className="p-menuitem-link" activeClassName="active-link" to="/report">
+            <span className="p-menuitem-icon pi pi-fw pi-file-o"></span>
+            <span className="p-menuitem-text">Report</span>
+          </NavLink>
+        );
+      },
+    },
   ];
 
   const start = (

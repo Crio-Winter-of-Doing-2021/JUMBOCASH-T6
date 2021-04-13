@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import * as Papa from 'papaparse';
 
 import { getEntities } from '../../store/actions/entityActions';
-import { addMultipleTransactions, getTransactions } from '../../store/actions/transactionActions';
+import { addMultipleTransactions, getFilteredTransactions, getTransactions } from '../../store/actions/transactionActions';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -80,10 +80,10 @@ const TransactionsTable = ({
   let fileUploader = useRef(null);
 
   useEffect(() => {
-    if (!transaction.transactions.length && !transaction.isLoading) {
+    if (!transaction?.transactions?.length && !transaction?.isLoading) {
       getTransactions();
     }
-    if (!entity.entities.length && !entity.isLoading) {
+    if (!entity?.entities?.length && !entity?.isLoading) {
       getEntities();
     }
   }, []);
