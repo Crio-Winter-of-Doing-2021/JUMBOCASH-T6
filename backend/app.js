@@ -6,17 +6,17 @@ var logger = require("morgan");
 var cors = require("cors");
 const cookieSession = require('cookie-session')
 const passport = require('passport');
-const {router, authenticate} = require("./routes/authentication");
+const {router, authenticate} = require("./src/routes/authentication");
 const fs = require('fs');
 
 const sequelize = require("./config/database");
 const keys = require("./config/server");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var entityRouter = require("./routes/entity");
-var transactionRouter = require("./routes/transaction");
-var analyticsRouter = require("./routes/analytics");
+var indexRouter = require("./src/routes/index");
+var usersRouter = require("./src/routes/users");
+var entityRouter = require("./src/routes/entity");
+var transactionRouter = require("./src/routes/transaction");
+var analyticsRouter = require("./src/routes/analytics");
 
 const removeDir = require('./src/services/removeDirectory');
 

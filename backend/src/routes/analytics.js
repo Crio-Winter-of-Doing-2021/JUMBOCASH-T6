@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const analyticsController = require('../src/controllers/analytics');
+const analyticsController = require('../controllers/analytics');
 
 router.post('/cashflow', analyticsController.getTotalFlow);
 

@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const transactionController = require('../src/controllers/transaction');
+const transactionController = require('../controllers/transaction');
 
 /* GET home page. */
 // router.get('/', require('../src/controllers/transaction').getTransactions);

@@ -3,7 +3,8 @@
 ### Minor fixes:
 1. Changed response schema of transaction to include entity name. (Check [schema](schema.md))
 2. Added sample request to transaction filter endpoint.
-3. Added validation check for user update
+3. Added validation check for user update.
+4. Refactored: routes moved under the src folder.
 
 ## Version-7.1 (9th April, 10PM)
 

@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const passport = require("../config/passport");
-const clientUrl = require("../config/server").clientUrl;
-const authController = require("../src/controllers/authentication");
+const passport = require("../../config/passport");
+const clientUrl = require("../../config/server").clientUrl;
+const authController = require("../controllers/authentication");
 
 // AUTHENTICATION MIDDLEWARE
 const authenticate = (req, res, next) => {

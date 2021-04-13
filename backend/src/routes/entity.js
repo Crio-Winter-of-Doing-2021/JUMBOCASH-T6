@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const entityController = require('../src/controllers/entity');
+const entityController = require('../controllers/entity');
 
 /* GET home page. */
 // router.get('/', require('../src/controllers/entity').getEntities);
