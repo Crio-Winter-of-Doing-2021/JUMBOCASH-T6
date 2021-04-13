@@ -1,5 +1,3 @@
-import { object } from 'yup';
-
 export const formatTrendChartsData = (data, interval) => {
   const mapDateToAmount = (items) =>
     items.reduce((acc, item) => {
@@ -64,13 +62,38 @@ export const formatTopEntitiesChartsData = (data, interval) => {
   };
 };
 
-export const formatCashflowSummaryData = (data) => { 
-    const inflow = data.current.inflow.totalAmount;
-    const outflow = data.current.outflow.totalAmount;
-    const pendingInflow = data.pending.inflow.totalAmount;
-    const pendingOutflow = data.pending.outflow.totalAmount;
-    const totalInflow = inflow + pendingInflow;
-    const totalOutflow = outflow + pendingOutflow;
-    const totalTransactions = totalInflow + totalOutflow;
-    return {totalInflow,totalOutflow,pendingInflow,pendingOutflow,totalTransactions}
-}
+export const formatCashflowSummaryData = (data) => {
+  const currInflow = data.current.inflow.totalAmount;
+  const currOutflow = data.current.outflow.totalAmount;
+
+  const pendingInflow = data.pending.inflow.totalAmount;
+  const pendingOutflow = data.pending.outflow.totalAmount;
+
+  const totalInflow = currInflow + pendingInflow;
+  const totalOutflow = currOutflow + pendingOutflow;
+
+  const totalTransactions = totalInflow + totalOutflow;
+
+  const getAmountByType = (items) => {
+    return items.reduce((acc, { category, totalAmount }) => {
+      acc[category] = acc[category] ? acc[category] + Number(totalAmount) : Number(totalAmount);
+      return acc;
+    }, {});
+  };
+  const cashflowByType = {
+    inflow: getAmountByType(data.current.inflow.components),
+    outflow: getAmountByType(data.current.outflow.components),
+  };
+
+  return {
+    totalInflow,
+    totalOutflow,
+    pendingInflow,
+    pendingOutflow,
+    currInflow,
+    currOutflow,
+    totalTransactions,
+    cashflowByType,
+    netCashflow:currInflow-currOutflow
+  };
+};
