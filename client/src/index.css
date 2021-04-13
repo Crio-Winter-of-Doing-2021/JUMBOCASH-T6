@@ -125,6 +125,7 @@ a {
 .p-fileupload .p-button {
   background-color: #fbc02d;
   border: 1px solid #fbc02d;
+  border-radius: 3px 0 0 3px;
 }
 
 .p-fileupload-choose:not(.p-disabled):hover {
