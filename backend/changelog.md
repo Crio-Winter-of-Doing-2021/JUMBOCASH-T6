@@ -2,6 +2,8 @@
 
 ### Minor fixes:
 1. Changed response schema of transaction to include entity name. (Check [schema](schema.md))
+2. Added sample request to transaction filter endpoint.
+3. Added validation check for user update
 
 ## Version-7.1 (9th April, 10PM)
 

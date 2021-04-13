@@ -31,8 +31,11 @@ async function deleteById(id) {
 async function create(user) {
   try {
     var newUser = new User(user);
-    // test
-    // console.log(newUser);
+    
+    if(! userValidation.isValidUserForUpdate(newUser)) {
+      return false;
+    }
+
     return await newUser.save();
   } catch (err) {
     throw { code: 500, message: err };

@@ -318,6 +318,36 @@ Request:
     
 }
 ```
+Sample Request body:
+```js
+{
+    "filter": {
+        "entity": ["c30ca02d-52e5-4190-ac92-36eb19b57ff7"],
+        "category": ["SALES", "PURCHASE"],
+        "paymentMode": ["CREDIT_CARD", "CASH"],
+        "status": ["NOT_PAID"],
+        "amount": {
+            "from": "0",
+            "to": "20000"
+        },
+        "time": {
+            "from": "2018-12-06 02:16:39 -06:-30",
+            "to": "2020-12-06 02:16:39 -06:-30"
+        }
+    },
+    "sort": {
+        "key": "time",
+        "reverse": false
+    },
+    "page": {
+        "limitPerPage": 20,
+        "currentPage": 1
+    }
+}
+```
+
+Note: inclusion of "from" and "to" keys in "time" and "amount" is mandatory for filtering using "time" or "amount" 
+
 Successful response:  Array of transactions
 ```js
 {
@@ -342,7 +372,7 @@ Failed response:
 ```js
 {
     error: true,
-    errorMessage: "Any message" | "unprocessable entity in {field-name}" | "case-specific error" | "Unsupported enum in {field-name}
+    errorMessage: "Any message" | "unprocessable entity in {field-name}" | "case-specific error" | "Unsupported enum in {field-name}"
 }
 ```
 
