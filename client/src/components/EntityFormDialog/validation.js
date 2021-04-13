@@ -8,5 +8,6 @@ export const entityFormSchema = Yup.object({
   address: Yup.string().required('Address cannot be left empty'),
   contact: Yup.string()
     .required('Contact cannot be left empty')
-    .matches(/^[0-9]+$/, 'Invalid contact number'),
+    .matches(/^[0-9]+$/, 'Invalid contact number')
+    .min(10,'Minimum length is 10'),
 });

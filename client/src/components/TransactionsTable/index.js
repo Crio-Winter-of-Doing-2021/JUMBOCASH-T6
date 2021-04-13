@@ -2,14 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Papa from 'papaparse';
+import { CSVLink } from 'react-csv';
 
 import { getEntities } from '../../store/actions/entityActions';
-import { addMultipleTransactions, getFilteredTransactions, getTransactions } from '../../store/actions/transactionActions';
+import {
+  addMultipleTransactions,
+  getFilteredTransactions,
+  getTransactions,
+} from '../../store/actions/transactionActions';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import { SplitButton } from 'primereact/splitbutton';
 import { MultiSelect } from 'primereact/multiselect';
 import { Message } from 'primereact/message';
 import { FileUpload } from 'primereact/fileupload';
@@ -39,6 +45,19 @@ const paymentModeImgMap = {
   DEBIT_CARD: debit_card,
   CREDIT_CARD: credit_card,
 };
+
+const sampleCsvData = [
+  ['Entity', 'Amount', 'Payment Status', 'Payment Mode', 'Category', '	Time of Transaction'],
+
+  [
+    '1dca4dbe-adef-46ff-86b6-6c62b4ce43c7',
+    '8549',
+    'NOT_PAID',
+    'DEBIT_CARD',
+    'ASSET_LIQUIDATION',
+    '2020-05-18T04:57:41.475Z',
+  ],
+];
 
 const paymentModeBodyTemplate = ({ paymentMode }) => {
   return (
@@ -139,7 +158,6 @@ const TransactionsTable = ({
       <div className="p-d-flex p-flex-wrap">
         <FileUpload
           ref={(el) => (fileUploader = el)}
-          className="p-mr-2"
           auto
           accept=".csv"
           chooseLabel="Import CSV"
@@ -147,6 +165,15 @@ const TransactionsTable = ({
           customUpload
           uploadHandler={fileUploadHandler}
         />
+        <CSVLink data={sampleCsvData} filename={'transactions-sample.csv'}>
+          <Button
+            type="Button"
+            icon="pi pi-file"
+            className="p-button-outlined p-button-warning p-mr-4"
+            label="Download Sample"
+            style={{ borderRadius: '0 3px 3px 0' }}
+          />
+        </CSVLink>
         <Button
           type="Button"
           icon="pi pi-download"

@@ -10,6 +10,8 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
+import { Message } from 'primereact/message';
+
 import { PaymentStatuses, PaymentModes, Categories } from '../../constants';
 import SaveButton from '../SaveButton';
 import { useFormik } from 'formik';
@@ -20,13 +22,12 @@ const TransactionFormDialog = ({
   getEntities,
   addTransaction,
   editTransaction,
-  transaction: { isUpdating,updateError },
+  transaction: { isUpdating, updateError },
   visible,
   onHide,
   initialValues,
   isEdit,
 }) => {
-
   useEffect(() => {
     getEntities();
   }, []);
@@ -40,7 +41,7 @@ const TransactionFormDialog = ({
     },
     enableReinitialize: true,
   });
-   
+
   // Reset form and close dialog only if there is no error
   useEffect(() => {
     if (!updateError && !isUpdating) {
@@ -48,7 +49,6 @@ const TransactionFormDialog = ({
       onHide(false);
     }
   }, [updateError, isUpdating]);
-  
 
   const entityTemplate = (option) => {
     return (
@@ -73,6 +73,14 @@ const TransactionFormDialog = ({
         }}
         dismissableMask={true}
       >
+        {entities.length && (
+          <Message
+            severity="warn"
+            text="No entities present, please add an entity before adding a new transaction"
+            style={{ display: 'block' }}
+            className="p-mb-2"
+          ></Message>
+        )}
         <div className="p-fluid p-formgrid p-grid">
           <div className="p-field p-col-12 p-md-6 p-mb-4">
             <label htmlFor="amount">Amount</label>

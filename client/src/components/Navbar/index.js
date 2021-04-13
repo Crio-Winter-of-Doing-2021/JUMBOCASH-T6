@@ -11,8 +11,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import logo from '../../static/assets/images/logo.png';
 import { getAvatarLabel } from '../../utils';
 import UserDropdownMenu from './UserDropdownMenu';
+import { downloadAnalyticsZip } from '../../store/actions/cashflowAnalyticsActions';
 
-const Navbar = ({ auth, logOutUser, history }) => {
+const Navbar = ({ auth, logOutUser, history,downloadAnalyticsZip }) => {
   const op = useRef(null);
 
   const onLogOut = (event) => {
@@ -41,9 +42,22 @@ const Navbar = ({ auth, logOutUser, history }) => {
       template: (item, options) => {
         return (
           <NavLink className="p-menuitem-link" activeClassName="active-link" to="/report">
-            <span className="p-menuitem-icon pi pi-fw pi-file-o"></span>
+            <span className="p-menuitem-icon pi pi-fw pi-file-pdf"></span>
             <span className="p-menuitem-text">Report</span>
           </NavLink>
+        );
+      },
+    },
+    {
+      label: 'Download Reports Zip',
+      template: (item, options) => {
+        return (
+          <Button
+          icon="pi pi-folder"
+          className="p-button-text p-button-secondary"
+          label="Download Reports Zip"
+          onClick={downloadAnalyticsZip}
+        />
         );
       },
     },
@@ -86,4 +100,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default compose(withRouter, connect(mapStateToProps, { logOutUser }))(Navbar);
+export default compose(withRouter, connect(mapStateToProps, { logOutUser,downloadAnalyticsZip }))(Navbar);
