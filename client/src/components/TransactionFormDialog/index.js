@@ -20,12 +20,13 @@ const TransactionFormDialog = ({
   getEntities,
   addTransaction,
   editTransaction,
-  transaction: { isUpdating },
+  transaction: { isUpdating,updateError },
   visible,
   onHide,
   initialValues,
   isEdit,
 }) => {
+
   useEffect(() => {
     getEntities();
   }, []);
@@ -35,13 +36,19 @@ const TransactionFormDialog = ({
     initialValues: initialValues,
     validationSchema: transactionFormSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      await (isEdit ? editTransaction(initialValues.id, values) : addTransaction(values));
-
-      resetForm();
-      onHide(false);
+      isEdit ? editTransaction(initialValues.id, values) : addTransaction(values);
     },
     enableReinitialize: true,
   });
+   
+  // Reset form and close dialog only if there is no error
+  useEffect(() => {
+    if (!updateError && !isUpdating) {
+      formik.resetForm();
+      onHide(false);
+    }
+  }, [updateError, isUpdating]);
+  
 
   const entityTemplate = (option) => {
     return (

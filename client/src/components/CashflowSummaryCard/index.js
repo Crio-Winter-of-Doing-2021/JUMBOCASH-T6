@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import * as moment from 'moment';
 
 import { getCashflowAnalytics } from '../../store/actions/cashflowAnalyticsActions';
 
@@ -8,7 +7,6 @@ import { Card } from 'primereact/card';
 import { ProgressBar } from 'primereact/progressbar';
 import { Divider } from 'primereact/divider';
 import { Message } from 'primereact/message';
-import { Calendar } from 'primereact/calendar';
 
 import Loader from '../Loader';
 
@@ -17,38 +15,17 @@ import './styles.css';
 const CashflowSummaryCard = ({
   getCashflowAnalytics,
   analytics: { isCashflowAnalyticsLoading, cashflowAnalytics, cashflowAnalyticsError },
+  date
 }) => {
-  const now = moment();
-  const [interval, setInterval] = useState([new Date(now.subtract(1, 'years')), new Date()]);
 
   useEffect(() => {
     if (!isCashflowAnalyticsLoading) {
-      getCashflowAnalytics(interval);
+      getCashflowAnalytics();
     }
-  }, []);
-
-  const onIntervalChange = (value) => {
-    setInterval(value);
-    if (!isCashflowAnalyticsLoading && value[0] && value[1]) {
-      getCashflowAnalytics(value);
-    }
-  };
+  }, [date]);
 
   return (
     <Card title="Cashflow Summary" className="cashflow-summary h-100">
-      <div className="p-d-flex p-jc-end">
-        <Calendar
-          id="dateRange"
-          selectionMode="range"
-          monthNavigator
-          yearNavigator
-          yearRange={`2010:${new Date().getFullYear()}`}
-          value={interval}
-          onChange={(e) => onIntervalChange(e.value)}
-          showIcon
-        ></Calendar>
-      </div>
-
       {isCashflowAnalyticsLoading ? (
         <Loader />
       ) : cashflowAnalyticsError ? (
@@ -105,6 +82,7 @@ const CashflowSummaryCard = ({
 };
 
 const mapStateToProps = (state) => ({
+  date: state.appDate,
   analytics: state.cashflowAnalytics,
 });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import { addEntity, editEntity } from '../../store/actions/entityActions';
@@ -14,7 +14,7 @@ import SaveButton from '../SaveButton';
 const EntityFormDialog = ({
   addEntity,
   editEntity,
-  entity: { isUpdating, error },
+  entity: { isUpdating, updateError },
   visible,
   onHide,
   initialValues,
@@ -23,14 +23,19 @@ const EntityFormDialog = ({
   const formik = useFormik({
     initialValues,
     validationSchema: entityFormSchema,
-    onSubmit: async (values, { setSubmitting, resetForm }) => {
-      await (isEdit ? editEntity(initialValues.id, values) : addEntity(values));
-
-      resetForm();
-      onHide(false);
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+      isEdit ? editEntity(initialValues.id, values) : addEntity(values);
     },
     enableReinitialize: true,
   });
+  
+   // Reset form and close dialog only if there is no error
+   useEffect(() => {
+    if (!updateError && !isUpdating) {
+      formik.resetForm();
+      onHide(false);
+    }
+  }, [updateError, isUpdating]);
 
   return (
     <form onSubmit={formik.handleSubmit}>

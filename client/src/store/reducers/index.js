@@ -6,6 +6,7 @@ import transactionReducer from './transactionReducer';
 import analyticsReducer from './analyticsReducer';
 import entityAnalyticsReducer from './entityAnalyticsReducer';
 import cashflowAnalyticsReducer from './cashflowAnalyticsReducer';
+import appDateReducer from './appDateReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   transaction: transactionReducer,
   analytics: analyticsReducer,
   entityAnalytics: entityAnalyticsReducer,
-  cashflowAnalytics: cashflowAnalyticsReducer
+  cashflowAnalytics: cashflowAnalyticsReducer,
+  appDate: appDateReducer
 });

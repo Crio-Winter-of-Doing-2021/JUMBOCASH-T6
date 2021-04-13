@@ -10,13 +10,14 @@ import {
 import { BASE_URL } from '../../constants';
 import { formatTopEntitiesChartsData } from '../../utils/formatChartData';
 
-export const getEntityAnalytics = (interval) => async (dispatch, getState) => {
+export const getEntityAnalytics = () => async (dispatch, getState) => {
+    const {from,to} = getState().appDate; 
     dispatch({
       type: GET_ENTITY_ANALYTICS_LOADING,
     });
     try {
       const options = attachTokenToHeaders(getState);
-      const response = await axios.post(BASE_URL+'/analytics/entity',{time:{from:interval[0],to:interval[1]}}, options);
+      const response = await axios.post(BASE_URL+'/analytics/entity',{time:{from,to}}, options);
       const data = formatTopEntitiesChartsData(response?.data?.analytics);
       dispatch({
         type: GET_ENTITY_ANALYTICS_SUCCESS,

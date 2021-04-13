@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import * as moment from 'moment';
 
 import { getEntityAnalytics } from '../../store/actions/entityAnalyticsActions';
 
@@ -8,33 +7,32 @@ import { Chart } from 'primereact/chart';
 import { Card } from 'primereact/card';
 import { Message } from 'primereact/message';
 import { RadioButton } from 'primereact/radiobutton';
-import { Calendar } from 'primereact/calendar';
 
 import Loader from '../Loader';
 
 import { PaymentStatuses } from '../../constants';
+import { getEntities } from '../../store/actions/entityActions';
 
 const TopEntitiesCard = ({
+  date,
+  getEntities,
   getEntityAnalytics,
   analytics: { isEntityAnalyticsLoading, entityAnalytics, entityAnalyticsError },
   entity: { entitiesMap, isLoading },
 }) => {
-  const now = moment();
-  const [interval, setInterval] = useState([new Date(now.subtract(1, 'years')), new Date()]);
   const [paymentStatus, setPaymentStatus] = useState('PAID');
+ 
+  useEffect(() => {
+    if (!isLoading){
+      // getEntities();
+    }
+  },[]);
 
   useEffect(() => {
     if (!isEntityAnalyticsLoading) {
-      getEntityAnalytics(interval);
+      getEntityAnalytics();
     }
-  }, []);
-
-  const onIntervalChange = (value) => {
-    setInterval(value);
-    if (!isEntityAnalyticsLoading && value[0] && value[1]) {
-      getEntityAnalytics(value);
-    }
-  };
+  }, [date]);
 
   const onPaymentStatusChange = (value) => {
     setPaymentStatus(value);
@@ -93,18 +91,8 @@ const TopEntitiesCard = ({
 
   return (
     <Card title="Top Vendors/Customers" className="h-100">
-      <div className="p-d-flex p-jc-between p-mb-3">
+      <div className="p-d-flex p-jc-end p-mb-3">
         {paymentStatusRadioButtons}
-        <Calendar
-          id="dateRange"
-          selectionMode="range"
-          monthNavigator
-          yearNavigator
-          yearRange={`2010:${new Date().getFullYear()}`}
-          value={interval}
-          onChange={(e) => onIntervalChange(e.value)}
-          showIcon
-        ></Calendar>
       </div>
 
       {isEntityAnalyticsLoading || isLoading ? (
@@ -124,8 +112,9 @@ const TopEntitiesCard = ({
 };
 
 const mapStateToProps = (state) => ({
+  date: state.appDate,
   analytics: state.entityAnalytics,
   entity: state.entity,
 });
 
-export default connect(mapStateToProps, { getEntityAnalytics })(TopEntitiesCard);
+export default connect(mapStateToProps, { getEntities,getEntityAnalytics })(TopEntitiesCard);

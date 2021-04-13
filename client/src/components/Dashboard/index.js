@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
-import CashflowSummaryCard from '../CashflowSummaryCard';
-import TopEntitiesCard from '../TopEntitiesCard';
-import TransactionsTrendCard from '../TransactionsTrendCard';
-
-import TransactionsTable from '../TransactionsTable.js';
+import AnalyticsGrid from '../AnalyticsGrid';
+import ItemsTabView from '../ItemsTabView';
+import TransactionsTable from '../TransactionsTable';
+import EntitiesTable from '../EntitiesTable';
 import ActionsButton from '../ActionsButton';
 import TransactionFormDialog from '../TransactionFormDialog';
 import EntityFormDialog from '../EntityFormDialog';
+
 import { DefaultEntity, DefaultTransaction } from '../../constants';
-import ItemsTabView from '../ItemsTabView';
-import EntitiesTable from '../EntitiesTable.js';
-import AddMultipleItemsDialog from '../AddMultipleItemsDialog';
+import Datepicker from '../Datepicker';
 
 const Dashboard = () => {
   const [showTransactionFormDialog, setShowTransactionFormDialog] = useState(false);
   const [showEntityFormDialog, setShowEntityFormDialog] = useState(false);
-  const [showAddMultipleItemsDialog, setAddMultipleItemsDialog] = useState(false);
   const [currTransaction, setCurrTransaction] = useState({});
   const [isTransactionEdit, setIsTransactionEdit] = useState(false);
   const [currEntity, setCurrEntity] = useState({});
   const [isEntityEdit, setIsEntityEdit] = useState(false);
-  const [isMultipleEntity, setIsMultipleEntity] = useState(false);
 
   const addOrEditTransactionDialog = (data) => {
     data ? setIsTransactionEdit(true) : setIsTransactionEdit(false);
@@ -35,24 +31,10 @@ const Dashboard = () => {
     setShowEntityFormDialog(true);
   };
 
-  const addMultipleItemsDialog = (isMultipleEntity) => {
-    isMultipleEntity ? setIsMultipleEntity(true) : setIsMultipleEntity(false);
-    setAddMultipleItemsDialog(true);
-  };
-
   return (
-    <>
-      <div className="p-grid nested-grid p-mb-3">
-        <div className="p-col-12 p-lg-12">
-          <CashflowSummaryCard />
-        </div>
-        <div className="p-col-12 p-lg-6">
-          <TopEntitiesCard />
-        </div>
-        <div className="p-col-12 p-lg-6">
-          <TransactionsTrendCard />
-        </div>
-      </div>
+    <> 
+      <Datepicker />
+      <AnalyticsGrid />
       <ItemsTabView
         items={[
           {
@@ -68,7 +50,6 @@ const Dashboard = () => {
       <ActionsButton
         addTransactionDialog={addOrEditTransactionDialog}
         addEntityDialog={addOrEditEntityDialog}
-        addMultipleItemsDialog={addMultipleItemsDialog}
       />
       <TransactionFormDialog
         visible={showTransactionFormDialog}
@@ -81,11 +62,6 @@ const Dashboard = () => {
         onHide={setShowEntityFormDialog}
         initialValues={currEntity}
         isEdit={isEntityEdit}
-      />
-      <AddMultipleItemsDialog
-        visible={showAddMultipleItemsDialog}
-        onHide={setAddMultipleItemsDialog}
-        isEntity={isMultipleEntity}
       />
     </>
   );

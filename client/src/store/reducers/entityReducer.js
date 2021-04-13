@@ -18,7 +18,8 @@ const initialState = {
   entitiesMap: {},
   isLoading: false,
   isUpdating: false,
-  error: null,
+  error: '',
+  updateError:false
 };
 
 export default function (state = initialState, { type, payload }) {
@@ -75,11 +76,13 @@ export default function (state = initialState, { type, payload }) {
       return {
         ...state,
         isUpdating: false,
+        updateError: true
       };
     case GET_ENTITIES_FAIL:
       return {
         ...state,
         isLoading: false,
+        error:'Failed to fetch entities'
       };
     default:
       return state;

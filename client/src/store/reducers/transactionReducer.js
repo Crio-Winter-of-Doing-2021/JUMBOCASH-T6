@@ -20,7 +20,8 @@ const initialState = {
   transactions: [],
   isLoading: false,
   isUpdating: false,
-  error: null,
+  error: '',
+  updateError: false
 };
 
 export default function (state = initialState, { type, payload }) {
@@ -78,11 +79,13 @@ export default function (state = initialState, { type, payload }) {
       return {
         ...state,
         isUpdating: false,
+        updateError:true
       };
     case GET_TRANSACTIONS_FAIL:
       return {
         ...state,
         isLoading: false,
+        error:'Failed to fetch transactions'
       };
     default:
       return state;
