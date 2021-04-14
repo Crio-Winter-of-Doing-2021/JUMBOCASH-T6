@@ -7,14 +7,13 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 ### Current Version Deployed: 7.2
 ---
 
-## Branch: backend-feature
-1. All experimental features
-2. Untested features
+## Branch: cwod-final
 
 ## To Know More
 ### [README.md](#)
 ### [schema.md](schema.md) - Contains API contracts and table schema
 ### [changelog.md](changelog.md) - Timeline of API development
+### backend-feature branch
 
 ## Links to blog
 1. [Authentication workflow](blogs/Authentication.md)
@@ -26,6 +25,10 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 7. [Challenges and next step](blogs/vulnerability.md)
 
 ## How to Run
+Compile the frontend:
+> **npm run build**
+> Replace the build folder in the `/backend` 
+
 To run the application
 > **npm start**
 > 

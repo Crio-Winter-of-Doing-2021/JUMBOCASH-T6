@@ -15,4 +15,4 @@ blogs/draft
 .env.test.local
 .env.production.local
 
-client/
+
