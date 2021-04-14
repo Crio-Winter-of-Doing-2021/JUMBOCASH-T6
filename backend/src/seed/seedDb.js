@@ -6,10 +6,10 @@ const {User, Entity, Transaction } = require('../models/index');
 // ==== New version
 const generateSeed = require("./newTransaction");
 let {EntityList, TransactionList} = generateSeed("2e107775-2b0d-4e24-af6c-8766c042fb09", 10, 10, 30, 30)
-let {EntityList2, TransactionList2} = generateSeed("9ab3b39b-9aee-438a-88bf-bae9833d0926", 10, 10, 30, 30)
+let user2Seed = generateSeed("9ab3b39b-9aee-438a-88bf-bae9833d0926", 10, 10, 30, 30)
 
-EntityList.concat(EntityList2);
-TransactionList.concat(TransactionList2);
+EntityList = EntityList.concat(user2Seed.EntityList);
+TransactionList = TransactionList.concat(user2Seed.TransactionList);
 
 // ==== Seed user table with single user
 const newUserList = [{

@@ -2,9 +2,9 @@
 Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 
 --- 
-### Current Version Developed: 7.1
+### Current Version Developed: 7.2
 
-### Current Version Deployed: 7.1
+### Current Version Deployed: 7.2
 ---
 
 ## Branch: backend-feature
@@ -13,8 +13,17 @@ Team ID: JUMBOCASH-T6 | Team Members: Kanishka Chowdhury &amp; Piyush Arya
 
 ## To Know More
 ### [README.md](#)
-### [schema.md](schema.md)
-### [changelog.md](changelog.md) - for viewing new features in Version-7.1
+### [schema.md](schema.md) - Contains API contracts and table schema
+### [changelog.md](changelog.md) - Timeline of API development
+
+## Links to blog
+1. [Authentication workflow](blogs/Authentication.md)
+2. [Some useful commands and snippets to handle file in Node.js](blogs/file-handling.md)
+3. [Designing filter](blogs/design-filter.md)
+4. [Writing, managing and sending multiple files in a go](blogs/file-writing.md)
+5. [Folder-structure](blogs/folder-structure.md)
+6. [Seeding with dummy-data](blogs/generating-dummy-data.md)
+7. [Challenges and next step](blogs/vulnerability.md)
 
 ## How to Run
 To run the application
@@ -26,46 +35,6 @@ To run the application
 
       To get clear understanding of request and response specification, take a look at test/IntegrationTest/ directory, but ignore the body of 2xx response
 
-## Note from backend developer (6th April):
-
-      For Cashflow Calculations:
-      Pending amount is not calculated in cashflow report. Only the transactions whose status is "done" is taken into consideration.
-      Current amount signifies the total cashflow, which will get written in cashflow report, while pending is an additional insight generated for user to manage his/her debt.
-      Inflow is basically what comes in cash/cashless, Outflow is what goes out in cash/cashless.
-
-## Version-7.0 (8th April, 10PM)
-
-## Major Enhancements:
-
-1. Added csv report functionality, curently user can view
-   1. current inflow - total incoming transactions 
-   2. curent outflow - total outgoing transactions
-   3. pending inflow - total incoming amount, which has not been paid by client to the user
-   4. pending outflow - total outgoing amount, which has not been paid by the user to the vendor
-   5. entity-current inflow - list of client who has paid most to the user
-   6. entity-current outflow - list of vendor who has sold most items to the user
-   7. entity-pending inflow - list of client who are biggest credit holders
-   8. entity-pending outflow - list of vendors to whom user owes the most
-2. Added service to remove file
-3. Added job scheduler, which currently
-   1. Cleans `report` directory to optimize space
-4. Added `analytics/csv` endpoint for user to download zip of folder containig list of csv files
-
-### To Do:
-
-1. Prettify trends report
-2. Add trends to the report
-3. cache userId
-4. Prettify entity object in entity analytics
-5. Add pagination of 100 transactions limit
-6. Add swagger jsdoc
-7. Refactor services, auth middleware, seed, config(for passport), app.js
-8. Think about adding 'inflow', 'outflow' in transaction schema
-9. Add validation check on all analytics routes
-
-### Minor improvements:
-
-1. Fixed: entity analytics should return name and contact of the user, in generating report
 
 
 ## Todo
@@ -93,7 +62,7 @@ To run the application
 9.  [x] Make request object schema
 10. [x] make reposnse object schema
 11. [x] Add test folder based on mocha and chai library
-12.  Add `/user` endpoint to get and edit user data
+12. [x] Add `/user` endpoint to get and edit user data
 13. [x] Make aggregation of transactions
 14. [x] Add option to make and send csv file
 15. [x] Add optional analytics

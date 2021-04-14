@@ -1,10 +1,17 @@
 ## Version-7.2 (12th April, 10PM)
 
+### Major enhancement
+1. Frontend: added csv, pdf report generation service.
+2. Frontend: Moved the time filter over to the top of the Dashboard.
+3. Added blogs
+
 ### Minor fixes:
 1. Changed response schema of transaction to include entity name. (Check [schema](schema.md))
 2. Added sample request to transaction filter endpoint.
 3. Added validation check for user update.
 4. Refactored: routes moved under the src folder.
+5. Fixed: CSV generation throwing error for not detecting report directory in heroku.
+6. Fixed: Seed of other users are not visible.
 
 ## Version-7.1 (9th April, 10PM)
 
