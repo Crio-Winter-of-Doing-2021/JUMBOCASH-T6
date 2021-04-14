@@ -73,7 +73,7 @@ const TransactionFormDialog = ({
         }}
         dismissableMask={true}
       >
-        {entities.length && (
+        {!entities.length && (
           <Message
             severity="warn"
             text="No entities present, please add an entity before adding a new transaction"
