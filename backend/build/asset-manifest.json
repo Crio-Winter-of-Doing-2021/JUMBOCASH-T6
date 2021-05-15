@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.38c62a50.chunk.css",
+    "main.js": "/static/js/main.9c1dd360.chunk.js",
+    "main.js.map": "/static/js/main.9c1dd360.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0525dd07.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0525dd07.js.map",
+    "static/js/2.b3f74727.chunk.js": "/static/js/2.b3f74727.chunk.js",
+    "static/js/2.b3f74727.chunk.js.map": "/static/js/2.b3f74727.chunk.js.map",
+    "static/css/3.31beb0a5.chunk.css": "/static/css/3.31beb0a5.chunk.css",
+    "static/js/3.3fd88165.chunk.js": "/static/js/3.3fd88165.chunk.js",
+    "static/js/3.3fd88165.chunk.js.map": "/static/js/3.3fd88165.chunk.js.map",
+    "static/js/4.51b8871c.chunk.js": "/static/js/4.51b8871c.chunk.js",
+    "static/js/4.51b8871c.chunk.js.map": "/static/js/4.51b8871c.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.444bd0c59fedb0fe5cdee676eae43f5f.js": "/precache-manifest.444bd0c59fedb0fe5cdee676eae43f5f.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/3.31beb0a5.chunk.css.map": "/static/css/3.31beb0a5.chunk.css.map",
+    "static/css/main.38c62a50.chunk.css.map": "/static/css/main.38c62a50.chunk.css.map",
+    "static/js/2.b3f74727.chunk.js.LICENSE.txt": "/static/js/2.b3f74727.chunk.js.LICENSE.txt",
+    "static/js/3.3fd88165.chunk.js.LICENSE.txt": "/static/js/3.3fd88165.chunk.js.LICENSE.txt",
+    "static/js/4.51b8871c.chunk.js.LICENSE.txt": "/static/js/4.51b8871c.chunk.js.LICENSE.txt",
+    "static/media/cash.png": "/static/media/cash.d3e786a7.png",
+    "static/media/primereact.min.css": "/static/media/color.c7a33805.png",
+    "static/media/credit_card.png": "/static/media/credit_card.08340871.png",
+    "static/media/debit_card.png": "/static/media/debit_card.69c6de74.png",
+    "static/media/error_404.svg": "/static/media/error_404.f36c3ba3.svg",
+    "static/media/login_banner.svg": "/static/media/login_banner.e0f421ab.svg",
+    "static/media/logo.png": "/static/media/logo.b358106f.png",
+    "static/media/placeholder.png": "/static/media/placeholder.a24fb888.png",
+    "static/media/primeicons.css": "/static/media/primeicons.b0f5d02f.eot",
+    "static/media/upi.png": "/static/media/upi.b6b34cb5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0525dd07.js",
+    "static/css/3.31beb0a5.chunk.css",
+    "static/js/3.3fd88165.chunk.js",
+    "static/css/main.38c62a50.chunk.css",
+    "static/js/main.9c1dd360.chunk.js"
+  ]
+}

@@ -1,0 +1,20 @@
+[
+    {
+
+        "entityId": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+        "time": "2018-11-12 12:00:48 -06:-30",
+        "paymentMode": "DEBIT_CARD",
+        "paymentStatus": "NOT_PAID",
+        "amount": 800.56,
+        "category": "PURCHASE"
+      },
+      {
+
+        "entityId": "4a454efb-4818-4154-9729-bbdf40791fe7",
+        "time": "2019-01-02 06:17:43 -06:-30",
+        "paymentMode": "CASH",
+        "paymentStatus": "NOT_PAID",
+        "amount": 1600,
+        "category": "SALES"
+      }
+]

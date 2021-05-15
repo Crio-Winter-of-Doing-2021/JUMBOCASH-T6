@@ -1,0 +1,130 @@
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+var cors = require("cors");
+const cookieSession = require('cookie-session')
+const passport = require('passport');
+const {router, authenticate} = require("./src/routes/authentication");
+const fs = require('fs');
+
+const sequelize = require("./config/database");
+const keys = require("./config/server");
+
+var indexRouter = require("./src/routes/index");
+var usersRouter = require("./src/routes/users");
+var entityRouter = require("./src/routes/entity");
+var transactionRouter = require("./src/routes/transaction");
+var analyticsRouter = require("./src/routes/analytics");
+
+const removeDir = require('./src/services/removeDirectory');
+
+var app = express();
+
+// JOB scheduler to run every hour
+setInterval(function() {
+  removeDir(path.join(__dirname, "report"));
+  if (!fs.existsSync(`report`)){
+    fs.mkdirSync(`report`);
+  }
+  console.log("cleaned Directory report")
+}, 3000 * 1000);
+
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "credentials": true,
+  "exposedHeaders": ["date", "etag", "access-control-allow-origin", "access-control-allow-credentials"]
+}));
+
+// For an actual app you should configure this with an experation time, better keys, proxy and secure
+app.use(
+  cookieSession({
+    name: "tuto-session",
+    keys: ["key1", "key2"]
+    // sameSite: "none", 
+    // secure: true // uncomment on deployment
+  })
+);
+
+app.use(logger("dev"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+// DB connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Database connected...");
+  })
+  .catch((err) => {
+    console.log("Error: " + err);
+  });
+
+// Initializes passport and passport sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use("/api", indexRouter);
+
+/* Express app ROUTING */
+app.use('/api/auth', router)
+
+// app.use(authenticate)
+// protected routes
+app.use("/api/user", authenticate, usersRouter);
+app.use("/api/entity", authenticate, entityRouter);
+app.use("/api/transaction", authenticate, transactionRouter);
+app.use("/api/analytics", authenticate, analyticsRouter)
+
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render("error");
+});
+
+// for setting the db with seed value, and starting the server
+const startServer = (dbReset, port) => {
+  if (dbReset === "true") {
+    sequelize
+      .sync({ force: true })
+      .then(() => {
+        app.listen(port, console.log(`Server started on port ${port}`));
+
+        require("./src/seed/seedDb");
+      })
+      .catch((err) => console.log("Error: " + err));
+  } else {
+    // for resetting the db, and starting the server
+    sequelize
+      .sync()
+      .then(() => {
+        app.listen(port, console.log(`Server started on port ${port}`));
+      })
+      .catch((err) => console.log("Error: " + err));
+  }
+};
+
+startServer(keys.resetDB, keys.port);

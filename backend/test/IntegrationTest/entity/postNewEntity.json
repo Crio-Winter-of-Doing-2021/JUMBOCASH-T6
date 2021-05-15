@@ -1,0 +1,138 @@
+[
+    {
+       "request":{
+            "userId": "",
+            "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+            "name": "Stone Quinn",
+            "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+            "contact": "+91 (969) 552-3445"
+        },
+       "response":{
+          "code":422,
+          "body":{
+             "error":true,
+             "errorMessage":"userId not defined"
+          }
+       }
+    },
+    {
+        "request":{
+             "userId": "202agg",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+             "name": "Stone Quinn",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": "+91 (969) 552-3445"
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"userId not defined"
+           }
+        }
+     },
+     {
+        "request":{
+             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+             "name": "12331tonyg34",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": "+91 (969) 552-3445"
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"name cannot start with number"
+           }
+        }
+     },
+     {
+        "request":{
+             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+             "name": "",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": "+91 (969) 552-3445"
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"name cannot be left empty"
+           }
+        }
+     },
+     {
+        "request":{
+             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+             "name": "Max Dillon",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": ""
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"contact cannot be left empty"
+           }
+        }
+     },
+     {
+        "request":{
+             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e482f37",
+             "name": "Max Dillon",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": "23292s3993"
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"contact number not valid"
+           }
+        }
+     },
+     {
+        "request":{
+             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e487f37",
+             "name": "Stone Quinn",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": "915523445"
+         },
+        "response":{
+           "code":201,
+           "body":{
+              "error":false,
+              "entity":{
+                 "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+                 "id": "3930b3f7-5cc0-4f22-be17-da2d0e487f37",
+                 "name": "Stone Quinn",
+                 "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+                 "contact": "+91 (969) 552-3445",
+                 "createdAt": "",
+                 "updatedAt": ""
+             }
+           }
+        }
+     },
+     {
+        "request":{
+             "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "id": "3930b3f7-5cc0-4f22-be17-da2d0e487f37",
+             "name": "Stone Quinn",
+             "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+             "contact": "915523445"
+         },
+        "response":{
+           "code":409,
+           "body":{
+                "error":true,
+                "errorMessage":"Duplicate value found"
+           }
+        }
+     }
+ ]

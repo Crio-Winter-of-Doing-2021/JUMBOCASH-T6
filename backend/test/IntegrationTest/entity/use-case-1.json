@@ -1,0 +1,85 @@
+[
+    {
+        "request":{
+            "describe": "should create a new entity, userId, id are not given",
+            "VERB": "POST",
+            "endpoint": "entity",
+            "body":{
+                "name": "Peter Pan",
+                "address": "726 Greames Road, Verdona, Utah, 4080",
+                "contact": "9389403445"
+            }
+         },
+        "response":{
+           "code":201,
+           "body":{
+              "error":false,
+              "entity":{
+                 "userId": "",
+                 "id": "",
+                 "name": "Peter Pan",
+                 "address": "726 Greames Road, Verdona, Utah, 4080",
+                 "contact": "9389403445",
+                 "createdAt": "",
+                 "updatedAt": ""
+             }
+           }
+        }
+     },
+     {
+        "request":{
+            "describe": "should create a new entity, userId is not given",
+            "VERB": "POST",
+            "endpoint": "entity",
+            "body":{
+                "id": "3930b3f7-5cc0-4a22-be17-da2d0e487f37",
+                "name": "Harley David",
+                "address": "426 David Avenue Avenue, Baikal, 4080",
+                "contact": "9155234457"
+            }
+         },
+        "response":{
+           "code":201,
+           "body":{
+              "error":false,
+              "entity":{
+                 "userId": "3930b3f7-5cc0-4a22-be17-da2d0e487f37",
+                 "id": "3930b3f7-5cc0-4f22-be17-da2d0e487f37",
+                 "name": "Harley David",
+                 "address": "426 David Avenue Avenue, Baikal, 4080",
+                 "contact": "9155234457",
+                 "createdAt": "",
+                 "updatedAt": ""
+             }
+           }
+        }
+     },
+     {
+        "request":{
+            "describe": "should create a new entity, userId, id are not given",
+            "VERB": "POST",
+            "endpoint": "entity",
+            "body":{
+                "id": "3930b3f7-5cc0-4f22-be17-da2d0e487f37",
+                "name": "Stone Quinn",
+                "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+                "contact": "915523445"
+            }
+         },
+        "response":{
+           "code":201,
+           "body":{
+              "error":false,
+              "entity":{
+                 "userId": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+                 "id": "3930b3f7-5cc0-4f22-be17-da2d0e487f37",
+                 "name": "Stone Quinn",
+                 "address": "726 Christopher Avenue, Cetronia, Missouri, 4080",
+                 "contact": "+91 (969) 552-3445",
+                 "createdAt": "",
+                 "updatedAt": ""
+             }
+           }
+        }
+     }
+]

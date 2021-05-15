@@ -1,0 +1,132 @@
+[
+    {
+        "request":{
+             "uuid": "9813",
+             "body": {
+                "amountPayable": 2000,
+                "paymentMode": "DEBIT CARD",
+                "paymentStatus": "NOT PAID"
+            }
+        },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"not a valid uuid"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "2e107775-2b0d-4e24-af6c-8766c042fb09",
+             "body": {
+                "amountPayable": 2000,
+                "paymentMode": "DEBIT_CARD",
+                "paymentStatus": "NOT_PAID"
+            }
+         },
+        "response":{
+           "code":404,
+           "body":{
+              "error":true,
+              "errorMessage":"Not found"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+             "body": {
+                "amount": 2000,
+                "paymentMode": "iMPs",
+                "paymentStatus": "NOT PAID"
+            }
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"Payment mode not accepted"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+             "body": {
+                "amount": 2000,
+                "paymentMode": "",
+                "paymentStatus": "NOT PAID"
+            }
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"Payment mode is empty"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+             "body": {
+                "amount": 2000,
+                "paymentMode": "DEBIT_CARD",
+                "paymentStatus": "NOT PAID"
+            }
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"Payment Status not accepted"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+             "body": {
+                "amount": 2000,
+                "paymentMode": "DEBIT_CARD",
+                "paymentStatus": ""
+            }
+         },
+        "response":{
+           "code":422,
+           "body":{
+              "error":true,
+              "errorMessage":"Payment Status is empty"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+             "body": {
+                "paymentStatus": "NOT_PAID"
+            }
+         },
+        "response":{
+           "code":200,
+           "body":{
+              "error":false,
+              "errorMessage":"Other fields can remain empty"
+           }
+        }
+     },
+     {
+        "request":{
+             "uuid": "4e9f3907-c2d5-4f85-ba51-97a3058f726d",
+             "body": { }
+         },
+        "response":{
+           "code":200,
+           "body":{
+              "error":false,
+              "errorMessage":"All fields can be empty"
+           }
+        }
+     }
+]
